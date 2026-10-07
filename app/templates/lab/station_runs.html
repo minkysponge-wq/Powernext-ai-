@@ -1,0 +1,11 @@
+{% load labui %}
+{% if test_runs or lab_role == 'Admin' %}
+<section class="panel"><div class="panel-heading"><div><h2>Test stations</h2><p>Each assigned test is locked by its engineer before the report enters quality review.</p></div>{% if lab_role == 'Admin' %}<a class="button secondary compact" href="{% url 'assign_test' job.pk %}">Assign test</a>{% endif %}</div>
+<div class="table-scroll"><table class="station-table"><thead><tr><th>Test</th><th>Station</th><th>Engineer</th><th>Status</th><th>Action</th></tr></thead><tbody>
+{% for run in test_runs %}<tr><td data-label="Test">{{ run.test_type|readable }}</td><td data-label="Station">{{ run.station }}</td><td data-label="Engineer">{{ run.assigned_to }}</td><td data-label="Status"><span class="badge {% if run.status == 'locked' %}green{% elif run.status == 'in_progress' %}blue{% else %}amber{% endif %}">{{ run.get_status_display }}</span></td><td class="station-action" data-label="Next action">
+{% if lab_role == 'Test Engineer' and run.assigned_to_id == user.pk %}
+{% if run.status == 'pending' %}<form method="post" action="{% url 'start_test' run.pk %}">{% csrf_token %}<button class="secondary compact">Start test</button></form>{% elif run.status == 'in_progress' %}<a class="button compact" href="{% url 'digital_review' job.pk %}?test={{ run.test_type|urlencode }}">Enter readings →</a><details class="station-lock"><summary>Lock after checking</summary><form method="post" action="{% url 'lock_test' run.pk %}" data-confirm="Lock this test after checking its station record? Corrections will require a formal return.">{% csrf_token %}<label><input type="checkbox" name="confirmed" value="yes" required> I checked this test against station records</label><button class="secondary compact">Lock test</button></form></details>{% endif %}
+{% elif run.status == 'locked' and lab_role == 'Quality' or run.status == 'locked' and lab_role == 'HoD' or run.status == 'locked' and lab_role == 'Admin' %}<form method="post" action="{% url 'reopen_test' run.pk %}">{% csrf_token %}<input name="reason" maxlength="500" required placeholder="Reason for correction"><button class="secondary compact">Return test</button></form>{% endif %}
+</td></tr>{% empty %}<tr><td colspan="5">No station tests assigned yet.</td></tr>{% endfor %}
+</tbody></table></div></section>
+{% endif %}

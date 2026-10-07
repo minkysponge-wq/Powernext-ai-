@@ -1,0 +1,9 @@
+[
+  {"form_type":"routine_test","label":"Routine test","lock_required":["series","sample_code","customer"],"result_any_of":["ir_hv_earth_BT","induced_observation_BT"]},
+  {"form_type":"short_circuit","label":"Short-circuit test","lock_required":["series","sample_code"],"result_any_of":["shots.0.peak","shots.0.rms_avg"]},
+  {"form_type":"loss_measurement","label":"Loss measurement","lock_required":["series","sample_code","serial","customer"],"result_any_of":["no_load_100_voltage","load_measurement_table"]},
+  {"form_type":"loss_calculation","label":"Loss calculation datasheet entry","lock_required":["series","sample_code","rated_power","rated_hv","rated_lv"],"result_any_of":["no_load.0.P","load_measurement.0.P1"]},
+  {"form_type":"transformer_proforma","label":"Transformer proforma entry","lock_required":["test_series","sample_code"],"result_any_of":["impedance_at_75","guaranteed_total_loss_100"]},
+  {"form_type":"temperature_rise","label":"Temperature-rise test","lock_required":["series","sample_code","customer"],"result_any_of":["top_oil_rise","time_series.0.top_oil"]},
+  {"form_type":"pressure_oil_leakage","label":"Pressure and oil-leakage test","lock_required":["series","customer"],"result_any_of":["routine_pressure_observation","type_observation","oil_observation"]}
+]

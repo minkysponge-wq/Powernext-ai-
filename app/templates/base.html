@@ -1,0 +1,61 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}VectorLab for CPRI · Laboratory workspace{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'app.css' %}">
+  <link rel="stylesheet" href="{% static 'lab-theme.css' %}?v=history-delivery-1">
+  <link rel="stylesheet" href="{% static 'interface-refresh.css' %}?v=4">
+  <link rel="stylesheet" href="{% static 'brand-refresh.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'workflow-ux.css' %}?v=1">
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <script src="{% static 'workspace.js' %}?v=3" defer></script>
+  <script src="{% static 'role-tour.js' %}?v=1" defer></script>
+</head>
+<body class="{% if not user.is_authenticated %}signed-out{% endif %}">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <aside class="sidebar">
+    <div class="sidebar-heading">Workspace</div>
+    {% if user.is_authenticated %}
+      <nav aria-label="Main navigation">
+        {% if lab_access %}
+          <a class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}selected{% endif %}" href="{% url 'dashboard' %}"><span class="nav-symbol">▦</span> Test jobs</a>
+          {% if lab_role == 'Test Engineer' or lab_role == 'Admin' or not lab_role %}<a class="nav-item {% if request.resolver_match.url_name == 'new_job' %}selected{% endif %}" href="{% url 'new_job' %}"><span class="nav-symbol">＋</span> New test job</a>{% endif %}
+          {% if lab_role == 'Admin' %}<a class="nav-item {% if request.resolver_match.url_name == 'batch_intake' %}selected{% endif %}" href="{% url 'batch_intake' %}">Batch intake</a>{% endif %}
+          {% if lab_role == 'Quality' or lab_role == 'HoD' or lab_role == 'Admin' %}<a class="nav-item {% if request.resolver_match.url_name == 'review_queue' %}selected{% endif %}" href="{% url 'review_queue' %}">Review queue</a>{% endif %}
+          <a class="nav-item {% if request.resolver_match.url_name == 'report_archive' %}selected{% endif %}" href="{% url 'report_archive' %}">Report archive</a>
+        {% else %}
+          <a class="nav-item {% if request.resolver_match.url_name == 'customer_home' %}selected{% endif %}" href="{% url 'customer_home' %}">My requests</a>
+        {% endif %}
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="avatar">{{ user.username|first|upper }}</div>
+        <div><strong title="{{ user.username }}">{{ user.username|title }}</strong><small>{% if lab_role %}{{ lab_role }}{% else %}Customer portal{% endif %}</small></div>
+        <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="signout" title="Sign out">Sign out</button></form>
+      </div>
+    {% else %}
+      <div class="sidebar-copy"><h2>From test records<br>to a clear report.</h2><p>Keep source forms, reviewed readings and results together.</p></div>
+    {% endif %}
+  </aside>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="top-wordmark" href="{% url 'dashboard' %}">VectorLab <span>for CPRI</span></a>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{% url 'dashboard' %}">Home</a><span aria-hidden="true">/</span><span>{% block location %}Workspace{% endblock %}</span></nav>
+      {% if user.is_authenticated %}
+        <div class="topbar-actions">
+          {% if lab_access %}<form class="top-search" method="get" action="{% url 'dashboard' %}" role="search"><label class="sr-only" for="global-job-search">Search jobs</label><input id="global-job-search" name="q" placeholder="Search jobs" maxlength="100"><button type="submit" aria-label="Search jobs">Search</button></form>{% endif %}
+          {% if action_count and lab_role == 'Quality' or action_count and lab_role == 'HoD' %}<a class="top-notice" href="{% url 'review_queue' %}">{{ action_count }} need your review</a>{% elif action_count and lab_role == 'Test Engineer' %}<a class="top-notice" href="{% url 'dashboard' %}#my-tests">{{ action_count }} assigned tests</a>{% elif not lab_access %}<a class="top-notice" href="{% url 'customer_home' %}">My requests</a>{% endif %}
+          <button type="button" class="tour-trigger" id="tour-open" aria-label="Show quick tour">Quick tour</button><span class="role-badge">{{ lab_role|default:'Customer' }}</span>
+        </div>
+      {% endif %}
+    </header>
+    <main id="main">
+      {% for message in messages %}<div class="notice {{ message.tags }}" role="status">{{ message }}</div>{% endfor %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  {% if user.is_authenticated %}<dialog id="role-tour" data-role="{{ lab_role|default:'Customer' }}" data-user="{{ user.pk }}" aria-labelledby="tour-title"><h2 id="tour-title">A quick tour</h2><p id="tour-copy"></p><div class="tour-actions"><button type="button" class="secondary" id="tour-close">Close</button><button type="button" id="tour-next">Next</button></div></dialog>{% endif %}
+</body>
+</html>

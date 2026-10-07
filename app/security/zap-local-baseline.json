@@ -1,0 +1,47 @@
+{
+  "scanner": "OWASP ZAP 2.17.0",
+  "target": "http://127.0.0.1:8000",
+  "mode": "unauthenticated spider and passive baseline",
+  "environment": "local DEBUG=1; not a production HTTPS scan",
+  "high": 0,
+  "medium": 22,
+  "low": 37,
+  "findings": [
+    {
+      "name": "Authentication Request Identified",
+      "risk": "Informational",
+      "count": 2,
+      "example": "http://127.0.0.1:8000/accounts/login/?next=/"
+    },
+    {
+      "name": "Content Security Policy (CSP) Header Not Set",
+      "risk": "Medium",
+      "count": 22,
+      "example": "http://127.0.0.1:8000/audit/"
+    },
+    {
+      "name": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
+      "risk": "Low",
+      "count": 32,
+      "example": "http://127.0.0.1:8000/"
+    },
+    {
+      "name": "Session Management Response Identified",
+      "risk": "Informational",
+      "count": 5,
+      "example": "http://127.0.0.1:8000/accounts/login/?next=/"
+    },
+    {
+      "name": "User Controllable HTML Element Attribute (Potential XSS)",
+      "risk": "Informational",
+      "count": 4,
+      "example": "http://127.0.0.1:8000/accounts/login/"
+    },
+    {
+      "name": "X-Content-Type-Options Header Missing",
+      "risk": "Low",
+      "count": 5,
+      "example": "http://127.0.0.1:8000/static/favicon.svg"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}{% load static %}
+{% block location %}New request{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'customer_home' %}">← My requests</a>
+<div class="page-heading"><div><p class="eyebrow">CUSTOMER PORTAL</p><h1>Request laboratory tests</h1><p class="subtitle">Four short steps. Your unfinished request is saved privately as you go.</p></div></div>
+<section class="panel request-wizard" data-draft-url="{% url 'customer_save_draft' %}">
+  <ol class="wizard-steps" aria-label="Request progress"><li aria-current="step">1. Company</li><li>2. Sample</li><li>3. Tests</li><li>4. Review</li></ol>
+  <form method="post" id="request-form">{% csrf_token %}{{ form.non_field_errors }}
+    <fieldset data-wizard-step><legend>Company details</legend><p class="helptext">Use the exact legal names and address you want on the report.</p>
+      {% if previous_details %}<button type="button" class="secondary compact" id="reuse-details">Use details from last request</button>{% endif %}
+      <p><label for="{{ form.customer.id_for_label }}">{{ form.customer.label }}</label>{{ form.customer }}{{ form.customer.errors }}</p>
+      <p><label for="{{ form.customer_address.id_for_label }}">Customer address</label>{{ form.customer_address }}{{ form.customer_address.errors }}</p>
+      <p><label for="{{ form.manufacturer.id_for_label }}">Manufacturer</label>{{ form.manufacturer }}{{ form.manufacturer.errors }}</p>
+    </fieldset>
+    <fieldset data-wizard-step hidden><legend>Sample particulars</legend><p class="helptext">Describe the exact sample or equipment sent for testing.</p><p><label for="{{ form.sample_particulars.id_for_label }}">Sample particulars</label>{{ form.sample_particulars }}{{ form.sample_particulars.errors }}</p></fieldset>
+    <fieldset data-wizard-step hidden><legend>Requested tests</legend><p class="helptext">Select each laboratory test you need.</p>{{ form.requested_tests }}{{ form.requested_tests.errors }}</fieldset>
+    <section data-wizard-step hidden aria-labelledby="request-review-heading"><h2 id="request-review-heading">Review before submitting</h2><p>These details will flow into the laboratory report exactly as entered.</p><dl id="request-summary"></dl><p class="helptext">The OV tracking number is provisional until CPRI confirms its official file-number format.</p></section>
+    <div class="wizard-footer"><span id="draft-state" role="status">{% if draft %}Draft restored{% else %}Draft saves as you type{% endif %}</span><button type="button" class="secondary" id="wizard-back" hidden>Back</button><button type="button" id="wizard-next">Continue</button><button type="submit" id="wizard-submit" hidden>Submit request</button></div>
+  </form>
+</section>
+{% if previous_details %}{{ previous_details|json_script:'previous-request-details' }}{% endif %}
+<script src="{% static 'request-wizard.js' %}?v=1" defer></script>
+{% endblock %}

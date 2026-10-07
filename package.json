@@ -1,0 +1,9 @@
+{
+  "name": "vectorlab-acceptance",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pinned browser acceptance dependency for VectorLab",
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

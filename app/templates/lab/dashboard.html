@@ -1,0 +1,35 @@
+{% extends 'base.html' %}{% load labui %}
+{% block location %}Test jobs{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div><p class="eyebrow">{{ lab_role|default:'LAB'|upper }} WORKSPACE</p><h1>{% if lab_role == 'Quality' %}Reports awaiting review{% elif lab_role == 'HoD' %}Ready to sign{% elif lab_role == 'Test Engineer' %}My tests today{% else %}Laboratory overview{% endif %}</h1><p class="subtitle">{% if lab_role == 'Quality' or lab_role == 'HoD' %}Open your approval queue first. Jobs and history remain below for reference.{% else %}Open a job to continue its report. Your next action is shown in the list.{% endif %}</p></div>
+  {% if lab_role == 'Test Engineer' or lab_role == 'Admin' or not lab_role %}<a class="button" href="{% url 'new_job' %}">New test job</a>{% endif %}
+</div>
+{% if lab_role == 'Quality' or lab_role == 'HoD' %}<div class="next-banner role-next"><div><strong>Your review work is in the review queue</strong><p>Open reports awaiting your stage of approval; use this job list for reference and history.</p></div><a class="button" href="{% url 'review_queue' %}">Open review queue →</a></div>{% endif %}
+{% if lab_role == 'Test Engineer' %}<section class="panel" id="my-tests"><div class="panel-heading"><h2>Today's tests</h2><span class="muted">Your assigned station work</span></div><div class="task-card-grid">{% for test in my_tests %}<article class="task-card"><strong>{{ test.test_type|readable }}</strong><small>{{ test.job.file_number|default:test.job.title }} · {{ test.station|default:'Station pending' }}</small>{% if test.status == 'pending' %}<form method="post" action="{% url 'start_test' test.pk %}">{% csrf_token %}<input type="hidden" name="next" value="entry"><button>Start & enter readings</button></form>{% else %}<a class="button" href="{% url 'digital_review' test.job_id %}?test={{ test.test_type|urlencode }}">Enter readings</a>{% endif %}</article>{% empty %}<div class="empty"><h3>No assigned tests waiting</h3><p>New station assignments will appear here.</p></div>{% endfor %}</div></section>{% endif %}
+<div class="stat-grid">
+  <article class="stat-card"><span>Jobs in view</span><strong>{{ job_page.paginator.count }}</strong><small>Matching your filters</small></article>
+  <article class="stat-card"><span>Awaiting review</span><strong>{{ needs_review }}</strong><small>Jobs with readings to check</small></article>
+  <article class="stat-card"><span>Readings reviewed</span><strong>{{ reviewed_total }}<em> / {{ field_total }}</em></strong><small>Verified or marked not applicable</small></article>
+</div>
+{% if lab_role == 'Quality' or lab_role == 'HoD' %}<details class="reference-jobs"><summary>Browse all test jobs and history</summary>{% endif %}
+<section class="panel">
+  <div class="panel-heading"><h2>Continue a job</h2><span class="muted">Select a job, then follow its highlighted next step.</span></div>
+  <details class="filter-disclosure" {% if query or request.GET.customer or request.GET.sample or request.GET.date_from or request.GET.date_to or request.GET.status %}open{% endif %}>
+    <summary>Search and filter jobs</summary>{% include "lab/history_filters.html" %}
+  </details>
+  <div class="table-scroll"><table class="jobs-table"><thead><tr><th>Job &amp; customer</th><th>Sample / series</th><th>Review progress</th><th>Next step</th><th></th></tr></thead><tbody>
+  {% for job in jobs %}<tr data-job-stage="{{ job.next_step }}">
+    <td data-label="Job"><a class="job-title" href="{% url 'job_detail' job.pk %}">{{ job.title }}</a><small>{{ job.customer }}</small></td>
+    <td data-label="Sample">{{ job.sample_code|default:'Sample not entered' }}<small>{{ job.test_series|default:'Series not entered' }}</small></td>
+    <td data-label="Progress"><progress class="progress-track" value="{{ job.review_percent }}" max="100">{{ job.review_percent }}%</progress><small>{{ job.reviewed_count }} of {{ job.field_count }} readings</small></td>
+    <td data-label="Next step"><span class="badge {% if job.pending_count %}amber{% else %}blue{% endif %}">{{ job.next_label }}</span></td>
+    <td class="job-open"><a class="button secondary compact" href="{% url 'job_detail' job.pk %}">Open job →</a></td>
+  </tr>{% empty %}<tr><td colspan="5"><div class="empty"><h3>{% if query %}No matching jobs{% else %}Your first report starts here{% endif %}</h3><p>{% if query %}Try another customer name or sample code.{% else %}Create a job, add the source forms, then review the readings.{% endif %}</p>{% if not query %}<a class="button" href="{% url 'new_job' %}">Create a test job</a>{% endif %}</div></td></tr>{% endfor %}
+  </tbody></table></div>
+  <p class="filter-empty" id="filter-empty" hidden>No jobs in this view. Choose All jobs to return to your list.</p>
+</section>
+<nav class="pagination">{% if job_page.has_previous %}<a href="?{{ filter_query }}&amp;page={{ job_page.previous_page_number }}">Previous page</a>{% endif %}<span>Page {{ job_page.number }} / {{ job_page.paginator.num_pages }}</span>{% if job_page.has_next %}<a href="?{{ filter_query }}&amp;page={{ job_page.next_page_number }}">Next page</a>{% endif %}</nav>
+<section class="panel"><div class="panel-heading"><h2>Recent reports</h2><a href="{% url 'report_archive' %}">View report history</a></div>{% for report in recent_reports %}<div class="recent-report"><a href="{% url 'report' report.pk %}">{{ report.snapshot.title }} · Revision {{ report.revision }}</a><span class="badge {% if report.approved_at %}green{% else %}grey{% endif %}">{% if report.approved_at %}Approved for export{% else %}Draft{% endif %}</span><small>{{ report.created_at|date:"d M Y H:i" }}</small></div>{% empty %}<p class="empty">No reports match these filters.</p>{% endfor %}</section>
+{% if lab_role == 'Quality' or lab_role == 'HoD' %}</details>{% endif %}
+{% endblock %}

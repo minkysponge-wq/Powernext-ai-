@@ -1,0 +1,69 @@
+services:
+  db:
+    image: postgres:17
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      retries: 10
+  web:
+    build: .
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      PRIVATE_STORAGE: /data/private
+      DJANGO_TRUST_PROXY_HTTPS: "1"
+    expose:
+      - "8000"
+    volumes:
+      - files:/data/private
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+  caddy:
+    image: caddy:2
+    env_file: .env
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+  worker:
+    build: .
+    command: python manage.py qcluster
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      PRIVATE_STORAGE: /data/private
+    volumes:
+      - files:/data/private
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+  migrate:
+    build: .
+    command: python manage.py migrate --noinput
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      PRIVATE_STORAGE: /data/private
+    volumes:
+      - files:/data/private
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  pgdata:
+  files:
+  caddy_data:
+  caddy_config:

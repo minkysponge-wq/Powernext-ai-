@@ -1,0 +1,30 @@
+{
+  "version": 3,
+  "critical_key_fragments": ["serial", "sample", "series", "customer", "manufacturer", "rated", "frequency", "phases", "vector_group", "loss", "impedance", "reactance", "observation", "signature", "standard", "limit", "permissible", "rise", "deflection"],
+  "critical_review_fragments": ["serial", "sample", "series", "customer", "manufacturer", "rated", "frequency", "phases", "vector_group", "loss", "impedance", "reactance", "observation", "signature", "standard", "limit", "permissible", "rise", "deflection", "rms", "current", "voltage", "power", "resistance", "pressure", "duration", "temperature", "ambient", "winding", "peak", "ratio", "tap", "date", "time", "bottom_oil", "top_oil"],
+  "aliases": {"series": "test_series", "serial": "serial_number"},
+  "cross_document": ["rated_power", "rated_hv", "rated_lv", "phases", "frequency", "customer", "customer_name", "cooling", "vector_group", "sample_code", "test_series", "serial_number"],
+  "numeric_with_units": ["rated_power", "rated_hv", "rated_lv", "frequency"],
+  "checks": [
+    {"type": "mean", "table": "*", "of": ["I1", "I2", "I3"], "equals": "Iavg"},
+    {"type": "mean", "table": "*", "of": ["V12", "V23", "V31"], "equals": "Vavg"},
+    {"type": "mean", "table": "*", "of": ["V1", "V2", "V3"], "equals": "Vavg"},
+    {"type": "mean", "table": "*", "of": ["R1", "R2", "R3"], "equals": "Ravg"},
+    {"type": "mean", "table": "*", "of": ["rms_U", "rms_V", "rms_W"], "equals": "rms_avg"},
+    {"type": "sum", "table": "*", "of": ["W1", "W2", "W3"], "equals": "Wtotal"},
+    {"type": "difference", "table": "*", "of": ["initial", "final"], "equals": "difference", "absolute": true},
+    {"type": "required", "field": "sample_code"},
+    {"type": "format", "field": "sample_code", "format": "identifier"},
+    {"type": "format", "field": "*signature_present", "format": "boolean_presence"},
+    {"type": "format", "form_type": "temperature_rise", "field": "method", "format": "choice_label"},
+    {"type": "format", "form_type": "temperature_rise", "field": "supply_side", "format": "choice_label"},
+    {"type": "unit", "field": "rated_power", "allowed": ["VA", "kVA"]},
+    {"type": "unit", "field": "rated_hv", "allowed": ["V", "kV"]},
+    {"type": "unit", "field": "rated_lv", "allowed": ["V", "kV"]},
+    {"type": "unit", "field": "frequency", "allowed": ["Hz"]},
+    {"type": "unit", "form_type": "routine_test", "field": "*duration*", "allowed": ["s", "seconds"]},
+    {"type": "unit", "form_type": "short_circuit", "field": "shots.*.rms_*", "allowed": ["A", "kA"]},
+    {"type": "unit", "form_type": "transformer_proforma", "field": "guaranteed_temp_rise_*", "allowed": ["K", "degC", "°C"]},
+    {"type": "range", "form_type": "transformer_proforma", "field": "frequency", "min": 45, "max": 65, "unit": "Hz"}
+  ]
+}

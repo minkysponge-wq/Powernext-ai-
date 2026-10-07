@@ -1,0 +1,5 @@
+<form method="get" class="history-filters">
+{{ filter_form.non_field_errors }}
+{% for field in filter_form %}<div><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}
+<div class="filter-actions"><button>Apply filters</button><a href="{{ request.path }}">Clear</a></div>
+</form>

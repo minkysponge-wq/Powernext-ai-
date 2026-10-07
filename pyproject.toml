@@ -1,0 +1,12 @@
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+extend-exclude = "(/private/|/_archive/|/output/|/source/|/inspection/)"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["private", "_archive", "output", "source", "inspection"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

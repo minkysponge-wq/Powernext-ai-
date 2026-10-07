@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% block location %}Customer delivery{% endblock %}{% block content %}
+<a class="back-link" href="{% url 'report' report.pk %}">← Report revision {{ report.revision }}</a>
+<h1>Customer delivery</h1><p class="subtitle">Send the signed approved PDF through configured SMTP, or prepare a staff-reviewed email draft.</p>
+<section class="panel form-panel"><h2>{{ report.snapshot.customer }}</h2><p>Sample {{ report.snapshot.sample_code }} · <strong>{{ report.get_delivery_status_display }}</strong></p>
+<form method="post">{% csrf_token %}{{ form.as_p }}
+<button name="action" value="email_draft" class="secondary">Download email draft with PDF</button><p class="helptext">Open the .eml file in your email client, check the recipient and send. Downloading does not send an email or change delivery status.</p>
+{% if smtp_enabled and report.delivery_status == 'pending' %}<label><input type="checkbox" name="recipient_checked" value="yes"> I checked this recipient against the customer request when no registered customer account is linked.</label><button name="action" value="send_email">Send signed PDF to customer</button>{% endif %}
+{% if report.delivery_status == 'sending' %}<p class="notice">Delivery outcome needs staff reconciliation before any retry. Do not send another copy until the mailbox is checked.</p>{% endif %}
+<label><input type="checkbox" name="confirmed" value="yes"> This status records what has actually happened.</label>
+<button name="action" value="save">Save delivery record</button></form></section>
+<section class="panel"><div class="panel-heading"><h2>Delivery history</h2></div>{% for event in events %}<div class="recent-report"><span>{{ event.action }}<small>{{ event.details.recipient }} · {{ event.details.status }} {{ event.details.reference }}</small></span><small>{{ event.actor }} · {{ event.created_at|date:'d M Y H:i' }}</small></div>{% empty %}<p class="empty">No delivery actions recorded.</p>{% endfor %}</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+from django.urls import path
+
+from . import (
+    customer_views,
+    delivery,
+    intake,
+    report_workflow,
+    reporting_views,
+    review_views,
+    station_views,
+    views,
+    workflow_views,
+)
+
+urlpatterns = [
+    path("intake/", intake.batch_intake, name="batch_intake"),
+    path("intake/<int:pk>/route/", intake.triage_item, name="triage_item"),
+    path("intake/<int:pk>/source/", intake.intake_source, name="intake_source"),
+    path("verify/<uuid:pk>/<str:code>/", report_workflow.verify_issued, name="verify_issued"),
+    path("review/queue/", review_views.queue, name="review_queue"),
+    path("review/reports/<uuid:pk>/", review_views.quality_review, name="quality_review"),
+    path("jobs/<uuid:pk>/audit/", review_views.audit_history, name="audit_history"),
+    path("jobs/<uuid:pk>/assign-test/", station_views.assign_test, name="assign_test"),
+    path("tests/<int:pk>/start/", station_views.start_test, name="start_test"),
+    path("tests/<int:pk>/lock/", station_views.lock_test, name="lock_test"),
+    path(
+        "tests/<int:pk>/mark-unused-na/",
+        station_views.mark_unused_not_applicable,
+        name="mark_unused_not_applicable",
+    ),
+    path("tests/<int:pk>/reopen/", station_views.reopen_test, name="reopen_test"),
+    path("customer/", customer_views.home, name="customer_home"),
+    path("customer/requests/new/", customer_views.new_request, name="customer_new_request"),
+    path("customer/requests/draft/", customer_views.save_request_draft, name="customer_save_draft"),
+    path("customer/requests/<str:file_number>/", customer_views.status, name="customer_status"),
+    path(
+        "customer/requests/<str:file_number>/report/",
+        customer_views.download_report,
+        name="customer_download",
+    ),
+    path("reports/<uuid:pk>/engineer-lock/", report_workflow.engineer_lock, name="engineer_lock"),
+    path(
+        "reports/<uuid:pk>/quality-verify/", report_workflow.quality_verify, name="quality_verify"
+    ),
+    path(
+        "reports/<uuid:pk>/return/",
+        report_workflow.return_for_correction,
+        name="return_for_correction",
+    ),
+    path("reports/<uuid:pk>/delivery/", delivery.delivery, name="report_delivery"),
+    path("jobs/<uuid:pk>/exceptions/", workflow_views.exception_review, name="exception_review"),
+    path("jobs/<uuid:pk>/approve-table/", workflow_views.approve_table, name="approve_table"),
+    path("jobs/<uuid:pk>/mapping/", workflow_views.report_mapping, name="report_mapping"),
+    path(
+        "jobs/<uuid:pk>/mapping/edit/", workflow_views.edit_fixed_mapping, name="edit_fixed_mapping"
+    ),
+    path("reports/<uuid:pk>/evidence/", workflow_views.report_evidence, name="report_evidence"),
+    path("jobs/<uuid:pk>/scope/", reporting_views.scope, name="job_scope"),
+    path("jobs/<uuid:pk>/import/", reporting_views.import_readings, name="import_readings"),
+    path(
+        "jobs/<uuid:pk>/import/template/", reporting_views.import_template, name="import_template"
+    ),
+    path("jobs/<uuid:pk>/digital-review/", reporting_views.digital_review, name="digital_review"),
+    path("jobs/<uuid:pk>/findings/", reporting_views.findings, name="findings"),
+    path("jobs/<uuid:pk>/insights/", reporting_views.request_insights, name="request_insights"),
+    path("insights/<int:pk>/approve/", reporting_views.approve_insights, name="approve_insights"),
+    path("reports/<uuid:pk>/approve/", reporting_views.approve_report, name="approve_report"),
+    path("reports/", reporting_views.archive, name="report_archive"),
+    path("documents/<uuid:pk>/pages/<int:page>/", views.source_page, name="source_page"),
+    path("documents/<uuid:pk>/review/", views.review_document, name="review_document"),
+    path("documents/<uuid:pk>/transformer/", views.transformer_results, name="transformer_results"),
+    path("documents/<uuid:pk>/extract/", views.retry_extraction, name="retry_extraction"),
+    path("fields/<int:pk>/crop/", views.field_crop, name="field_crop"),
+    path("jobs/<uuid:pk>/rules/", views.job_rules, name="job_rules"),
+    path("reports/<uuid:pk>/pdf/", views.report_pdf, name="report_pdf"),
+    path("reports/<uuid:pk>/print/", views.report_html, name="report_html"),
+    path("", views.dashboard, name="dashboard"),
+    path("jobs/new/", views.new_job, name="new_job"),
+    path("jobs/<uuid:pk>/", views.job_detail, name="job_detail"),
+    path("jobs/<uuid:pk>/upload/", views.upload, name="upload"),
+    path("jobs/<uuid:pk>/fields/new/", views.edit_field, name="new_field"),
+    path("jobs/<uuid:pk>/fields/<int:field_id>/", views.edit_field, name="edit_field"),
+    path("documents/<uuid:pk>/", views.source, name="source"),
+    path("jobs/<uuid:pk>/report/", views.make_report, name="make_report"),
+    path("reports/<uuid:pk>/", views.report, name="report"),
+]

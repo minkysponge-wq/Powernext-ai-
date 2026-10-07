@@ -1,0 +1,11 @@
+# Security deployment notes
+
+This pass protects CPRI customer and laboratory records, but deployment still requires a real host and operational verification.
+
+1. Copy `.env.example` to `.env`. Generate distinct random values of at least 50 characters for `DJANGO_SECRET_KEY` and `AUDIT_CHAIN_KEY`. Keep the audit key outside database backups and retain it for the lifetime of those backups; changing it invalidates historical chain verification. Set the public domain, allowed host, CSRF origin, Postgres password, and signed-report URL to the actual site. Never commit `.env`.
+2. Point the public domain to the host and make ports 80/443 reachable. Caddy terminates HTTPS and forwards only to the internal web service. Run the compose stack, then confirm HTTPS, certificate issuance, HSTS, static assets, and `manage.py check --deploy` on that host. Docker was not available on the development machine, so the compose stack has not yet been exercised end to end.
+3. From a trusted terminal, run `python manage.py provision_totp USERNAME` for every HoD, Quality, and Admin account. Transfer the generated secret to that user through a secure channel and confirm enrollment before relying on the account. These roles fail closed without a confirmed device in production. Lockout starts after five failed logins; their idle timeout is 15 minutes.
+4. Run `python manage.py verify_audit_chain` after restore and routinely thereafter. The keyed per-job chain and separate head detect record edits, reordering, and tail deletion when the database changes without the application key. They do not replace restricted database access or off-site backups.
+5. Uploaded PDFs are limited to 20 MB and 30 pages. Parsing and preview rendering run in separate processes with 15- and 20-second limits. Keep workers and the web process restricted to the private media directory; original PDFs are served only through authorised download routes.
+
+The local unauthenticated ZAP spider/passive baseline is recorded in `zap-local-baseline.json`: zero high alerts. Its 22 medium alerts are missing CSP on Django debug-mode 404 pages; a production-mode 404 regression test confirms CSP and `nosniff`. That scan does not cover authenticated workflows or the deployed HTTPS proxy. Re-run ZAP against the deployed domain with authorised test accounts before production use.

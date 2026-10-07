@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block location %}Edit template mapping{% endblock %}
+{% block content %}
+<section class="panel">
+  <p class="eyebrow">REPORT TEMPLATE</p>
+  <h1>Map a report field</h1>
+  <p>{{ template.name }} v{{ template.version }}. Saving creates a new version and opens a fresh PDF draft immediately.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save mapping and re-render</button>
+  </form>
+</section>
+{% endblock %}

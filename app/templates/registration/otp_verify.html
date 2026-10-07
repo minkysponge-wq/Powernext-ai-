@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Verify sign-in · VectorLab{% endblock %}
+{% block location %}Verify sign-in{% endblock %}
+{% block content %}
+<section class="panel form-panel mfa-panel"><h1>Verify your sign-in</h1>
+{% if has_device %}<p>Enter the code from your authenticator to access protected laboratory work.</p>
+{% if error %}<p class="notice error" role="alert">{{ error }}</p>{% endif %}
+<form method="post">{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">
+<label for="otp-token">Authenticator code</label><input id="otp-token" name="token" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,8}" required autofocus>
+<button type="submit">Verify</button></form>
+{% else %}<p>No authenticator is registered for this account. Ask the local security administrator to provision one.</p>{% endif %}
+<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="secondary" type="submit">Sign out</button></form></section>
+{% endblock %}

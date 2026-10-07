@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% load labui %}
+{% block location %}Station readings{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'job_detail' job.pk %}?step=review">← Back to job</a>
+<div class="page-heading"><div>
+  <p class="eyebrow">{{ job.file_number|default:job.title }}</p>
+  <h1>{% if selected_run %}{{ selected_run.test_type|readable }}{% else %}Digital readings{% endif %}</h1>
+  <p class="subtitle">{% if selected_run %}{{ selected_run.station }} · {% endif %}{{ total_readings|add:0 }} readings · {{ remaining_readings }} still need review</p>
+</div></div>
+{% if selected_run %}<section class="panel entry-intro"><h2>Enter and check this test</h2><p>Compare values with the station record, then choose a review status. For unused measurements, select “Not applicable”.</p><details><summary>What is needed before engineer lock?</summary><p><strong>Required:</strong> {% for key in lock_required %}{{ key|readable }}{% if not forloop.last %}, {% endif %}{% endfor %}. <strong>At least one result:</strong> {% for key in result_any_of %}{{ key|readable }}{% if not forloop.last %} or {% endif %}{% endfor %}.</p></details></section>{% endif %}
+<section class="panel entry-panel">
+  <div class="panel-heading"><h2>Readings · page {{ page.number }} of {{ page.paginator.num_pages }}</h2></div>
+  <form method="post" id="station-form">{% csrf_token %}{{ forms.management_form }}{{ forms.non_form_errors }}
+    <div class="table-scroll"><table class="entry-table"><thead><tr><th>Measurement and source</th><th>Value</th><th>Unit</th><th>Review</th></tr></thead><tbody>
+    {% for form in forms %}<tr data-reading-key="{{ form.instance.context.schema_key }}" data-reading-page="{{ form.instance.context.schema_page }}">
+      <td class="entry-name">{{ form.instance.label|readable }}{% if form.instance.context.schema_key in lock_required %} <span class="badge amber">Required</span>{% elif form.instance.context.schema_key in result_any_of %} <span class="badge blue">Result option</span>{% endif %}<small>{{ form.instance.context.form_type|readable }} · {{ form.instance.context.source_reference|default:'Digital entry' }}</small>{% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}{{ form.non_field_errors }}</td>
+      <td class="entry-value"><label for="{{ form.value.id_for_label }}"><span class="mobile-field-label">Value</span><span class="sr-only">{{ form.instance.label }} value</span></label>{{ form.value }}{{ form.value.errors }}<div class="live-check" aria-live="polite"></div></td>
+      <td class="entry-unit"><label for="{{ form.unit.id_for_label }}"><span class="mobile-field-label">Unit</span><span class="sr-only">{{ form.instance.label }} unit</span></label>{{ form.unit }}{{ form.unit.errors }}</td>
+      <td class="entry-status"><label for="{{ form.status.id_for_label }}"><span class="mobile-field-label">Review</span><span class="sr-only">{{ form.instance.label }} review</span></label>{{ form.status }}{{ form.status.errors }}</td>
+    </tr>{% empty %}<tr><td colspan="4">No readings yet. Start the assigned test, or <a href="{% url 'import_readings' job.pk %}">import measurements</a>.</td></tr>{% endfor %}
+    </tbody></table></div>
+    <div class="review-savebar"><span id="station-save-state" role="status">Saved readings restore after refresh</span><button name="action" value="save" class="secondary">Save this page</button>{% if page.has_next %}<button name="action" value="next">Save & next →</button>{% else %}<button name="action" value="check">Save & check findings</button>{% endif %}</div>
+  </form>
+  <nav class="pagination">
+    {% if page.has_previous %}<a href="?{% if selected_type %}test={{ selected_type|urlencode }}&{% endif %}page={{ page.previous_page_number }}">← Previous</a>{% endif %}
+    {% if page.has_next %}<a href="?{% if selected_type %}test={{ selected_type|urlencode }}&{% endif %}page={{ page.next_page_number }}">Next →</a>{% endif %}
+  </nav>
+</section>
+{% if ready_for_bulk and optional_blank_count %}<section class="panel"><h2>Classify unused optional readings</h2><p>Save this page first. {{ optional_blank_count }} untouched, empty readings can be marked Not applicable together. Saved values and required identifiers stay unchanged. Your reason and every status change appear in the audit history for Quality review.</p><form method="post" action="{% url 'mark_unused_not_applicable' selected_run.pk %}">{% csrf_token %}<label for="na-reason">Reason these readings are not applicable</label><textarea id="na-reason" name="reason" minlength="10" maxlength="500" rows="2" required></textarea><label><input type="checkbox" name="confirmed" value="yes" required> I checked which measurements apply to this test</label><button class="secondary">Mark {{ optional_blank_count }} empty readings N/A</button></form></section>{% endif %}
+{% if selected_run and selected_run.status == 'in_progress' and total_readings and selected_run.assigned_to_id == user.pk %}<section class="panel"><h2>Engineer lock</h2>{% if lock_blockers %}<p>Complete these items before locking:</p><ul>{% for blocker in lock_blockers %}<li>{{ blocker }}</li>{% endfor %}</ul><p class="helptext">After the readings save, refresh this page to check lock readiness again.</p><button disabled title="Complete the listed items, then refresh">Lock this test</button>{% else %}<p>All configured readings have a review status. Check the values against the station record before locking.</p><form method="post" action="{% url 'lock_test' selected_run.pk %}" data-confirm="Lock this test and its readings for Quality review?">{% csrf_token %}<label><input type="checkbox" name="confirmed" value="yes" required> I checked these readings against the station record</label><button>Lock this test</button></form>{% endif %}</section>{% endif %}
+{{ live_rules|json_script:'station-live-rules' }}
+{% load static %}<script src="{% static 'station-entry.js' %}?v=1" defer></script>
+{% endblock %}

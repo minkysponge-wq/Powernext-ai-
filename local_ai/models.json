@@ -1,0 +1,12 @@
+{
+  "qwen": {
+    "repo": "Qwen/Qwen3-VL-2B-Instruct",
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "license": "Apache-2.0"
+  },
+  "paddle": {
+    "repo": "PaddlePaddle/PaddleOCR-VL-1.6",
+    "revision": "c5630abae1d940eafe0697512a0325494b02ab42",
+    "license": "Apache-2.0"
+  }
+}

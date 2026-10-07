@@ -1,0 +1,5162 @@
+[
+  {
+    "form_type": "customer_request",
+    "pages": 3,
+    "fields": [
+      {
+        "key": "customer_name",
+        "page": 1,
+        "label": "customer name"
+      },
+      {
+        "key": "customer_address",
+        "page": 1,
+        "label": "customer address"
+      },
+      {
+        "key": "manufacturer",
+        "page": 1,
+        "label": "manufacturer as declared"
+      },
+      {
+        "key": "sample_description",
+        "page": 1,
+        "label": "sample description"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "rated_hv",
+        "page": 1,
+        "label": "rated hv"
+      },
+      {
+        "key": "rated_lv",
+        "page": 1,
+        "label": "rated lv"
+      },
+      {
+        "key": "phases",
+        "page": 1,
+        "label": "phases"
+      },
+      {
+        "key": "frequency",
+        "page": 1,
+        "label": "frequency"
+      },
+      {
+        "key": "winding_material",
+        "page": 1,
+        "label": "winding material"
+      },
+      {
+        "key": "sealed",
+        "page": 1,
+        "label": "sealed"
+      },
+      {
+        "key": "installation",
+        "page": 1,
+        "label": "installation"
+      },
+      {
+        "key": "cooling",
+        "page": 1,
+        "label": "cooling"
+      },
+      {
+        "key": "tap_range",
+        "page": 1,
+        "label": "tap range"
+      },
+      {
+        "key": "tap_count",
+        "page": 1,
+        "label": "tap count"
+      },
+      {
+        "key": "serial_number",
+        "page": 1,
+        "label": "serial number"
+      },
+      {
+        "key": "efficiency_level",
+        "page": 1,
+        "label": "efficiency level"
+      },
+      {
+        "key": "drawing_numbers",
+        "page": 1,
+        "label": "drawing numbers"
+      },
+      {
+        "key": "customer_requirement",
+        "page": 1,
+        "label": "customer requirement"
+      },
+      {
+        "key": "evaluation_criteria",
+        "page": 1,
+        "label": "evaluation criteria"
+      },
+      {
+        "key": "sample_count",
+        "page": 1,
+        "label": "sample count"
+      },
+      {
+        "key": "return_sample",
+        "page": 1,
+        "label": "return sample"
+      },
+      {
+        "key": "scrap_sample",
+        "page": 1,
+        "label": "scrap sample"
+      },
+      {
+        "key": "requested_test",
+        "page": 1,
+        "label": "requested test"
+      },
+      {
+        "key": "mounting_instructions",
+        "page": 1,
+        "label": "mounting instructions"
+      },
+      {
+        "key": "witness_name",
+        "page": 1,
+        "label": "witness name"
+      },
+      {
+        "key": "witness_capacity",
+        "page": 1,
+        "label": "witness capacity"
+      },
+      {
+        "key": "dispatch_to",
+        "page": 1,
+        "label": "dispatch to"
+      },
+      {
+        "key": "dispatch_mode",
+        "page": 1,
+        "label": "dispatch mode"
+      },
+      {
+        "key": "additional_reports",
+        "page": 1,
+        "label": "additional reports"
+      },
+      {
+        "key": "msme_discount",
+        "page": 2,
+        "label": "msme discount"
+      },
+      {
+        "key": "conformity_requested",
+        "page": 2,
+        "label": "conformity requested"
+      },
+      {
+        "key": "decision_rule_standard",
+        "page": 2,
+        "label": "decision rule standard"
+      },
+      {
+        "key": "decision_rule_customer",
+        "page": 2,
+        "label": "decision rule customer"
+      },
+      {
+        "key": "decision_rule_uncertainty",
+        "page": 2,
+        "label": "decision rule uncertainty"
+      },
+      {
+        "key": "customer_signature_present",
+        "page": 2,
+        "label": "customer signature present"
+      },
+      {
+        "key": "sample_suitable",
+        "page": 3,
+        "label": "sample suitable"
+      },
+      {
+        "key": "sample_unsuitable",
+        "page": 3,
+        "label": "sample unsuitable"
+      },
+      {
+        "key": "continue_testing",
+        "page": 3,
+        "label": "continue testing"
+      },
+      {
+        "key": "do_not_continue",
+        "page": 3,
+        "label": "do not continue"
+      },
+      {
+        "key": "lab_capable",
+        "page": 3,
+        "label": "lab capable"
+      },
+      {
+        "key": "external_services",
+        "page": 3,
+        "label": "external services"
+      },
+      {
+        "key": "acceptance_signature_present",
+        "page": 3,
+        "label": "acceptance signature present"
+      },
+      {
+        "key": "deviations",
+        "page": 3,
+        "label": "deviations"
+      },
+      {
+        "key": "customer_communication",
+        "page": 3,
+        "label": "customer communication"
+      },
+      {
+        "key": "test_engineer_signature",
+        "page": 3,
+        "label": "test engineer signature"
+      },
+      {
+        "key": "customer_signature",
+        "page": 3,
+        "label": "customer signature"
+      }
+    ]
+  },
+  {
+    "form_type": "work_instruction",
+    "pages": 1,
+    "fields": [
+      {
+        "key": "test_series",
+        "page": 1,
+        "label": "test series"
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code"
+      },
+      {
+        "key": "customer",
+        "page": 1,
+        "label": "customer"
+      },
+      {
+        "key": "customer_reference",
+        "page": 1,
+        "label": "customer reference"
+      },
+      {
+        "key": "sample_description",
+        "page": 1,
+        "label": "sample description"
+      },
+      {
+        "key": "mounting_instructions",
+        "page": 1,
+        "label": "mounting instructions"
+      },
+      {
+        "key": "special_instructions",
+        "page": 1,
+        "label": "special instructions"
+      },
+      {
+        "key": "test_date",
+        "page": 1,
+        "label": "test date"
+      },
+      {
+        "key": "customer_requirement",
+        "page": 1,
+        "label": "customer requirement"
+      },
+      {
+        "key": "requested_tests",
+        "page": 1,
+        "label": "requested tests"
+      },
+      {
+        "key": "standard",
+        "page": 1,
+        "label": "standard"
+      },
+      {
+        "key": "latest_standard",
+        "page": 1,
+        "label": "latest standard"
+      },
+      {
+        "key": "standard_deviation",
+        "page": 1,
+        "label": "standard deviation"
+      },
+      {
+        "key": "assigned_to",
+        "page": 1,
+        "label": "assigned to"
+      },
+      {
+        "key": "authorised_signature_present",
+        "page": 1,
+        "label": "authorised signature present"
+      },
+      {
+        "key": "authorised_date",
+        "page": 1,
+        "label": "authorised date"
+      },
+      {
+        "key": "completed_date",
+        "page": 1,
+        "label": "completed date"
+      },
+      {
+        "key": "report_engineer",
+        "page": 1,
+        "label": "report engineer"
+      },
+      {
+        "key": "deviations",
+        "page": 1,
+        "label": "deviations"
+      },
+      {
+        "key": "discrepancy_resolution",
+        "page": 1,
+        "label": "discrepancy resolution"
+      },
+      {
+        "key": "completion_signature_present",
+        "page": 1,
+        "label": "completion signature present"
+      },
+      {
+        "key": "resolution_signature_present",
+        "page": 1,
+        "label": "resolution signature present"
+      }
+    ]
+  },
+  {
+    "form_type": "transformer_proforma",
+    "pages": 2,
+    "fields": [
+      {
+        "key": "test_series",
+        "page": 1,
+        "label": "test series"
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code"
+      },
+      {
+        "key": "sealed",
+        "page": 1,
+        "label": "sealed"
+      },
+      {
+        "key": "non_sealed",
+        "page": 1,
+        "label": "non sealed"
+      },
+      {
+        "key": "oil_immersed",
+        "page": 1,
+        "label": "oil immersed"
+      },
+      {
+        "key": "dry_type",
+        "page": 1,
+        "label": "dry type"
+      },
+      {
+        "key": "indoor",
+        "page": 1,
+        "label": "indoor"
+      },
+      {
+        "key": "outdoor",
+        "page": 1,
+        "label": "outdoor"
+      },
+      {
+        "key": "serial_number",
+        "page": 1,
+        "label": "serial number",
+        "guidance": "Copy digits only if written in serial cell; adjacent tick mark is not part of serial."
+      },
+      {
+        "key": "description",
+        "page": 1,
+        "label": "description"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "rated_hv",
+        "page": 1,
+        "label": "rated hv"
+      },
+      {
+        "key": "rated_lv",
+        "page": 1,
+        "label": "rated lv"
+      },
+      {
+        "key": "highest_voltage",
+        "page": 1,
+        "label": "highest voltage"
+      },
+      {
+        "key": "hv_impulse",
+        "page": 1,
+        "label": "hv impulse"
+      },
+      {
+        "key": "hv_ac",
+        "page": 1,
+        "label": "hv ac"
+      },
+      {
+        "key": "lv_ac",
+        "page": 1,
+        "label": "lv ac"
+      },
+      {
+        "key": "impedance_at_75",
+        "page": 1,
+        "label": "impedance at 75"
+      },
+      {
+        "key": "impedance_high_tap_at_75",
+        "page": 1,
+        "label": "Declared high-tap impedance at 75 °C",
+        "optional": true,
+        "digital_only": true
+      },
+      {
+        "key": "impedance_low_tap_at_75",
+        "page": 1,
+        "label": "Declared low-tap impedance at 75 °C",
+        "optional": true,
+        "digital_only": true
+      },
+      {
+        "key": "declared_ratio_principal",
+        "page": 1,
+        "label": "Declared principal-tap voltage ratio",
+        "optional": true,
+        "digital_only": true
+      },
+      {
+        "key": "phases",
+        "page": 1,
+        "label": "phases"
+      },
+      {
+        "key": "frequency",
+        "page": 1,
+        "label": "frequency"
+      },
+      {
+        "key": "vector_group",
+        "page": 1,
+        "label": "vector group"
+      },
+      {
+        "key": "efficiency_level",
+        "page": 1,
+        "label": "efficiency level"
+      },
+      {
+        "key": "cooling",
+        "page": 1,
+        "label": "cooling"
+      },
+      {
+        "key": "tap_range",
+        "page": 1,
+        "label": "tap range"
+      },
+      {
+        "key": "tap_step",
+        "page": 1,
+        "label": "tap step"
+      },
+      {
+        "key": "no_load_loss",
+        "page": 1,
+        "label": "no load loss"
+      },
+      {
+        "key": "load_loss",
+        "page": 1,
+        "label": "load loss"
+      },
+      {
+        "key": "guaranteed_total_loss_50",
+        "page": 1,
+        "label": "guaranteed total loss 50"
+      },
+      {
+        "key": "guaranteed_total_loss_100",
+        "page": 1,
+        "label": "guaranteed total loss 100"
+      },
+      {
+        "key": "noise_limit",
+        "page": 1,
+        "label": "noise limit"
+      },
+      {
+        "key": "oil_volume",
+        "page": 1,
+        "label": "oil volume"
+      },
+      {
+        "key": "manufacture_month",
+        "page": 1,
+        "label": "manufacture month"
+      },
+      {
+        "key": "signature_present",
+        "page": 1,
+        "label": "signature present"
+      },
+      {
+        "key": "signature_date",
+        "page": 1,
+        "label": "signature date"
+      },
+      {
+        "key": "test_series",
+        "page": 2,
+        "label": "test series"
+      },
+      {
+        "key": "sample_code",
+        "page": 2,
+        "label": "sample code"
+      },
+      {
+        "key": "copper",
+        "page": 2,
+        "label": "copper"
+      },
+      {
+        "key": "aluminium",
+        "page": 2,
+        "label": "aluminium"
+      },
+      {
+        "key": "circular",
+        "page": 2,
+        "label": "circular"
+      },
+      {
+        "key": "non_circular",
+        "page": 2,
+        "label": "non circular"
+      },
+      {
+        "key": "crgo",
+        "page": 2,
+        "label": "crgo"
+      },
+      {
+        "key": "amorphous",
+        "page": 2,
+        "label": "amorphous"
+      },
+      {
+        "key": "lv_winding",
+        "page": 2,
+        "label": "lv winding"
+      },
+      {
+        "key": "hv_winding",
+        "page": 2,
+        "label": "hv winding"
+      },
+      {
+        "key": "test_1",
+        "page": 2,
+        "label": "test 1"
+      },
+      {
+        "key": "test_2",
+        "page": 2,
+        "label": "test 2"
+      },
+      {
+        "key": "test_3",
+        "page": 2,
+        "label": "test 3"
+      },
+      {
+        "key": "test_4",
+        "page": 2,
+        "label": "test 4"
+      },
+      {
+        "key": "test_5",
+        "page": 2,
+        "label": "test 5"
+      },
+      {
+        "key": "test_6",
+        "page": 2,
+        "label": "test 6"
+      },
+      {
+        "key": "test_7",
+        "page": 2,
+        "label": "test 7"
+      },
+      {
+        "key": "standard",
+        "page": 2,
+        "label": "standard"
+      },
+      {
+        "key": "customer_instructions",
+        "page": 2,
+        "label": "customer instructions"
+      },
+      {
+        "key": "dry_insulation_class",
+        "page": 2,
+        "label": "dry insulation class"
+      },
+      {
+        "key": "tank_plain",
+        "page": 2,
+        "label": "tank plain"
+      },
+      {
+        "key": "tank_corrugated",
+        "page": 2,
+        "label": "tank corrugated"
+      },
+      {
+        "key": "guaranteed_temp_rise_1",
+        "page": 2,
+        "label": "guaranteed temp rise 1"
+      },
+      {
+        "key": "guaranteed_temp_rise_2",
+        "page": 2,
+        "label": "guaranteed temp rise 2"
+      },
+      {
+        "key": "signature_date",
+        "page": 2,
+        "label": "signature date"
+      },
+      {
+        "key": "signature_present",
+        "page": 2,
+        "label": "signature present"
+      }
+    ],
+    "instructions": [
+      "The serial-number handwriting ends before the adjacent tick mark. Do not append the tick to the identifier.",
+      "Read checkbox selections from the tick inside the corresponding box; a tick beside a number is not part of that number."
+    ]
+  },
+  {
+    "form_type": "loss_calculation",
+    "pages": 1,
+    "fields": [
+      {
+        "key": "software_version",
+        "page": 1,
+        "label": "software version"
+      },
+      {
+        "key": "series",
+        "page": 1,
+        "label": "series"
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "rated_hv",
+        "page": 1,
+        "label": "rated hv"
+      },
+      {
+        "key": "rated_lv",
+        "page": 1,
+        "label": "rated lv"
+      },
+      {
+        "key": "efficiency_level",
+        "page": 1,
+        "label": "efficiency level"
+      },
+      {
+        "key": "phases",
+        "page": 1,
+        "label": "phases"
+      },
+      {
+        "key": "material",
+        "page": 1,
+        "label": "material"
+      },
+      {
+        "key": "tap_range",
+        "page": 1,
+        "label": "tap range"
+      },
+      {
+        "key": "tap_step",
+        "page": 1,
+        "label": "tap step"
+      },
+      {
+        "key": "guarantee_50",
+        "page": 1,
+        "label": "guarantee 50"
+      },
+      {
+        "key": "guarantee_100",
+        "page": 1,
+        "label": "guarantee 100"
+      },
+      {
+        "key": "reference_temperature",
+        "page": 1,
+        "label": "reference temperature"
+      },
+      {
+        "key": "test_engineer_signature_present",
+        "page": 1,
+        "label": "test engineer signature present"
+      },
+      {
+        "key": "no_load.0.stage",
+        "page": 1,
+        "label": "no load.0.stage"
+      },
+      {
+        "key": "no_load.0.V",
+        "page": 1,
+        "label": "no load.0.V"
+      },
+      {
+        "key": "no_load.0.I",
+        "page": 1,
+        "label": "no load.0.I"
+      },
+      {
+        "key": "no_load.0.P",
+        "page": 1,
+        "label": "no load.0.P"
+      },
+      {
+        "key": "no_load.0.f",
+        "page": 1,
+        "label": "no load.0.f"
+      },
+      {
+        "key": "no_load.1.stage",
+        "page": 1,
+        "label": "no load.1.stage"
+      },
+      {
+        "key": "no_load.1.V",
+        "page": 1,
+        "label": "no load.1.V"
+      },
+      {
+        "key": "no_load.1.I",
+        "page": 1,
+        "label": "no load.1.I"
+      },
+      {
+        "key": "no_load.1.P",
+        "page": 1,
+        "label": "no load.1.P"
+      },
+      {
+        "key": "no_load.1.f",
+        "page": 1,
+        "label": "no load.1.f"
+      },
+      {
+        "key": "half_load.0.stage",
+        "page": 1,
+        "label": "half load.0.stage"
+      },
+      {
+        "key": "half_load.0.V",
+        "page": 1,
+        "label": "half load.0.V"
+      },
+      {
+        "key": "half_load.0.I",
+        "page": 1,
+        "label": "half load.0.I"
+      },
+      {
+        "key": "half_load.0.P",
+        "page": 1,
+        "label": "half load.0.P"
+      },
+      {
+        "key": "half_load.0.f",
+        "page": 1,
+        "label": "half load.0.f"
+      },
+      {
+        "key": "half_load.1.stage",
+        "page": 1,
+        "label": "half load.1.stage"
+      },
+      {
+        "key": "half_load.1.V",
+        "page": 1,
+        "label": "half load.1.V"
+      },
+      {
+        "key": "half_load.1.I",
+        "page": 1,
+        "label": "half load.1.I"
+      },
+      {
+        "key": "half_load.1.P",
+        "page": 1,
+        "label": "half load.1.P"
+      },
+      {
+        "key": "half_load.1.f",
+        "page": 1,
+        "label": "half load.1.f"
+      },
+      {
+        "key": "lv_resistance.0.stage",
+        "page": 1,
+        "label": "lv resistance.0.stage"
+      },
+      {
+        "key": "lv_resistance.0.R1",
+        "page": 1,
+        "label": "lv resistance.0.R1"
+      },
+      {
+        "key": "lv_resistance.0.R2",
+        "page": 1,
+        "label": "lv resistance.0.R2"
+      },
+      {
+        "key": "lv_resistance.0.R3",
+        "page": 1,
+        "label": "lv resistance.0.R3"
+      },
+      {
+        "key": "lv_resistance.0.temperature",
+        "page": 1,
+        "label": "lv resistance.0.temperature"
+      },
+      {
+        "key": "lv_resistance.1.stage",
+        "page": 1,
+        "label": "lv resistance.1.stage"
+      },
+      {
+        "key": "lv_resistance.1.R1",
+        "page": 1,
+        "label": "lv resistance.1.R1"
+      },
+      {
+        "key": "lv_resistance.1.R2",
+        "page": 1,
+        "label": "lv resistance.1.R2"
+      },
+      {
+        "key": "lv_resistance.1.R3",
+        "page": 1,
+        "label": "lv resistance.1.R3"
+      },
+      {
+        "key": "lv_resistance.1.temperature",
+        "page": 1,
+        "label": "lv resistance.1.temperature"
+      },
+      {
+        "key": "hv_resistance.0.stage",
+        "page": 1,
+        "label": "hv resistance.0.stage"
+      },
+      {
+        "key": "hv_resistance.0.R1",
+        "page": 1,
+        "label": "hv resistance.0.R1"
+      },
+      {
+        "key": "hv_resistance.0.R2",
+        "page": 1,
+        "label": "hv resistance.0.R2"
+      },
+      {
+        "key": "hv_resistance.0.R3",
+        "page": 1,
+        "label": "hv resistance.0.R3"
+      },
+      {
+        "key": "hv_resistance.1.stage",
+        "page": 1,
+        "label": "hv resistance.1.stage"
+      },
+      {
+        "key": "hv_resistance.1.R1",
+        "page": 1,
+        "label": "hv resistance.1.R1"
+      },
+      {
+        "key": "hv_resistance.1.R2",
+        "page": 1,
+        "label": "hv resistance.1.R2"
+      },
+      {
+        "key": "hv_resistance.1.R3",
+        "page": 1,
+        "label": "hv resistance.1.R3"
+      },
+      {
+        "key": "hv_resistance.2.stage",
+        "page": 1,
+        "label": "hv resistance.2.stage"
+      },
+      {
+        "key": "hv_resistance.2.R1",
+        "page": 1,
+        "label": "hv resistance.2.R1"
+      },
+      {
+        "key": "hv_resistance.2.R2",
+        "page": 1,
+        "label": "hv resistance.2.R2"
+      },
+      {
+        "key": "hv_resistance.2.R3",
+        "page": 1,
+        "label": "hv resistance.2.R3"
+      },
+      {
+        "key": "hv_resistance.3.stage",
+        "page": 1,
+        "label": "hv resistance.3.stage"
+      },
+      {
+        "key": "hv_resistance.3.R1",
+        "page": 1,
+        "label": "hv resistance.3.R1"
+      },
+      {
+        "key": "hv_resistance.3.R2",
+        "page": 1,
+        "label": "hv resistance.3.R2"
+      },
+      {
+        "key": "hv_resistance.3.R3",
+        "page": 1,
+        "label": "hv resistance.3.R3"
+      },
+      {
+        "key": "hv_resistance.4.stage",
+        "page": 1,
+        "label": "hv resistance.4.stage"
+      },
+      {
+        "key": "hv_resistance.4.R1",
+        "page": 1,
+        "label": "hv resistance.4.R1"
+      },
+      {
+        "key": "hv_resistance.4.R2",
+        "page": 1,
+        "label": "hv resistance.4.R2"
+      },
+      {
+        "key": "hv_resistance.4.R3",
+        "page": 1,
+        "label": "hv resistance.4.R3"
+      },
+      {
+        "key": "hv_resistance.5.stage",
+        "page": 1,
+        "label": "hv resistance.5.stage"
+      },
+      {
+        "key": "hv_resistance.5.R1",
+        "page": 1,
+        "label": "hv resistance.5.R1"
+      },
+      {
+        "key": "hv_resistance.5.R2",
+        "page": 1,
+        "label": "hv resistance.5.R2"
+      },
+      {
+        "key": "hv_resistance.5.R3",
+        "page": 1,
+        "label": "hv resistance.5.R3"
+      },
+      {
+        "key": "load_measurement.0.stage",
+        "page": 1,
+        "label": "load measurement.0.stage"
+      },
+      {
+        "key": "load_measurement.0.V1",
+        "page": 1,
+        "label": "load measurement.0.V1"
+      },
+      {
+        "key": "load_measurement.0.V2",
+        "page": 1,
+        "label": "load measurement.0.V2"
+      },
+      {
+        "key": "load_measurement.0.V3",
+        "page": 1,
+        "label": "load measurement.0.V3"
+      },
+      {
+        "key": "load_measurement.0.I1",
+        "page": 1,
+        "label": "load measurement.0.I1"
+      },
+      {
+        "key": "load_measurement.0.I2",
+        "page": 1,
+        "label": "load measurement.0.I2"
+      },
+      {
+        "key": "load_measurement.0.I3",
+        "page": 1,
+        "label": "load measurement.0.I3"
+      },
+      {
+        "key": "load_measurement.0.P1",
+        "page": 1,
+        "label": "load measurement.0.P1"
+      },
+      {
+        "key": "load_measurement.0.P2",
+        "page": 1,
+        "label": "load measurement.0.P2"
+      },
+      {
+        "key": "load_measurement.0.P3",
+        "page": 1,
+        "label": "load measurement.0.P3"
+      },
+      {
+        "key": "load_measurement.0.f",
+        "page": 1,
+        "label": "load measurement.0.f"
+      },
+      {
+        "key": "load_measurement.1.stage",
+        "page": 1,
+        "label": "load measurement.1.stage"
+      },
+      {
+        "key": "load_measurement.1.V1",
+        "page": 1,
+        "label": "load measurement.1.V1"
+      },
+      {
+        "key": "load_measurement.1.V2",
+        "page": 1,
+        "label": "load measurement.1.V2"
+      },
+      {
+        "key": "load_measurement.1.V3",
+        "page": 1,
+        "label": "load measurement.1.V3"
+      },
+      {
+        "key": "load_measurement.1.I1",
+        "page": 1,
+        "label": "load measurement.1.I1"
+      },
+      {
+        "key": "load_measurement.1.I2",
+        "page": 1,
+        "label": "load measurement.1.I2"
+      },
+      {
+        "key": "load_measurement.1.I3",
+        "page": 1,
+        "label": "load measurement.1.I3"
+      },
+      {
+        "key": "load_measurement.1.P1",
+        "page": 1,
+        "label": "load measurement.1.P1"
+      },
+      {
+        "key": "load_measurement.1.P2",
+        "page": 1,
+        "label": "load measurement.1.P2"
+      },
+      {
+        "key": "load_measurement.1.P3",
+        "page": 1,
+        "label": "load measurement.1.P3"
+      },
+      {
+        "key": "load_measurement.1.f",
+        "page": 1,
+        "label": "load measurement.1.f"
+      },
+      {
+        "key": "load_measurement.2.stage",
+        "page": 1,
+        "label": "load measurement.2.stage"
+      },
+      {
+        "key": "load_measurement.2.V1",
+        "page": 1,
+        "label": "load measurement.2.V1"
+      },
+      {
+        "key": "load_measurement.2.V2",
+        "page": 1,
+        "label": "load measurement.2.V2"
+      },
+      {
+        "key": "load_measurement.2.V3",
+        "page": 1,
+        "label": "load measurement.2.V3"
+      },
+      {
+        "key": "load_measurement.2.I1",
+        "page": 1,
+        "label": "load measurement.2.I1"
+      },
+      {
+        "key": "load_measurement.2.I2",
+        "page": 1,
+        "label": "load measurement.2.I2"
+      },
+      {
+        "key": "load_measurement.2.I3",
+        "page": 1,
+        "label": "load measurement.2.I3"
+      },
+      {
+        "key": "load_measurement.2.P1",
+        "page": 1,
+        "label": "load measurement.2.P1"
+      },
+      {
+        "key": "load_measurement.2.P2",
+        "page": 1,
+        "label": "load measurement.2.P2"
+      },
+      {
+        "key": "load_measurement.2.P3",
+        "page": 1,
+        "label": "load measurement.2.P3"
+      },
+      {
+        "key": "load_measurement.2.f",
+        "page": 1,
+        "label": "load measurement.2.f"
+      },
+      {
+        "key": "load_measurement.3.stage",
+        "page": 1,
+        "label": "load measurement.3.stage"
+      },
+      {
+        "key": "load_measurement.3.V1",
+        "page": 1,
+        "label": "load measurement.3.V1"
+      },
+      {
+        "key": "load_measurement.3.V2",
+        "page": 1,
+        "label": "load measurement.3.V2"
+      },
+      {
+        "key": "load_measurement.3.V3",
+        "page": 1,
+        "label": "load measurement.3.V3"
+      },
+      {
+        "key": "load_measurement.3.I1",
+        "page": 1,
+        "label": "load measurement.3.I1"
+      },
+      {
+        "key": "load_measurement.3.I2",
+        "page": 1,
+        "label": "load measurement.3.I2"
+      },
+      {
+        "key": "load_measurement.3.I3",
+        "page": 1,
+        "label": "load measurement.3.I3"
+      },
+      {
+        "key": "load_measurement.3.P1",
+        "page": 1,
+        "label": "load measurement.3.P1"
+      },
+      {
+        "key": "load_measurement.3.P2",
+        "page": 1,
+        "label": "load measurement.3.P2"
+      },
+      {
+        "key": "load_measurement.3.P3",
+        "page": 1,
+        "label": "load measurement.3.P3"
+      },
+      {
+        "key": "load_measurement.3.f",
+        "page": 1,
+        "label": "load measurement.3.f"
+      },
+      {
+        "key": "load_measurement.4.stage",
+        "page": 1,
+        "label": "load measurement.4.stage"
+      },
+      {
+        "key": "load_measurement.4.V1",
+        "page": 1,
+        "label": "load measurement.4.V1"
+      },
+      {
+        "key": "load_measurement.4.V2",
+        "page": 1,
+        "label": "load measurement.4.V2"
+      },
+      {
+        "key": "load_measurement.4.V3",
+        "page": 1,
+        "label": "load measurement.4.V3"
+      },
+      {
+        "key": "load_measurement.4.I1",
+        "page": 1,
+        "label": "load measurement.4.I1"
+      },
+      {
+        "key": "load_measurement.4.I2",
+        "page": 1,
+        "label": "load measurement.4.I2"
+      },
+      {
+        "key": "load_measurement.4.I3",
+        "page": 1,
+        "label": "load measurement.4.I3"
+      },
+      {
+        "key": "load_measurement.4.P1",
+        "page": 1,
+        "label": "load measurement.4.P1"
+      },
+      {
+        "key": "load_measurement.4.P2",
+        "page": 1,
+        "label": "load measurement.4.P2"
+      },
+      {
+        "key": "load_measurement.4.P3",
+        "page": 1,
+        "label": "load measurement.4.P3"
+      },
+      {
+        "key": "load_measurement.4.f",
+        "page": 1,
+        "label": "load measurement.4.f"
+      },
+      {
+        "key": "load_measurement.5.stage",
+        "page": 1,
+        "label": "load measurement.5.stage"
+      },
+      {
+        "key": "load_measurement.5.V1",
+        "page": 1,
+        "label": "load measurement.5.V1"
+      },
+      {
+        "key": "load_measurement.5.V2",
+        "page": 1,
+        "label": "load measurement.5.V2"
+      },
+      {
+        "key": "load_measurement.5.V3",
+        "page": 1,
+        "label": "load measurement.5.V3"
+      },
+      {
+        "key": "load_measurement.5.I1",
+        "page": 1,
+        "label": "load measurement.5.I1"
+      },
+      {
+        "key": "load_measurement.5.I2",
+        "page": 1,
+        "label": "load measurement.5.I2"
+      },
+      {
+        "key": "load_measurement.5.I3",
+        "page": 1,
+        "label": "load measurement.5.I3"
+      },
+      {
+        "key": "load_measurement.5.P1",
+        "page": 1,
+        "label": "load measurement.5.P1"
+      },
+      {
+        "key": "load_measurement.5.P2",
+        "page": 1,
+        "label": "load measurement.5.P2"
+      },
+      {
+        "key": "load_measurement.5.P3",
+        "page": 1,
+        "label": "load measurement.5.P3"
+      },
+      {
+        "key": "load_measurement.5.f",
+        "page": 1,
+        "label": "load measurement.5.f"
+      },
+      {
+        "key": "calculated.0.stage",
+        "page": 1,
+        "label": "calculated.0.stage"
+      },
+      {
+        "key": "calculated.0.Z75",
+        "page": 1,
+        "label": "calculated.0.Z75"
+      },
+      {
+        "key": "calculated.0.X50",
+        "page": 1,
+        "label": "calculated.0.X50"
+      },
+      {
+        "key": "calculated.0.Xchange",
+        "page": 1,
+        "label": "calculated.0.Xchange"
+      },
+      {
+        "key": "calculated.0.Rhv",
+        "page": 1,
+        "label": "calculated.0.Rhv"
+      },
+      {
+        "key": "calculated.0.Rlv",
+        "page": 1,
+        "label": "calculated.0.Rlv"
+      },
+      {
+        "key": "calculated.0.load_loss_100",
+        "page": 1,
+        "label": "calculated.0.load loss 100"
+      },
+      {
+        "key": "calculated.0.XR75",
+        "page": 1,
+        "label": "X/R at 75 degC, row 0"
+      },
+      {
+        "key": "calculated.0.Isc_peak",
+        "page": 1,
+        "label": "calculated.0.Isc peak"
+      },
+      {
+        "key": "calculated.0.Isc_rms",
+        "page": 1,
+        "label": "calculated.0.Isc rms"
+      },
+      {
+        "key": "calculated.0.stray_loss",
+        "page": 1,
+        "label": "calculated.0.stray loss"
+      },
+      {
+        "key": "calculated.0.load_loss_50",
+        "page": 1,
+        "label": "calculated.0.load loss 50"
+      },
+      {
+        "key": "calculated.0.total_loss_50",
+        "page": 1,
+        "label": "calculated.0.total loss 50"
+      },
+      {
+        "key": "calculated.0.total_loss_100",
+        "page": 1,
+        "label": "calculated.0.total loss 100"
+      },
+      {
+        "key": "calculated.1.stage",
+        "page": 1,
+        "label": "calculated.1.stage"
+      },
+      {
+        "key": "calculated.1.Z75",
+        "page": 1,
+        "label": "calculated.1.Z75"
+      },
+      {
+        "key": "calculated.1.X50",
+        "page": 1,
+        "label": "calculated.1.X50"
+      },
+      {
+        "key": "calculated.1.Xchange",
+        "page": 1,
+        "label": "calculated.1.Xchange"
+      },
+      {
+        "key": "calculated.1.Rhv",
+        "page": 1,
+        "label": "calculated.1.Rhv"
+      },
+      {
+        "key": "calculated.1.Rlv",
+        "page": 1,
+        "label": "calculated.1.Rlv"
+      },
+      {
+        "key": "calculated.1.load_loss_100",
+        "page": 1,
+        "label": "calculated.1.load loss 100"
+      },
+      {
+        "key": "calculated.1.XR75",
+        "page": 1,
+        "label": "X/R at 75 degC, row 1"
+      },
+      {
+        "key": "calculated.1.Isc_peak",
+        "page": 1,
+        "label": "calculated.1.Isc peak"
+      },
+      {
+        "key": "calculated.1.Isc_rms",
+        "page": 1,
+        "label": "calculated.1.Isc rms"
+      },
+      {
+        "key": "calculated.1.stray_loss",
+        "page": 1,
+        "label": "calculated.1.stray loss"
+      },
+      {
+        "key": "calculated.1.load_loss_50",
+        "page": 1,
+        "label": "calculated.1.load loss 50"
+      },
+      {
+        "key": "calculated.1.total_loss_50",
+        "page": 1,
+        "label": "calculated.1.total loss 50"
+      },
+      {
+        "key": "calculated.1.total_loss_100",
+        "page": 1,
+        "label": "calculated.1.total loss 100"
+      },
+      {
+        "key": "calculated.2.stage",
+        "page": 1,
+        "label": "calculated.2.stage"
+      },
+      {
+        "key": "calculated.2.Z75",
+        "page": 1,
+        "label": "calculated.2.Z75"
+      },
+      {
+        "key": "calculated.2.X50",
+        "page": 1,
+        "label": "calculated.2.X50"
+      },
+      {
+        "key": "calculated.2.Xchange",
+        "page": 1,
+        "label": "calculated.2.Xchange"
+      },
+      {
+        "key": "calculated.2.Rhv",
+        "page": 1,
+        "label": "calculated.2.Rhv"
+      },
+      {
+        "key": "calculated.2.Rlv",
+        "page": 1,
+        "label": "calculated.2.Rlv"
+      },
+      {
+        "key": "calculated.2.load_loss_100",
+        "page": 1,
+        "label": "calculated.2.load loss 100"
+      },
+      {
+        "key": "calculated.2.XR75",
+        "page": 1,
+        "label": "X/R at 75 degC, row 2"
+      },
+      {
+        "key": "calculated.2.Isc_peak",
+        "page": 1,
+        "label": "calculated.2.Isc peak"
+      },
+      {
+        "key": "calculated.2.Isc_rms",
+        "page": 1,
+        "label": "calculated.2.Isc rms"
+      },
+      {
+        "key": "calculated.2.stray_loss",
+        "page": 1,
+        "label": "calculated.2.stray loss"
+      },
+      {
+        "key": "calculated.2.load_loss_50",
+        "page": 1,
+        "label": "calculated.2.load loss 50"
+      },
+      {
+        "key": "calculated.2.total_loss_50",
+        "page": 1,
+        "label": "calculated.2.total loss 50"
+      },
+      {
+        "key": "calculated.2.total_loss_100",
+        "page": 1,
+        "label": "calculated.2.total loss 100"
+      },
+      {
+        "key": "calculated.3.stage",
+        "page": 1,
+        "label": "calculated.3.stage"
+      },
+      {
+        "key": "calculated.3.Z75",
+        "page": 1,
+        "label": "calculated.3.Z75"
+      },
+      {
+        "key": "calculated.3.X50",
+        "page": 1,
+        "label": "calculated.3.X50"
+      },
+      {
+        "key": "calculated.3.Xchange",
+        "page": 1,
+        "label": "calculated.3.Xchange"
+      },
+      {
+        "key": "calculated.3.Rhv",
+        "page": 1,
+        "label": "calculated.3.Rhv"
+      },
+      {
+        "key": "calculated.3.Rlv",
+        "page": 1,
+        "label": "calculated.3.Rlv"
+      },
+      {
+        "key": "calculated.3.load_loss_100",
+        "page": 1,
+        "label": "calculated.3.load loss 100"
+      },
+      {
+        "key": "calculated.3.XR75",
+        "page": 1,
+        "label": "X/R at 75 degC, row 3"
+      },
+      {
+        "key": "calculated.3.Isc_peak",
+        "page": 1,
+        "label": "calculated.3.Isc peak"
+      },
+      {
+        "key": "calculated.3.Isc_rms",
+        "page": 1,
+        "label": "calculated.3.Isc rms"
+      },
+      {
+        "key": "calculated.3.stray_loss",
+        "page": 1,
+        "label": "calculated.3.stray loss"
+      },
+      {
+        "key": "calculated.3.load_loss_50",
+        "page": 1,
+        "label": "calculated.3.load loss 50"
+      },
+      {
+        "key": "calculated.3.total_loss_50",
+        "page": 1,
+        "label": "calculated.3.total loss 50"
+      },
+      {
+        "key": "calculated.3.total_loss_100",
+        "page": 1,
+        "label": "calculated.3.total loss 100"
+      },
+      {
+        "key": "calculated.4.stage",
+        "page": 1,
+        "label": "calculated.4.stage"
+      },
+      {
+        "key": "calculated.4.Z75",
+        "page": 1,
+        "label": "calculated.4.Z75"
+      },
+      {
+        "key": "calculated.4.X50",
+        "page": 1,
+        "label": "calculated.4.X50"
+      },
+      {
+        "key": "calculated.4.Xchange",
+        "page": 1,
+        "label": "calculated.4.Xchange"
+      },
+      {
+        "key": "calculated.4.Rhv",
+        "page": 1,
+        "label": "calculated.4.Rhv"
+      },
+      {
+        "key": "calculated.4.Rlv",
+        "page": 1,
+        "label": "calculated.4.Rlv"
+      },
+      {
+        "key": "calculated.4.load_loss_100",
+        "page": 1,
+        "label": "calculated.4.load loss 100"
+      },
+      {
+        "key": "calculated.4.XR75",
+        "page": 1,
+        "label": "X/R at 75 degC, row 4"
+      },
+      {
+        "key": "calculated.4.Isc_peak",
+        "page": 1,
+        "label": "calculated.4.Isc peak"
+      },
+      {
+        "key": "calculated.4.Isc_rms",
+        "page": 1,
+        "label": "calculated.4.Isc rms"
+      },
+      {
+        "key": "calculated.4.stray_loss",
+        "page": 1,
+        "label": "calculated.4.stray loss"
+      },
+      {
+        "key": "calculated.4.load_loss_50",
+        "page": 1,
+        "label": "calculated.4.load loss 50"
+      },
+      {
+        "key": "calculated.4.total_loss_50",
+        "page": 1,
+        "label": "calculated.4.total loss 50"
+      },
+      {
+        "key": "calculated.4.total_loss_100",
+        "page": 1,
+        "label": "calculated.4.total loss 100"
+      },
+      {
+        "key": "calculated.5.stage",
+        "page": 1,
+        "label": "calculated.5.stage"
+      },
+      {
+        "key": "calculated.5.Z75",
+        "page": 1,
+        "label": "calculated.5.Z75"
+      },
+      {
+        "key": "calculated.5.X50",
+        "page": 1,
+        "label": "calculated.5.X50"
+      },
+      {
+        "key": "calculated.5.Xchange",
+        "page": 1,
+        "label": "calculated.5.Xchange"
+      },
+      {
+        "key": "calculated.5.Rhv",
+        "page": 1,
+        "label": "calculated.5.Rhv"
+      },
+      {
+        "key": "calculated.5.Rlv",
+        "page": 1,
+        "label": "calculated.5.Rlv"
+      },
+      {
+        "key": "calculated.5.load_loss_100",
+        "page": 1,
+        "label": "calculated.5.load loss 100"
+      },
+      {
+        "key": "calculated.5.XR75",
+        "page": 1,
+        "label": "X/R at 75 degC, row 5"
+      },
+      {
+        "key": "calculated.5.Isc_peak",
+        "page": 1,
+        "label": "calculated.5.Isc peak"
+      },
+      {
+        "key": "calculated.5.Isc_rms",
+        "page": 1,
+        "label": "calculated.5.Isc rms"
+      },
+      {
+        "key": "calculated.5.stray_loss",
+        "page": 1,
+        "label": "calculated.5.stray loss"
+      },
+      {
+        "key": "calculated.5.load_loss_50",
+        "page": 1,
+        "label": "calculated.5.load loss 50"
+      },
+      {
+        "key": "calculated.5.total_loss_50",
+        "page": 1,
+        "label": "calculated.5.total loss 50"
+      },
+      {
+        "key": "calculated.5.total_loss_100",
+        "page": 1,
+        "label": "calculated.5.total loss 100"
+      }
+    ]
+  },
+  {
+    "form_type": "routine_test",
+    "pages": 1,
+    "fields": [
+      {
+        "key": "series",
+        "page": 1,
+        "label": "series"
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code"
+      },
+      {
+        "key": "customer",
+        "page": 1,
+        "label": "customer"
+      },
+      {
+        "key": "date_BT",
+        "page": 1,
+        "label": "date BT"
+      },
+      {
+        "key": "date_AT",
+        "page": 1,
+        "label": "date AT"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "phases",
+        "page": 1,
+        "label": "phases"
+      },
+      {
+        "key": "serial",
+        "page": 1,
+        "label": "serial"
+      },
+      {
+        "key": "ambient_BT",
+        "page": 1,
+        "label": "ambient BT"
+      },
+      {
+        "key": "ambient_AT",
+        "page": 1,
+        "label": "ambient AT"
+      },
+      {
+        "key": "humidity_BT",
+        "page": 1,
+        "label": "humidity BT"
+      },
+      {
+        "key": "humidity_AT",
+        "page": 1,
+        "label": "humidity AT"
+      },
+      {
+        "key": "type",
+        "page": 1,
+        "label": "type"
+      },
+      {
+        "key": "vector_group_BT",
+        "page": 1,
+        "label": "vector group BT"
+      },
+      {
+        "key": "vector_group_AT",
+        "page": 1,
+        "label": "vector group AT"
+      },
+      {
+        "key": "ir_hv_earth_BT",
+        "page": 1,
+        "label": "ir hv earth BT"
+      },
+      {
+        "key": "ir_hv_earth_AT",
+        "page": 1,
+        "label": "ir hv earth AT"
+      },
+      {
+        "key": "ir_lv_earth_BT",
+        "page": 1,
+        "label": "ir lv earth BT"
+      },
+      {
+        "key": "ir_lv_earth_AT",
+        "page": 1,
+        "label": "ir lv earth AT"
+      },
+      {
+        "key": "ir_hv_lv_BT",
+        "page": 1,
+        "label": "ir hv lv BT"
+      },
+      {
+        "key": "ir_hv_lv_AT",
+        "page": 1,
+        "label": "ir hv lv AT"
+      },
+      {
+        "key": "induced_voltage_BT",
+        "page": 1,
+        "label": "induced voltage BT"
+      },
+      {
+        "key": "induced_voltage_AT",
+        "page": 1,
+        "label": "induced voltage AT"
+      },
+      {
+        "key": "induced_current_BT",
+        "page": 1,
+        "label": "induced current BT"
+      },
+      {
+        "key": "induced_current_AT",
+        "page": 1,
+        "label": "induced current AT"
+      },
+      {
+        "key": "induced_frequency_BT",
+        "page": 1,
+        "label": "induced frequency BT"
+      },
+      {
+        "key": "induced_frequency_AT",
+        "page": 1,
+        "label": "induced frequency AT"
+      },
+      {
+        "key": "induced_duration_BT",
+        "page": 1,
+        "label": "induced duration BT"
+      },
+      {
+        "key": "induced_duration_AT",
+        "page": 1,
+        "label": "induced duration AT"
+      },
+      {
+        "key": "induced_observation_BT",
+        "page": 1,
+        "label": "induced observation BT"
+      },
+      {
+        "key": "induced_observation_AT",
+        "page": 1,
+        "label": "induced observation AT"
+      },
+      {
+        "key": "hv_voltage_BT",
+        "page": 1,
+        "label": "hv voltage BT"
+      },
+      {
+        "key": "hv_voltage_AT",
+        "page": 1,
+        "label": "hv voltage AT"
+      },
+      {
+        "key": "hv_duration_BT",
+        "page": 1,
+        "label": "hv duration BT"
+      },
+      {
+        "key": "hv_duration_AT",
+        "page": 1,
+        "label": "hv duration AT"
+      },
+      {
+        "key": "hv_current_BT",
+        "page": 1,
+        "label": "hv current BT"
+      },
+      {
+        "key": "hv_current_AT",
+        "page": 1,
+        "label": "hv current AT"
+      },
+      {
+        "key": "lv_voltage_BT",
+        "page": 1,
+        "label": "lv voltage BT"
+      },
+      {
+        "key": "lv_voltage_AT",
+        "page": 1,
+        "label": "lv voltage AT"
+      },
+      {
+        "key": "lv_duration_BT",
+        "page": 1,
+        "label": "lv duration BT"
+      },
+      {
+        "key": "lv_duration_AT",
+        "page": 1,
+        "label": "lv duration AT"
+      },
+      {
+        "key": "lv_current_BT",
+        "page": 1,
+        "label": "lv current BT"
+      },
+      {
+        "key": "lv_current_AT",
+        "page": 1,
+        "label": "lv current AT"
+      },
+      {
+        "key": "hv_observation_BT",
+        "page": 1,
+        "label": "hv observation BT"
+      },
+      {
+        "key": "hv_observation_AT",
+        "page": 1,
+        "label": "hv observation AT"
+      },
+      {
+        "key": "lv_observation_BT",
+        "page": 1,
+        "label": "lv observation BT"
+      },
+      {
+        "key": "lv_observation_AT",
+        "page": 1,
+        "label": "lv observation AT"
+      },
+      {
+        "key": "customer_signature_present",
+        "page": 1,
+        "label": "customer signature present"
+      },
+      {
+        "key": "engineer_signature_present",
+        "page": 1,
+        "label": "engineer signature present"
+      },
+      {
+        "key": "instrument_serials",
+        "page": 1,
+        "label": "instrument serials"
+      },
+      {
+        "key": "ratio.0.tap",
+        "page": 1,
+        "label": "ratio.0.tap"
+      },
+      {
+        "key": "ratio.0.BT_A",
+        "page": 1,
+        "label": "ratio.0.BT A"
+      },
+      {
+        "key": "ratio.0.BT_B",
+        "page": 1,
+        "label": "ratio.0.BT B"
+      },
+      {
+        "key": "ratio.0.BT_C",
+        "page": 1,
+        "label": "ratio.0.BT C"
+      },
+      {
+        "key": "ratio.0.AT_A",
+        "page": 1,
+        "label": "ratio.0.AT A"
+      },
+      {
+        "key": "ratio.0.AT_B",
+        "page": 1,
+        "label": "ratio.0.AT B"
+      },
+      {
+        "key": "ratio.0.AT_C",
+        "page": 1,
+        "label": "ratio.0.AT C"
+      },
+      {
+        "key": "ratio.1.tap",
+        "page": 1,
+        "label": "ratio.1.tap"
+      },
+      {
+        "key": "ratio.1.BT_A",
+        "page": 1,
+        "label": "ratio.1.BT A"
+      },
+      {
+        "key": "ratio.1.BT_B",
+        "page": 1,
+        "label": "ratio.1.BT B"
+      },
+      {
+        "key": "ratio.1.BT_C",
+        "page": 1,
+        "label": "ratio.1.BT C"
+      },
+      {
+        "key": "ratio.1.AT_A",
+        "page": 1,
+        "label": "ratio.1.AT A"
+      },
+      {
+        "key": "ratio.1.AT_B",
+        "page": 1,
+        "label": "ratio.1.AT B"
+      },
+      {
+        "key": "ratio.1.AT_C",
+        "page": 1,
+        "label": "ratio.1.AT C"
+      },
+      {
+        "key": "ratio.2.tap",
+        "page": 1,
+        "label": "ratio.2.tap"
+      },
+      {
+        "key": "ratio.2.BT_A",
+        "page": 1,
+        "label": "ratio.2.BT A"
+      },
+      {
+        "key": "ratio.2.BT_B",
+        "page": 1,
+        "label": "ratio.2.BT B"
+      },
+      {
+        "key": "ratio.2.BT_C",
+        "page": 1,
+        "label": "ratio.2.BT C"
+      },
+      {
+        "key": "ratio.2.AT_A",
+        "page": 1,
+        "label": "ratio.2.AT A"
+      },
+      {
+        "key": "ratio.2.AT_B",
+        "page": 1,
+        "label": "ratio.2.AT B"
+      },
+      {
+        "key": "ratio.2.AT_C",
+        "page": 1,
+        "label": "ratio.2.AT C"
+      },
+      {
+        "key": "ratio.3.tap",
+        "page": 1,
+        "label": "ratio.3.tap"
+      },
+      {
+        "key": "ratio.3.BT_A",
+        "page": 1,
+        "label": "ratio.3.BT A"
+      },
+      {
+        "key": "ratio.3.BT_B",
+        "page": 1,
+        "label": "ratio.3.BT B"
+      },
+      {
+        "key": "ratio.3.BT_C",
+        "page": 1,
+        "label": "ratio.3.BT C"
+      },
+      {
+        "key": "ratio.3.AT_A",
+        "page": 1,
+        "label": "ratio.3.AT A"
+      },
+      {
+        "key": "ratio.3.AT_B",
+        "page": 1,
+        "label": "ratio.3.AT B"
+      },
+      {
+        "key": "ratio.3.AT_C",
+        "page": 1,
+        "label": "ratio.3.AT C"
+      },
+      {
+        "key": "ratio.4.tap",
+        "page": 1,
+        "label": "ratio.4.tap"
+      },
+      {
+        "key": "ratio.4.BT_A",
+        "page": 1,
+        "label": "ratio.4.BT A"
+      },
+      {
+        "key": "ratio.4.BT_B",
+        "page": 1,
+        "label": "ratio.4.BT B"
+      },
+      {
+        "key": "ratio.4.BT_C",
+        "page": 1,
+        "label": "ratio.4.BT C"
+      },
+      {
+        "key": "ratio.4.AT_A",
+        "page": 1,
+        "label": "ratio.4.AT A"
+      },
+      {
+        "key": "ratio.4.AT_B",
+        "page": 1,
+        "label": "ratio.4.AT B"
+      },
+      {
+        "key": "ratio.4.AT_C",
+        "page": 1,
+        "label": "ratio.4.AT C"
+      },
+      {
+        "key": "ratio.5.tap",
+        "page": 1,
+        "label": "ratio.5.tap"
+      },
+      {
+        "key": "ratio.5.BT_A",
+        "page": 1,
+        "label": "ratio.5.BT A"
+      },
+      {
+        "key": "ratio.5.BT_B",
+        "page": 1,
+        "label": "ratio.5.BT B"
+      },
+      {
+        "key": "ratio.5.BT_C",
+        "page": 1,
+        "label": "ratio.5.BT C"
+      },
+      {
+        "key": "ratio.5.AT_A",
+        "page": 1,
+        "label": "ratio.5.AT A"
+      },
+      {
+        "key": "ratio.5.AT_B",
+        "page": 1,
+        "label": "ratio.5.AT B"
+      },
+      {
+        "key": "ratio.5.AT_C",
+        "page": 1,
+        "label": "ratio.5.AT C"
+      },
+      {
+        "key": "ratio.6.tap",
+        "page": 1,
+        "label": "ratio.6.tap"
+      },
+      {
+        "key": "ratio.6.BT_A",
+        "page": 1,
+        "label": "ratio.6.BT A"
+      },
+      {
+        "key": "ratio.6.BT_B",
+        "page": 1,
+        "label": "ratio.6.BT B"
+      },
+      {
+        "key": "ratio.6.BT_C",
+        "page": 1,
+        "label": "ratio.6.BT C"
+      },
+      {
+        "key": "ratio.6.AT_A",
+        "page": 1,
+        "label": "ratio.6.AT A"
+      },
+      {
+        "key": "ratio.6.AT_B",
+        "page": 1,
+        "label": "ratio.6.AT B"
+      },
+      {
+        "key": "ratio.6.AT_C",
+        "page": 1,
+        "label": "ratio.6.AT C"
+      }
+    ]
+  },
+  {
+    "form_type": "short_circuit",
+    "pages": 1,
+    "fields": [
+      {
+        "key": "series",
+        "page": 1,
+        "label": "series"
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code"
+      },
+      {
+        "key": "date",
+        "page": 1,
+        "label": "date"
+      },
+      {
+        "key": "condition_before",
+        "page": 1,
+        "label": "condition before"
+      },
+      {
+        "key": "no_visible_defects_confirmed",
+        "page": 1,
+        "label": "Engineer confirmation of no visible defects",
+        "optional": true,
+        "digital_only": true
+      },
+      {
+        "key": "overall_engineer_verdict",
+        "page": 1,
+        "label": "Engineer-confirmed overall short-circuit verdict",
+        "optional": true,
+        "digital_only": true
+      },
+      {
+        "key": "rating",
+        "page": 1,
+        "label": "rating"
+      },
+      {
+        "key": "voltage",
+        "page": 1,
+        "label": "voltage"
+      },
+      {
+        "key": "bay",
+        "page": 1,
+        "label": "bay"
+      },
+      {
+        "key": "required_normal_rms",
+        "page": 1,
+        "label": "required normal rms"
+      },
+      {
+        "key": "required_normal_peak",
+        "page": 1,
+        "label": "required normal peak"
+      },
+      {
+        "key": "required_high_rms",
+        "page": 1,
+        "label": "required high rms"
+      },
+      {
+        "key": "required_high_peak",
+        "page": 1,
+        "label": "required high peak"
+      },
+      {
+        "key": "required_low_rms",
+        "page": 1,
+        "label": "required low rms"
+      },
+      {
+        "key": "required_low_peak",
+        "page": 1,
+        "label": "required low peak"
+      },
+      {
+        "key": "during_test",
+        "page": 1,
+        "label": "during test"
+      },
+      {
+        "key": "after_test",
+        "page": 1,
+        "label": "after test"
+      },
+      {
+        "key": "conductor_core_clamps",
+        "page": 1,
+        "label": "conductor core clamps"
+      },
+      {
+        "key": "spacers",
+        "page": 1,
+        "label": "spacers"
+      },
+      {
+        "key": "oil",
+        "page": 1,
+        "label": "oil"
+      },
+      {
+        "key": "customer_signature_present",
+        "page": 1,
+        "label": "customer signature present",
+        "guidance": "Detect whether a handwritten signature or initials are present at this signature label; do not infer from printed words."
+      },
+      {
+        "key": "engineer_signature_present",
+        "page": 1,
+        "label": "engineer signature present",
+        "guidance": "Detect whether a handwritten signature or initials are present at this signature label; do not infer from printed words."
+      },
+      {
+        "key": "shots.0.osc",
+        "page": 1,
+        "label": "shots.0.osc"
+      },
+      {
+        "key": "shots.0.dial",
+        "page": 1,
+        "label": "shots.0.dial"
+      },
+      {
+        "key": "shots.0.U",
+        "page": 1,
+        "label": "shots.0.U"
+      },
+      {
+        "key": "shots.0.V",
+        "page": 1,
+        "label": "shots.0.V"
+      },
+      {
+        "key": "shots.0.W",
+        "page": 1,
+        "label": "shots.0.W"
+      },
+      {
+        "key": "shots.0.tap",
+        "page": 1,
+        "label": "shots.0.tap"
+      },
+      {
+        "key": "shots.0.peak",
+        "page": 1,
+        "label": "shots.0.peak"
+      },
+      {
+        "key": "shots.0.rms_U",
+        "page": 1,
+        "label": "shots.0.rms U"
+      },
+      {
+        "key": "shots.0.rms_V",
+        "page": 1,
+        "label": "shots.0.rms V"
+      },
+      {
+        "key": "shots.0.rms_W",
+        "page": 1,
+        "label": "shots.0.rms W"
+      },
+      {
+        "key": "shots.0.rms_avg",
+        "page": 1,
+        "label": "shots.0.rms avg"
+      },
+      {
+        "key": "shots.0.duration",
+        "page": 1,
+        "label": "shots.0.duration"
+      },
+      {
+        "key": "shots.0.SE",
+        "page": 1,
+        "label": "shots.0.SE"
+      },
+      {
+        "key": "shots.1.osc",
+        "page": 1,
+        "label": "shots.1.osc"
+      },
+      {
+        "key": "shots.1.dial",
+        "page": 1,
+        "label": "shots.1.dial"
+      },
+      {
+        "key": "shots.1.U",
+        "page": 1,
+        "label": "shots.1.U"
+      },
+      {
+        "key": "shots.1.V",
+        "page": 1,
+        "label": "shots.1.V"
+      },
+      {
+        "key": "shots.1.W",
+        "page": 1,
+        "label": "shots.1.W"
+      },
+      {
+        "key": "shots.1.tap",
+        "page": 1,
+        "label": "shots.1.tap"
+      },
+      {
+        "key": "shots.1.peak",
+        "page": 1,
+        "label": "shots.1.peak"
+      },
+      {
+        "key": "shots.1.rms_U",
+        "page": 1,
+        "label": "shots.1.rms U"
+      },
+      {
+        "key": "shots.1.rms_V",
+        "page": 1,
+        "label": "shots.1.rms V"
+      },
+      {
+        "key": "shots.1.rms_W",
+        "page": 1,
+        "label": "shots.1.rms W"
+      },
+      {
+        "key": "shots.1.rms_avg",
+        "page": 1,
+        "label": "shots.1.rms avg"
+      },
+      {
+        "key": "shots.1.duration",
+        "page": 1,
+        "label": "shots.1.duration"
+      },
+      {
+        "key": "shots.1.SE",
+        "page": 1,
+        "label": "shots.1.SE"
+      },
+      {
+        "key": "shots.2.osc",
+        "page": 1,
+        "label": "shots.2.osc"
+      },
+      {
+        "key": "shots.2.dial",
+        "page": 1,
+        "label": "shots.2.dial"
+      },
+      {
+        "key": "shots.2.U",
+        "page": 1,
+        "label": "shots.2.U"
+      },
+      {
+        "key": "shots.2.V",
+        "page": 1,
+        "label": "shots.2.V"
+      },
+      {
+        "key": "shots.2.W",
+        "page": 1,
+        "label": "shots.2.W"
+      },
+      {
+        "key": "shots.2.tap",
+        "page": 1,
+        "label": "shots.2.tap"
+      },
+      {
+        "key": "shots.2.peak",
+        "page": 1,
+        "label": "shots.2.peak"
+      },
+      {
+        "key": "shots.2.rms_U",
+        "page": 1,
+        "label": "shots.2.rms U"
+      },
+      {
+        "key": "shots.2.rms_V",
+        "page": 1,
+        "label": "shots.2.rms V"
+      },
+      {
+        "key": "shots.2.rms_W",
+        "page": 1,
+        "label": "shots.2.rms W"
+      },
+      {
+        "key": "shots.2.rms_avg",
+        "page": 1,
+        "label": "shots.2.rms avg"
+      },
+      {
+        "key": "shots.2.duration",
+        "page": 1,
+        "label": "shots.2.duration"
+      },
+      {
+        "key": "shots.2.SE",
+        "page": 1,
+        "label": "shots.2.SE"
+      },
+      {
+        "key": "shots.3.osc",
+        "page": 1,
+        "label": "shots.3.osc"
+      },
+      {
+        "key": "shots.3.dial",
+        "page": 1,
+        "label": "shots.3.dial"
+      },
+      {
+        "key": "shots.3.U",
+        "page": 1,
+        "label": "shots.3.U"
+      },
+      {
+        "key": "shots.3.V",
+        "page": 1,
+        "label": "shots.3.V"
+      },
+      {
+        "key": "shots.3.W",
+        "page": 1,
+        "label": "shots.3.W"
+      },
+      {
+        "key": "shots.3.tap",
+        "page": 1,
+        "label": "shots.3.tap"
+      },
+      {
+        "key": "shots.3.peak",
+        "page": 1,
+        "label": "shots.3.peak"
+      },
+      {
+        "key": "shots.3.rms_U",
+        "page": 1,
+        "label": "shots.3.rms U"
+      },
+      {
+        "key": "shots.3.rms_V",
+        "page": 1,
+        "label": "shots.3.rms V"
+      },
+      {
+        "key": "shots.3.rms_W",
+        "page": 1,
+        "label": "shots.3.rms W"
+      },
+      {
+        "key": "shots.3.rms_avg",
+        "page": 1,
+        "label": "shots.3.rms avg"
+      },
+      {
+        "key": "shots.3.duration",
+        "page": 1,
+        "label": "shots.3.duration"
+      },
+      {
+        "key": "shots.3.SE",
+        "page": 1,
+        "label": "shots.3.SE"
+      },
+      {
+        "key": "shots.4.osc",
+        "page": 1,
+        "label": "shots.4.osc"
+      },
+      {
+        "key": "shots.4.dial",
+        "page": 1,
+        "label": "shots.4.dial"
+      },
+      {
+        "key": "shots.4.U",
+        "page": 1,
+        "label": "shots.4.U"
+      },
+      {
+        "key": "shots.4.V",
+        "page": 1,
+        "label": "shots.4.V"
+      },
+      {
+        "key": "shots.4.W",
+        "page": 1,
+        "label": "shots.4.W"
+      },
+      {
+        "key": "shots.4.tap",
+        "page": 1,
+        "label": "shots.4.tap"
+      },
+      {
+        "key": "shots.4.peak",
+        "page": 1,
+        "label": "shots.4.peak"
+      },
+      {
+        "key": "shots.4.rms_U",
+        "page": 1,
+        "label": "shots.4.rms U"
+      },
+      {
+        "key": "shots.4.rms_V",
+        "page": 1,
+        "label": "shots.4.rms V"
+      },
+      {
+        "key": "shots.4.rms_W",
+        "page": 1,
+        "label": "shots.4.rms W"
+      },
+      {
+        "key": "shots.4.rms_avg",
+        "page": 1,
+        "label": "shots.4.rms avg"
+      },
+      {
+        "key": "shots.4.duration",
+        "page": 1,
+        "label": "shots.4.duration"
+      },
+      {
+        "key": "shots.4.SE",
+        "page": 1,
+        "label": "shots.4.SE"
+      },
+      {
+        "key": "shots.5.osc",
+        "page": 1,
+        "label": "shots.5.osc"
+      },
+      {
+        "key": "shots.5.dial",
+        "page": 1,
+        "label": "shots.5.dial"
+      },
+      {
+        "key": "shots.5.U",
+        "page": 1,
+        "label": "shots.5.U"
+      },
+      {
+        "key": "shots.5.V",
+        "page": 1,
+        "label": "shots.5.V"
+      },
+      {
+        "key": "shots.5.W",
+        "page": 1,
+        "label": "shots.5.W"
+      },
+      {
+        "key": "shots.5.tap",
+        "page": 1,
+        "label": "shots.5.tap"
+      },
+      {
+        "key": "shots.5.peak",
+        "page": 1,
+        "label": "shots.5.peak"
+      },
+      {
+        "key": "shots.5.rms_U",
+        "page": 1,
+        "label": "shots.5.rms U"
+      },
+      {
+        "key": "shots.5.rms_V",
+        "page": 1,
+        "label": "shots.5.rms V"
+      },
+      {
+        "key": "shots.5.rms_W",
+        "page": 1,
+        "label": "shots.5.rms W"
+      },
+      {
+        "key": "shots.5.rms_avg",
+        "page": 1,
+        "label": "shots.5.rms avg"
+      },
+      {
+        "key": "shots.5.duration",
+        "page": 1,
+        "label": "shots.5.duration"
+      },
+      {
+        "key": "shots.5.SE",
+        "page": 1,
+        "label": "shots.5.SE"
+      },
+      {
+        "key": "shots.6.osc",
+        "page": 1,
+        "label": "shots.6.osc"
+      },
+      {
+        "key": "shots.6.dial",
+        "page": 1,
+        "label": "shots.6.dial"
+      },
+      {
+        "key": "shots.6.U",
+        "page": 1,
+        "label": "shots.6.U"
+      },
+      {
+        "key": "shots.6.V",
+        "page": 1,
+        "label": "shots.6.V"
+      },
+      {
+        "key": "shots.6.W",
+        "page": 1,
+        "label": "shots.6.W"
+      },
+      {
+        "key": "shots.6.tap",
+        "page": 1,
+        "label": "shots.6.tap"
+      },
+      {
+        "key": "shots.6.peak",
+        "page": 1,
+        "label": "shots.6.peak"
+      },
+      {
+        "key": "shots.6.rms_U",
+        "page": 1,
+        "label": "shots.6.rms U"
+      },
+      {
+        "key": "shots.6.rms_V",
+        "page": 1,
+        "label": "shots.6.rms V"
+      },
+      {
+        "key": "shots.6.rms_W",
+        "page": 1,
+        "label": "shots.6.rms W"
+      },
+      {
+        "key": "shots.6.rms_avg",
+        "page": 1,
+        "label": "shots.6.rms avg"
+      },
+      {
+        "key": "shots.6.duration",
+        "page": 1,
+        "label": "shots.6.duration"
+      },
+      {
+        "key": "shots.6.SE",
+        "page": 1,
+        "label": "shots.6.SE"
+      },
+      {
+        "key": "shots.7.osc",
+        "page": 1,
+        "label": "shots.7.osc"
+      },
+      {
+        "key": "shots.7.dial",
+        "page": 1,
+        "label": "shots.7.dial"
+      },
+      {
+        "key": "shots.7.U",
+        "page": 1,
+        "label": "shots.7.U"
+      },
+      {
+        "key": "shots.7.V",
+        "page": 1,
+        "label": "shots.7.V"
+      },
+      {
+        "key": "shots.7.W",
+        "page": 1,
+        "label": "shots.7.W"
+      },
+      {
+        "key": "shots.7.tap",
+        "page": 1,
+        "label": "shots.7.tap"
+      },
+      {
+        "key": "shots.7.peak",
+        "page": 1,
+        "label": "shots.7.peak"
+      },
+      {
+        "key": "shots.7.rms_U",
+        "page": 1,
+        "label": "shots.7.rms U"
+      },
+      {
+        "key": "shots.7.rms_V",
+        "page": 1,
+        "label": "shots.7.rms V"
+      },
+      {
+        "key": "shots.7.rms_W",
+        "page": 1,
+        "label": "shots.7.rms W"
+      },
+      {
+        "key": "shots.7.rms_avg",
+        "page": 1,
+        "label": "shots.7.rms avg"
+      },
+      {
+        "key": "shots.7.duration",
+        "page": 1,
+        "label": "shots.7.duration"
+      },
+      {
+        "key": "shots.7.SE",
+        "page": 1,
+        "label": "shots.7.SE"
+      },
+      {
+        "key": "shots.8.osc",
+        "page": 1,
+        "label": "shots.8.osc"
+      },
+      {
+        "key": "shots.8.dial",
+        "page": 1,
+        "label": "shots.8.dial"
+      },
+      {
+        "key": "shots.8.U",
+        "page": 1,
+        "label": "shots.8.U"
+      },
+      {
+        "key": "shots.8.V",
+        "page": 1,
+        "label": "shots.8.V"
+      },
+      {
+        "key": "shots.8.W",
+        "page": 1,
+        "label": "shots.8.W"
+      },
+      {
+        "key": "shots.8.tap",
+        "page": 1,
+        "label": "shots.8.tap"
+      },
+      {
+        "key": "shots.8.peak",
+        "page": 1,
+        "label": "shots.8.peak"
+      },
+      {
+        "key": "shots.8.rms_U",
+        "page": 1,
+        "label": "shots.8.rms U"
+      },
+      {
+        "key": "shots.8.rms_V",
+        "page": 1,
+        "label": "shots.8.rms V"
+      },
+      {
+        "key": "shots.8.rms_W",
+        "page": 1,
+        "label": "shots.8.rms W"
+      },
+      {
+        "key": "shots.8.rms_avg",
+        "page": 1,
+        "label": "shots.8.rms avg"
+      },
+      {
+        "key": "shots.8.duration",
+        "page": 1,
+        "label": "shots.8.duration"
+      },
+      {
+        "key": "shots.8.SE",
+        "page": 1,
+        "label": "shots.8.SE"
+      },
+      {
+        "key": "shots.9.osc",
+        "page": 1,
+        "label": "shots.9.osc"
+      },
+      {
+        "key": "shots.9.dial",
+        "page": 1,
+        "label": "shots.9.dial"
+      },
+      {
+        "key": "shots.9.U",
+        "page": 1,
+        "label": "shots.9.U"
+      },
+      {
+        "key": "shots.9.V",
+        "page": 1,
+        "label": "shots.9.V"
+      },
+      {
+        "key": "shots.9.W",
+        "page": 1,
+        "label": "shots.9.W"
+      },
+      {
+        "key": "shots.9.tap",
+        "page": 1,
+        "label": "shots.9.tap"
+      },
+      {
+        "key": "shots.9.peak",
+        "page": 1,
+        "label": "shots.9.peak"
+      },
+      {
+        "key": "shots.9.rms_U",
+        "page": 1,
+        "label": "shots.9.rms U"
+      },
+      {
+        "key": "shots.9.rms_V",
+        "page": 1,
+        "label": "shots.9.rms V"
+      },
+      {
+        "key": "shots.9.rms_W",
+        "page": 1,
+        "label": "shots.9.rms W"
+      },
+      {
+        "key": "shots.9.rms_avg",
+        "page": 1,
+        "label": "shots.9.rms avg"
+      },
+      {
+        "key": "shots.9.duration",
+        "page": 1,
+        "label": "shots.9.duration"
+      },
+      {
+        "key": "shots.9.SE",
+        "page": 1,
+        "label": "shots.9.SE"
+      },
+      {
+        "key": "shots.10.osc",
+        "page": 1,
+        "label": "shots.10.osc"
+      },
+      {
+        "key": "shots.10.dial",
+        "page": 1,
+        "label": "shots.10.dial"
+      },
+      {
+        "key": "shots.10.U",
+        "page": 1,
+        "label": "shots.10.U"
+      },
+      {
+        "key": "shots.10.V",
+        "page": 1,
+        "label": "shots.10.V"
+      },
+      {
+        "key": "shots.10.W",
+        "page": 1,
+        "label": "shots.10.W"
+      },
+      {
+        "key": "shots.10.tap",
+        "page": 1,
+        "label": "shots.10.tap"
+      },
+      {
+        "key": "shots.10.peak",
+        "page": 1,
+        "label": "shots.10.peak"
+      },
+      {
+        "key": "shots.10.rms_U",
+        "page": 1,
+        "label": "shots.10.rms U"
+      },
+      {
+        "key": "shots.10.rms_V",
+        "page": 1,
+        "label": "shots.10.rms V"
+      },
+      {
+        "key": "shots.10.rms_W",
+        "page": 1,
+        "label": "shots.10.rms W"
+      },
+      {
+        "key": "shots.10.rms_avg",
+        "page": 1,
+        "label": "shots.10.rms avg"
+      },
+      {
+        "key": "shots.10.duration",
+        "page": 1,
+        "label": "shots.10.duration"
+      },
+      {
+        "key": "shots.10.SE",
+        "page": 1,
+        "label": "shots.10.SE"
+      }
+    ],
+    "instructions": [
+      "A handwritten signature or initials beside the engineer/customer signature label means present; do not transcribe the signature as a numeric reading.",
+      "Crossed-out lines are struck_out and require human review."
+    ]
+  },
+  {
+    "form_type": "loss_measurement",
+    "pages": 1,
+    "fields": [
+      {
+        "key": "series",
+        "page": 1,
+        "label": "series"
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code"
+      },
+      {
+        "key": "serial",
+        "page": 1,
+        "label": "serial"
+      },
+      {
+        "key": "customer",
+        "page": 1,
+        "label": "customer"
+      },
+      {
+        "key": "manufacturer",
+        "page": 1,
+        "label": "manufacturer"
+      },
+      {
+        "key": "date_BT",
+        "page": 1,
+        "label": "date BT"
+      },
+      {
+        "key": "date_AT",
+        "page": 1,
+        "label": "date AT"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "rated_hv",
+        "page": 1,
+        "label": "rated hv"
+      },
+      {
+        "key": "rated_lv",
+        "page": 1,
+        "label": "rated lv"
+      },
+      {
+        "key": "top_oil_BT",
+        "page": 1,
+        "label": "top oil BT"
+      },
+      {
+        "key": "top_oil_AT",
+        "page": 1,
+        "label": "top oil AT"
+      },
+      {
+        "key": "bottom_oil_BT",
+        "page": 1,
+        "label": "bottom oil BT"
+      },
+      {
+        "key": "bottom_oil_AT",
+        "page": 1,
+        "label": "bottom oil AT"
+      },
+      {
+        "key": "no_load_100_voltage",
+        "page": 1,
+        "label": "no load 100 voltage"
+      },
+      {
+        "key": "no_load_100_current",
+        "page": 1,
+        "label": "no load 100 current"
+      },
+      {
+        "key": "no_load_100_percent",
+        "page": 1,
+        "label": "no load 100 percent"
+      },
+      {
+        "key": "no_load_100_limit_A",
+        "page": 1,
+        "label": "no load 100 limit A"
+      },
+      {
+        "key": "no_load_100_limit_percent",
+        "page": 1,
+        "label": "no load 100 limit percent"
+      },
+      {
+        "key": "no_load_100_observation",
+        "page": 1,
+        "label": "no load 100 observation"
+      },
+      {
+        "key": "no_load_112_voltage",
+        "page": 1,
+        "label": "no load 112 voltage"
+      },
+      {
+        "key": "no_load_112_current",
+        "page": 1,
+        "label": "no load 112 current"
+      },
+      {
+        "key": "no_load_112_percent",
+        "page": 1,
+        "label": "no load 112 percent"
+      },
+      {
+        "key": "no_load_112_limit_A",
+        "page": 1,
+        "label": "no load 112 limit A"
+      },
+      {
+        "key": "no_load_112_limit_percent",
+        "page": 1,
+        "label": "no load 112 limit percent"
+      },
+      {
+        "key": "no_load_112_observation",
+        "page": 1,
+        "label": "no load 112 observation"
+      },
+      {
+        "key": "half_load_table",
+        "page": 1,
+        "label": "half load table"
+      },
+      {
+        "key": "load_measurement_table",
+        "page": 1,
+        "label": "load measurement table"
+      },
+      {
+        "key": "customer_signature",
+        "page": 1,
+        "label": "customer signature",
+        "guidance": "Detect whether a handwritten signature or initials are present at this signature label; do not infer from printed words."
+      },
+      {
+        "key": "engineer_signature_present",
+        "page": 1,
+        "label": "engineer signature present",
+        "guidance": "Detect whether a handwritten signature or initials are present at this signature label; do not infer from printed words."
+      },
+      {
+        "key": "hv_resistance.0.tap",
+        "page": 1,
+        "label": "hv resistance.0.tap"
+      },
+      {
+        "key": "hv_resistance.0.BT_1",
+        "page": 1,
+        "label": "hv resistance.0.BT 1"
+      },
+      {
+        "key": "hv_resistance.0.BT_2",
+        "page": 1,
+        "label": "hv resistance.0.BT 2"
+      },
+      {
+        "key": "hv_resistance.0.BT_3",
+        "page": 1,
+        "label": "hv resistance.0.BT 3"
+      },
+      {
+        "key": "hv_resistance.0.AT_1",
+        "page": 1,
+        "label": "hv resistance.0.AT 1"
+      },
+      {
+        "key": "hv_resistance.0.AT_2",
+        "page": 1,
+        "label": "hv resistance.0.AT 2"
+      },
+      {
+        "key": "hv_resistance.0.AT_3",
+        "page": 1,
+        "label": "hv resistance.0.AT 3"
+      },
+      {
+        "key": "hv_resistance.1.tap",
+        "page": 1,
+        "label": "hv resistance.1.tap"
+      },
+      {
+        "key": "hv_resistance.1.BT_1",
+        "page": 1,
+        "label": "hv resistance.1.BT 1"
+      },
+      {
+        "key": "hv_resistance.1.BT_2",
+        "page": 1,
+        "label": "hv resistance.1.BT 2"
+      },
+      {
+        "key": "hv_resistance.1.BT_3",
+        "page": 1,
+        "label": "hv resistance.1.BT 3"
+      },
+      {
+        "key": "hv_resistance.1.AT_1",
+        "page": 1,
+        "label": "hv resistance.1.AT 1"
+      },
+      {
+        "key": "hv_resistance.1.AT_2",
+        "page": 1,
+        "label": "hv resistance.1.AT 2"
+      },
+      {
+        "key": "hv_resistance.1.AT_3",
+        "page": 1,
+        "label": "hv resistance.1.AT 3"
+      },
+      {
+        "key": "hv_resistance.2.tap",
+        "page": 1,
+        "label": "hv resistance.2.tap"
+      },
+      {
+        "key": "hv_resistance.2.BT_1",
+        "page": 1,
+        "label": "hv resistance.2.BT 1"
+      },
+      {
+        "key": "hv_resistance.2.BT_2",
+        "page": 1,
+        "label": "hv resistance.2.BT 2"
+      },
+      {
+        "key": "hv_resistance.2.BT_3",
+        "page": 1,
+        "label": "hv resistance.2.BT 3"
+      },
+      {
+        "key": "hv_resistance.2.AT_1",
+        "page": 1,
+        "label": "hv resistance.2.AT 1"
+      },
+      {
+        "key": "hv_resistance.2.AT_2",
+        "page": 1,
+        "label": "hv resistance.2.AT 2"
+      },
+      {
+        "key": "hv_resistance.2.AT_3",
+        "page": 1,
+        "label": "hv resistance.2.AT 3"
+      },
+      {
+        "key": "lv_resistance.0.BT_1",
+        "page": 1,
+        "label": "lv resistance.0.BT 1"
+      },
+      {
+        "key": "lv_resistance.0.BT_2",
+        "page": 1,
+        "label": "lv resistance.0.BT 2"
+      },
+      {
+        "key": "lv_resistance.0.BT_3",
+        "page": 1,
+        "label": "lv resistance.0.BT 3"
+      },
+      {
+        "key": "lv_resistance.0.AT_1",
+        "page": 1,
+        "label": "lv resistance.0.AT 1"
+      },
+      {
+        "key": "lv_resistance.0.AT_2",
+        "page": 1,
+        "label": "lv resistance.0.AT 2"
+      },
+      {
+        "key": "lv_resistance.0.AT_3",
+        "page": 1,
+        "label": "lv resistance.0.AT 3"
+      },
+      {
+        "key": "no_load.0.stage",
+        "page": 1,
+        "label": "no load.0.stage"
+      },
+      {
+        "key": "no_load.0.V12",
+        "page": 1,
+        "label": "no load.0.V12"
+      },
+      {
+        "key": "no_load.0.V23",
+        "page": 1,
+        "label": "no load.0.V23"
+      },
+      {
+        "key": "no_load.0.V31",
+        "page": 1,
+        "label": "no load.0.V31"
+      },
+      {
+        "key": "no_load.0.Vavg",
+        "page": 1,
+        "label": "no load.0.Vavg"
+      },
+      {
+        "key": "no_load.0.I1",
+        "page": 1,
+        "label": "no load.0.I1"
+      },
+      {
+        "key": "no_load.0.I2",
+        "page": 1,
+        "label": "no load.0.I2"
+      },
+      {
+        "key": "no_load.0.I3",
+        "page": 1,
+        "label": "no load.0.I3"
+      },
+      {
+        "key": "no_load.0.Iavg",
+        "page": 1,
+        "label": "no load.0.Iavg"
+      },
+      {
+        "key": "no_load.0.W1",
+        "page": 1,
+        "label": "no load.0.W1"
+      },
+      {
+        "key": "no_load.0.W2",
+        "page": 1,
+        "label": "no load.0.W2"
+      },
+      {
+        "key": "no_load.0.W3",
+        "page": 1,
+        "label": "no load.0.W3"
+      },
+      {
+        "key": "no_load.0.Wtotal",
+        "page": 1,
+        "label": "no load.0.Wtotal"
+      },
+      {
+        "key": "no_load.0.f",
+        "page": 1,
+        "label": "no load.0.f"
+      },
+      {
+        "key": "no_load.0.Vff",
+        "page": 1,
+        "label": "no load.0.Vff"
+      },
+      {
+        "key": "no_load.1.stage",
+        "page": 1,
+        "label": "no load.1.stage"
+      },
+      {
+        "key": "no_load.1.V12",
+        "page": 1,
+        "label": "no load.1.V12"
+      },
+      {
+        "key": "no_load.1.V23",
+        "page": 1,
+        "label": "no load.1.V23"
+      },
+      {
+        "key": "no_load.1.V31",
+        "page": 1,
+        "label": "no load.1.V31"
+      },
+      {
+        "key": "no_load.1.Vavg",
+        "page": 1,
+        "label": "no load.1.Vavg"
+      },
+      {
+        "key": "no_load.1.I1",
+        "page": 1,
+        "label": "no load.1.I1"
+      },
+      {
+        "key": "no_load.1.I2",
+        "page": 1,
+        "label": "no load.1.I2"
+      },
+      {
+        "key": "no_load.1.I3",
+        "page": 1,
+        "label": "no load.1.I3"
+      },
+      {
+        "key": "no_load.1.Iavg",
+        "page": 1,
+        "label": "no load.1.Iavg"
+      },
+      {
+        "key": "no_load.1.W1",
+        "page": 1,
+        "label": "no load.1.W1"
+      },
+      {
+        "key": "no_load.1.W2",
+        "page": 1,
+        "label": "no load.1.W2"
+      },
+      {
+        "key": "no_load.1.W3",
+        "page": 1,
+        "label": "no load.1.W3"
+      },
+      {
+        "key": "no_load.1.Wtotal",
+        "page": 1,
+        "label": "no load.1.Wtotal"
+      },
+      {
+        "key": "no_load.1.f",
+        "page": 1,
+        "label": "no load.1.f"
+      },
+      {
+        "key": "no_load.1.Vff",
+        "page": 1,
+        "label": "no load.1.Vff"
+      },
+      {
+        "key": "no_load.2.stage",
+        "page": 1,
+        "label": "no load.2.stage"
+      },
+      {
+        "key": "no_load.2.V12",
+        "page": 1,
+        "label": "no load.2.V12"
+      },
+      {
+        "key": "no_load.2.V23",
+        "page": 1,
+        "label": "no load.2.V23"
+      },
+      {
+        "key": "no_load.2.V31",
+        "page": 1,
+        "label": "no load.2.V31"
+      },
+      {
+        "key": "no_load.2.Vavg",
+        "page": 1,
+        "label": "no load.2.Vavg"
+      },
+      {
+        "key": "no_load.2.I1",
+        "page": 1,
+        "label": "no load.2.I1"
+      },
+      {
+        "key": "no_load.2.I2",
+        "page": 1,
+        "label": "no load.2.I2"
+      },
+      {
+        "key": "no_load.2.I3",
+        "page": 1,
+        "label": "no load.2.I3"
+      },
+      {
+        "key": "no_load.2.Iavg",
+        "page": 1,
+        "label": "no load.2.Iavg"
+      },
+      {
+        "key": "no_load.2.W1",
+        "page": 1,
+        "label": "no load.2.W1"
+      },
+      {
+        "key": "no_load.2.W2",
+        "page": 1,
+        "label": "no load.2.W2"
+      },
+      {
+        "key": "no_load.2.W3",
+        "page": 1,
+        "label": "no load.2.W3"
+      },
+      {
+        "key": "no_load.2.Wtotal",
+        "page": 1,
+        "label": "no load.2.Wtotal"
+      },
+      {
+        "key": "no_load.2.f",
+        "page": 1,
+        "label": "no load.2.f"
+      },
+      {
+        "key": "no_load.2.Vff",
+        "page": 1,
+        "label": "no load.2.Vff"
+      },
+      {
+        "key": "no_load.3.stage",
+        "page": 1,
+        "label": "no load.3.stage"
+      },
+      {
+        "key": "no_load.3.V12",
+        "page": 1,
+        "label": "no load.3.V12"
+      },
+      {
+        "key": "no_load.3.V23",
+        "page": 1,
+        "label": "no load.3.V23"
+      },
+      {
+        "key": "no_load.3.V31",
+        "page": 1,
+        "label": "no load.3.V31"
+      },
+      {
+        "key": "no_load.3.Vavg",
+        "page": 1,
+        "label": "no load.3.Vavg"
+      },
+      {
+        "key": "no_load.3.I1",
+        "page": 1,
+        "label": "no load.3.I1"
+      },
+      {
+        "key": "no_load.3.I2",
+        "page": 1,
+        "label": "no load.3.I2"
+      },
+      {
+        "key": "no_load.3.I3",
+        "page": 1,
+        "label": "no load.3.I3"
+      },
+      {
+        "key": "no_load.3.Iavg",
+        "page": 1,
+        "label": "no load.3.Iavg"
+      },
+      {
+        "key": "no_load.3.W1",
+        "page": 1,
+        "label": "no load.3.W1"
+      },
+      {
+        "key": "no_load.3.W2",
+        "page": 1,
+        "label": "no load.3.W2"
+      },
+      {
+        "key": "no_load.3.W3",
+        "page": 1,
+        "label": "no load.3.W3"
+      },
+      {
+        "key": "no_load.3.Wtotal",
+        "page": 1,
+        "label": "no load.3.Wtotal"
+      },
+      {
+        "key": "no_load.3.f",
+        "page": 1,
+        "label": "no load.3.f"
+      },
+      {
+        "key": "no_load.3.Vff",
+        "page": 1,
+        "label": "no load.3.Vff"
+      },
+      {
+        "key": "no_load.4.stage",
+        "page": 1,
+        "label": "no load.4.stage"
+      },
+      {
+        "key": "no_load.4.V12",
+        "page": 1,
+        "label": "no load.4.V12"
+      },
+      {
+        "key": "no_load.4.V23",
+        "page": 1,
+        "label": "no load.4.V23"
+      },
+      {
+        "key": "no_load.4.V31",
+        "page": 1,
+        "label": "no load.4.V31"
+      },
+      {
+        "key": "no_load.4.Vavg",
+        "page": 1,
+        "label": "no load.4.Vavg"
+      },
+      {
+        "key": "no_load.4.I1",
+        "page": 1,
+        "label": "no load.4.I1"
+      },
+      {
+        "key": "no_load.4.I2",
+        "page": 1,
+        "label": "no load.4.I2"
+      },
+      {
+        "key": "no_load.4.I3",
+        "page": 1,
+        "label": "no load.4.I3"
+      },
+      {
+        "key": "no_load.4.Iavg",
+        "page": 1,
+        "label": "no load.4.Iavg"
+      },
+      {
+        "key": "no_load.4.W1",
+        "page": 1,
+        "label": "no load.4.W1"
+      },
+      {
+        "key": "no_load.4.W2",
+        "page": 1,
+        "label": "no load.4.W2"
+      },
+      {
+        "key": "no_load.4.W3",
+        "page": 1,
+        "label": "no load.4.W3"
+      },
+      {
+        "key": "no_load.4.Wtotal",
+        "page": 1,
+        "label": "no load.4.Wtotal"
+      },
+      {
+        "key": "no_load.4.f",
+        "page": 1,
+        "label": "no load.4.f"
+      },
+      {
+        "key": "no_load.4.Vff",
+        "page": 1,
+        "label": "no load.4.Vff"
+      }
+    ],
+    "instructions": [
+      "A handwritten signature or initials beside the engineer/customer signature label means present; do not transcribe the signature as a numeric reading.",
+      "Crossed-out lines are struck_out and require human review."
+    ]
+  },
+  {
+    "form_type": "temperature_rise",
+    "pages": 2,
+    "fields": [
+      {
+        "key": "series",
+        "page": 1,
+        "label": "series",
+        "guidance": "Header marked Test Series Number, not Sample Number."
+      },
+      {
+        "key": "sample_code",
+        "page": 1,
+        "label": "sample code",
+        "guidance": "Header marked Sample Number, not Test Series Number."
+      },
+      {
+        "key": "customer",
+        "page": 1,
+        "label": "customer"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "phases",
+        "page": 1,
+        "label": "phases"
+      },
+      {
+        "key": "rated_hv",
+        "page": 1,
+        "label": "rated hv"
+      },
+      {
+        "key": "rated_lv",
+        "page": 1,
+        "label": "rated lv"
+      },
+      {
+        "key": "standard",
+        "page": 1,
+        "label": "standard"
+      },
+      {
+        "key": "condition",
+        "page": 1,
+        "label": "condition"
+      },
+      {
+        "key": "test_dates",
+        "page": 1,
+        "label": "test dates"
+      },
+      {
+        "key": "oil_cooled",
+        "page": 1,
+        "label": "oil cooled"
+      },
+      {
+        "key": "source_three_phase",
+        "page": 1,
+        "label": "source three phase"
+      },
+      {
+        "key": "method",
+        "page": 1,
+        "label": "method"
+      },
+      {
+        "key": "supply_side",
+        "page": 1,
+        "label": "supply side"
+      },
+      {
+        "key": "shorted_side",
+        "page": 1,
+        "label": "shorted side"
+      },
+      {
+        "key": "no_load_loss",
+        "page": 1,
+        "label": "no load loss"
+      },
+      {
+        "key": "full_load_loss",
+        "page": 1,
+        "label": "full load loss"
+      },
+      {
+        "key": "total_loss",
+        "page": 1,
+        "label": "total loss"
+      },
+      {
+        "key": "tap_count",
+        "page": 1,
+        "label": "tap count"
+      },
+      {
+        "key": "selected_tap",
+        "page": 1,
+        "label": "selected tap"
+      },
+      {
+        "key": "selected_current",
+        "page": 1,
+        "label": "selected current"
+      },
+      {
+        "key": "cold_hv_resistance",
+        "page": 1,
+        "label": "cold hv resistance"
+      },
+      {
+        "key": "cold_lv_resistance",
+        "page": 1,
+        "label": "cold lv resistance"
+      },
+      {
+        "key": "cold_ambient",
+        "page": 1,
+        "label": "cold ambient"
+      },
+      {
+        "key": "top_oil_rise",
+        "page": 1,
+        "label": "top oil rise"
+      },
+      {
+        "key": "time_series.0.hour",
+        "page": 1,
+        "label": "time series.0.hour"
+      },
+      {
+        "key": "time_series.0.time",
+        "page": 1,
+        "label": "time series.0.time"
+      },
+      {
+        "key": "time_series.0.loss",
+        "page": 1,
+        "label": "time series.0.loss"
+      },
+      {
+        "key": "time_series.0.top_oil",
+        "page": 1,
+        "label": "time series.0.top oil"
+      },
+      {
+        "key": "time_series.0.bottom_oil",
+        "page": 1,
+        "label": "time series.0.bottom oil"
+      },
+      {
+        "key": "time_series.0.ambient_1",
+        "page": 1,
+        "label": "time series.0.ambient 1"
+      },
+      {
+        "key": "time_series.0.ambient_2",
+        "page": 1,
+        "label": "time series.0.ambient 2"
+      },
+      {
+        "key": "time_series.0.ambient_3",
+        "page": 1,
+        "label": "time series.0.ambient 3"
+      },
+      {
+        "key": "time_series.1.hour",
+        "page": 1,
+        "label": "time series.1.hour"
+      },
+      {
+        "key": "time_series.1.time",
+        "page": 1,
+        "label": "time series.1.time"
+      },
+      {
+        "key": "time_series.1.loss",
+        "page": 1,
+        "label": "time series.1.loss"
+      },
+      {
+        "key": "time_series.1.top_oil",
+        "page": 1,
+        "label": "time series.1.top oil"
+      },
+      {
+        "key": "time_series.1.bottom_oil",
+        "page": 1,
+        "label": "time series.1.bottom oil"
+      },
+      {
+        "key": "time_series.1.ambient_1",
+        "page": 1,
+        "label": "time series.1.ambient 1"
+      },
+      {
+        "key": "time_series.1.ambient_2",
+        "page": 1,
+        "label": "time series.1.ambient 2"
+      },
+      {
+        "key": "time_series.1.ambient_3",
+        "page": 1,
+        "label": "time series.1.ambient 3"
+      },
+      {
+        "key": "time_series.2.hour",
+        "page": 1,
+        "label": "time series.2.hour"
+      },
+      {
+        "key": "time_series.2.time",
+        "page": 1,
+        "label": "time series.2.time"
+      },
+      {
+        "key": "time_series.2.loss",
+        "page": 1,
+        "label": "time series.2.loss"
+      },
+      {
+        "key": "time_series.2.top_oil",
+        "page": 1,
+        "label": "time series.2.top oil"
+      },
+      {
+        "key": "time_series.2.bottom_oil",
+        "page": 1,
+        "label": "time series.2.bottom oil"
+      },
+      {
+        "key": "time_series.2.ambient_1",
+        "page": 1,
+        "label": "time series.2.ambient 1"
+      },
+      {
+        "key": "time_series.2.ambient_2",
+        "page": 1,
+        "label": "time series.2.ambient 2"
+      },
+      {
+        "key": "time_series.2.ambient_3",
+        "page": 1,
+        "label": "time series.2.ambient 3"
+      },
+      {
+        "key": "time_series.3.hour",
+        "page": 1,
+        "label": "time series.3.hour"
+      },
+      {
+        "key": "time_series.3.time",
+        "page": 1,
+        "label": "time series.3.time"
+      },
+      {
+        "key": "time_series.3.loss",
+        "page": 1,
+        "label": "time series.3.loss"
+      },
+      {
+        "key": "time_series.3.top_oil",
+        "page": 1,
+        "label": "time series.3.top oil"
+      },
+      {
+        "key": "time_series.3.bottom_oil",
+        "page": 1,
+        "label": "time series.3.bottom oil"
+      },
+      {
+        "key": "time_series.3.ambient_1",
+        "page": 1,
+        "label": "time series.3.ambient 1"
+      },
+      {
+        "key": "time_series.3.ambient_2",
+        "page": 1,
+        "label": "time series.3.ambient 2"
+      },
+      {
+        "key": "time_series.3.ambient_3",
+        "page": 1,
+        "label": "time series.3.ambient 3"
+      },
+      {
+        "key": "time_series.4.hour",
+        "page": 1,
+        "label": "time series.4.hour"
+      },
+      {
+        "key": "time_series.4.time",
+        "page": 1,
+        "label": "time series.4.time"
+      },
+      {
+        "key": "time_series.4.loss",
+        "page": 1,
+        "label": "time series.4.loss"
+      },
+      {
+        "key": "time_series.4.top_oil",
+        "page": 1,
+        "label": "time series.4.top oil"
+      },
+      {
+        "key": "time_series.4.bottom_oil",
+        "page": 1,
+        "label": "time series.4.bottom oil"
+      },
+      {
+        "key": "time_series.4.ambient_1",
+        "page": 1,
+        "label": "time series.4.ambient 1"
+      },
+      {
+        "key": "time_series.4.ambient_2",
+        "page": 1,
+        "label": "time series.4.ambient 2"
+      },
+      {
+        "key": "time_series.4.ambient_3",
+        "page": 1,
+        "label": "time series.4.ambient 3"
+      },
+      {
+        "key": "time_series.5.hour",
+        "page": 1,
+        "label": "time series.5.hour"
+      },
+      {
+        "key": "time_series.5.time",
+        "page": 1,
+        "label": "time series.5.time"
+      },
+      {
+        "key": "time_series.5.loss",
+        "page": 1,
+        "label": "time series.5.loss"
+      },
+      {
+        "key": "time_series.5.top_oil",
+        "page": 1,
+        "label": "time series.5.top oil"
+      },
+      {
+        "key": "time_series.5.bottom_oil",
+        "page": 1,
+        "label": "time series.5.bottom oil"
+      },
+      {
+        "key": "time_series.5.ambient_1",
+        "page": 1,
+        "label": "time series.5.ambient 1"
+      },
+      {
+        "key": "time_series.5.ambient_2",
+        "page": 1,
+        "label": "time series.5.ambient 2"
+      },
+      {
+        "key": "time_series.5.ambient_3",
+        "page": 1,
+        "label": "time series.5.ambient 3"
+      },
+      {
+        "key": "time_series.6.hour",
+        "page": 1,
+        "label": "time series.6.hour"
+      },
+      {
+        "key": "time_series.6.time",
+        "page": 1,
+        "label": "time series.6.time"
+      },
+      {
+        "key": "time_series.6.loss",
+        "page": 1,
+        "label": "time series.6.loss"
+      },
+      {
+        "key": "time_series.6.top_oil",
+        "page": 1,
+        "label": "time series.6.top oil"
+      },
+      {
+        "key": "time_series.6.bottom_oil",
+        "page": 1,
+        "label": "time series.6.bottom oil"
+      },
+      {
+        "key": "time_series.6.ambient_1",
+        "page": 1,
+        "label": "time series.6.ambient 1"
+      },
+      {
+        "key": "time_series.6.ambient_2",
+        "page": 1,
+        "label": "time series.6.ambient 2"
+      },
+      {
+        "key": "time_series.6.ambient_3",
+        "page": 1,
+        "label": "time series.6.ambient 3"
+      },
+      {
+        "key": "time_series.7.hour",
+        "page": 1,
+        "label": "time series.7.hour"
+      },
+      {
+        "key": "time_series.7.time",
+        "page": 1,
+        "label": "time series.7.time"
+      },
+      {
+        "key": "time_series.7.loss",
+        "page": 1,
+        "label": "time series.7.loss"
+      },
+      {
+        "key": "time_series.7.top_oil",
+        "page": 1,
+        "label": "time series.7.top oil"
+      },
+      {
+        "key": "time_series.7.bottom_oil",
+        "page": 1,
+        "label": "time series.7.bottom oil"
+      },
+      {
+        "key": "time_series.7.ambient_1",
+        "page": 1,
+        "label": "time series.7.ambient 1"
+      },
+      {
+        "key": "time_series.7.ambient_2",
+        "page": 1,
+        "label": "time series.7.ambient 2"
+      },
+      {
+        "key": "time_series.7.ambient_3",
+        "page": 1,
+        "label": "time series.7.ambient 3"
+      },
+      {
+        "key": "time_series.8.hour",
+        "page": 1,
+        "label": "time series.8.hour"
+      },
+      {
+        "key": "time_series.8.time",
+        "page": 1,
+        "label": "time series.8.time"
+      },
+      {
+        "key": "time_series.8.loss",
+        "page": 1,
+        "label": "time series.8.loss"
+      },
+      {
+        "key": "time_series.8.top_oil",
+        "page": 1,
+        "label": "time series.8.top oil"
+      },
+      {
+        "key": "time_series.8.bottom_oil",
+        "page": 1,
+        "label": "time series.8.bottom oil"
+      },
+      {
+        "key": "time_series.8.ambient_1",
+        "page": 1,
+        "label": "time series.8.ambient 1"
+      },
+      {
+        "key": "time_series.8.ambient_2",
+        "page": 1,
+        "label": "time series.8.ambient 2"
+      },
+      {
+        "key": "time_series.8.ambient_3",
+        "page": 1,
+        "label": "time series.8.ambient 3"
+      },
+      {
+        "key": "time_series.9.hour",
+        "page": 1,
+        "label": "time series.9.hour"
+      },
+      {
+        "key": "time_series.9.time",
+        "page": 1,
+        "label": "time series.9.time"
+      },
+      {
+        "key": "time_series.9.loss",
+        "page": 1,
+        "label": "time series.9.loss"
+      },
+      {
+        "key": "time_series.9.top_oil",
+        "page": 1,
+        "label": "time series.9.top oil"
+      },
+      {
+        "key": "time_series.9.bottom_oil",
+        "page": 1,
+        "label": "time series.9.bottom oil"
+      },
+      {
+        "key": "time_series.9.ambient_1",
+        "page": 1,
+        "label": "time series.9.ambient 1"
+      },
+      {
+        "key": "time_series.9.ambient_2",
+        "page": 1,
+        "label": "time series.9.ambient 2"
+      },
+      {
+        "key": "time_series.9.ambient_3",
+        "page": 1,
+        "label": "time series.9.ambient 3"
+      },
+      {
+        "key": "time_series.10.hour",
+        "page": 1,
+        "label": "time series.10.hour"
+      },
+      {
+        "key": "time_series.10.time",
+        "page": 1,
+        "label": "time series.10.time"
+      },
+      {
+        "key": "time_series.10.loss",
+        "page": 1,
+        "label": "time series.10.loss"
+      },
+      {
+        "key": "time_series.10.top_oil",
+        "page": 1,
+        "label": "time series.10.top oil"
+      },
+      {
+        "key": "time_series.10.bottom_oil",
+        "page": 1,
+        "label": "time series.10.bottom oil"
+      },
+      {
+        "key": "time_series.10.ambient_1",
+        "page": 1,
+        "label": "time series.10.ambient 1"
+      },
+      {
+        "key": "time_series.10.ambient_2",
+        "page": 1,
+        "label": "time series.10.ambient 2"
+      },
+      {
+        "key": "time_series.10.ambient_3",
+        "page": 1,
+        "label": "time series.10.ambient 3"
+      },
+      {
+        "key": "time_series.11.hour",
+        "page": 1,
+        "label": "time series.11.hour"
+      },
+      {
+        "key": "time_series.11.time",
+        "page": 1,
+        "label": "time series.11.time"
+      },
+      {
+        "key": "time_series.11.loss",
+        "page": 1,
+        "label": "time series.11.loss"
+      },
+      {
+        "key": "time_series.11.top_oil",
+        "page": 1,
+        "label": "time series.11.top oil"
+      },
+      {
+        "key": "time_series.11.bottom_oil",
+        "page": 1,
+        "label": "time series.11.bottom oil"
+      },
+      {
+        "key": "time_series.11.ambient_1",
+        "page": 1,
+        "label": "time series.11.ambient 1"
+      },
+      {
+        "key": "time_series.11.ambient_2",
+        "page": 1,
+        "label": "time series.11.ambient 2"
+      },
+      {
+        "key": "time_series.11.ambient_3",
+        "page": 1,
+        "label": "time series.11.ambient 3"
+      },
+      {
+        "key": "time_series.12.hour",
+        "page": 1,
+        "label": "time series.12.hour"
+      },
+      {
+        "key": "time_series.12.time",
+        "page": 1,
+        "label": "time series.12.time"
+      },
+      {
+        "key": "time_series.12.loss",
+        "page": 1,
+        "label": "time series.12.loss"
+      },
+      {
+        "key": "time_series.12.top_oil",
+        "page": 1,
+        "label": "time series.12.top oil"
+      },
+      {
+        "key": "time_series.12.bottom_oil",
+        "page": 1,
+        "label": "time series.12.bottom oil"
+      },
+      {
+        "key": "time_series.12.ambient_1",
+        "page": 1,
+        "label": "time series.12.ambient 1"
+      },
+      {
+        "key": "time_series.12.ambient_2",
+        "page": 1,
+        "label": "time series.12.ambient 2"
+      },
+      {
+        "key": "time_series.12.ambient_3",
+        "page": 1,
+        "label": "time series.12.ambient 3"
+      },
+      {
+        "key": "time_series.13.hour",
+        "page": 1,
+        "label": "time series.13.hour",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.time",
+        "page": 1,
+        "label": "time series.13.time",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.loss",
+        "page": 1,
+        "label": "time series.13.loss",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.top_oil",
+        "page": 1,
+        "label": "time series.13.top oil",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.bottom_oil",
+        "page": 1,
+        "label": "time series.13.bottom oil",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.ambient_1",
+        "page": 1,
+        "label": "time series.13.ambient 1",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.ambient_2",
+        "page": 1,
+        "label": "time series.13.ambient 2",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.13.ambient_3",
+        "page": 1,
+        "label": "time series.13.ambient 3",
+        "guidance": "Align to printed row 14 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.hour",
+        "page": 1,
+        "label": "time series.14.hour",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.time",
+        "page": 1,
+        "label": "time series.14.time",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.loss",
+        "page": 1,
+        "label": "time series.14.loss",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.top_oil",
+        "page": 1,
+        "label": "time series.14.top oil",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.bottom_oil",
+        "page": 1,
+        "label": "time series.14.bottom oil",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.ambient_1",
+        "page": 1,
+        "label": "time series.14.ambient 1",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.ambient_2",
+        "page": 1,
+        "label": "time series.14.ambient 2",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "time_series.14.ambient_3",
+        "page": 1,
+        "label": "time series.14.ambient 3",
+        "guidance": "Align to printed row 15 and its exact column; if overwritten, struck out or unclear, abstain for review."
+      },
+      {
+        "key": "step2_rated_current",
+        "page": 2,
+        "label": "step2 rated current"
+      },
+      {
+        "key": "duration",
+        "page": 2,
+        "label": "duration"
+      },
+      {
+        "key": "material",
+        "page": 2,
+        "label": "material"
+      },
+      {
+        "key": "coefficient",
+        "page": 2,
+        "label": "coefficient",
+        "guidance": "Return 235 only when the 235 checkbox is visibly ticked; the 234.5 box is printed but unticked in the supplied example."
+      },
+      {
+        "key": "correction_factor",
+        "page": 2,
+        "label": "correction factor"
+      },
+      {
+        "key": "hv_hot_resistance",
+        "page": 2,
+        "label": "hv hot resistance"
+      },
+      {
+        "key": "hv_cold_resistance",
+        "page": 2,
+        "label": "hv cold resistance"
+      },
+      {
+        "key": "lv_hot_resistance",
+        "page": 2,
+        "label": "lv hot resistance"
+      },
+      {
+        "key": "lv_cold_resistance",
+        "page": 2,
+        "label": "lv cold resistance"
+      },
+      {
+        "key": "cold_temperature",
+        "page": 2,
+        "label": "cold temperature"
+      },
+      {
+        "key": "ambient_at_end",
+        "page": 2,
+        "label": "ambient at end"
+      },
+      {
+        "key": "hv_winding_rise",
+        "page": 2,
+        "label": "hv winding rise"
+      },
+      {
+        "key": "lv_winding_rise",
+        "page": 2,
+        "label": "lv winding rise"
+      },
+      {
+        "key": "hv_observation",
+        "page": 2,
+        "label": "hv observation"
+      },
+      {
+        "key": "lv_observation",
+        "page": 2,
+        "label": "lv observation"
+      },
+      {
+        "key": "instrument_serials",
+        "page": 2,
+        "label": "instrument serials"
+      },
+      {
+        "key": "engineer_signature_present",
+        "page": 2,
+        "label": "engineer signature present"
+      },
+      {
+        "key": "raw_shutdown_resistance_table",
+        "page": 2,
+        "label": "raw shutdown resistance table"
+      }
+    ],
+    "instructions": [
+      "Series number and sample code are different header cells. Copy each from its own printed label; do not swap them or infer from another form.",
+      "On page 2 thermal coefficient is selected by a tick box. Return the ticked option (235 or 234.5), not the nearest printed number.",
+      "For time-series rows 14 and 15 (keys time_series.13 and .14), align each handwritten entry to its printed column; a diagonal stroke or merged mark is not a value. Mark uncertain cells illegible.",
+      "If a whole line is crossed out, mark its affected cells struck_out and preserve any legible struck text for review."
+    ]
+  },
+  {
+    "form_type": "pressure_oil_leakage",
+    "pages": 1,
+    "fields": [
+      {
+        "key": "series",
+        "page": 1,
+        "label": "series"
+      },
+      {
+        "key": "customer",
+        "page": 1,
+        "label": "customer"
+      },
+      {
+        "key": "rated_power",
+        "page": 1,
+        "label": "rated power"
+      },
+      {
+        "key": "rated_hv",
+        "page": 1,
+        "label": "rated hv"
+      },
+      {
+        "key": "rated_lv",
+        "page": 1,
+        "label": "rated lv"
+      },
+      {
+        "key": "standard",
+        "page": 1,
+        "label": "standard"
+      },
+      {
+        "key": "phase",
+        "page": 1,
+        "label": "phase"
+      },
+      {
+        "key": "tank",
+        "page": 1,
+        "label": "tank"
+      },
+      {
+        "key": "sealed",
+        "page": 1,
+        "label": "sealed"
+      },
+      {
+        "key": "condition_pressure",
+        "page": 1,
+        "label": "condition pressure"
+      },
+      {
+        "key": "ambient_pressure",
+        "page": 1,
+        "label": "ambient pressure"
+      },
+      {
+        "key": "sample_pressure",
+        "page": 1,
+        "label": "sample pressure"
+      },
+      {
+        "key": "pressure_date",
+        "page": 1,
+        "label": "pressure date"
+      },
+      {
+        "key": "routine_pressure",
+        "page": 1,
+        "label": "routine pressure"
+      },
+      {
+        "key": "routine_pressure_duration",
+        "page": 1,
+        "label": "routine pressure duration"
+      },
+      {
+        "key": "routine_pressure_observation",
+        "page": 1,
+        "label": "routine pressure observation"
+      },
+      {
+        "key": "type_pressure",
+        "page": 1,
+        "label": "type pressure"
+      },
+      {
+        "key": "vacuum",
+        "page": 1,
+        "label": "vacuum"
+      },
+      {
+        "key": "type_pressure_duration",
+        "page": 1,
+        "label": "type pressure duration"
+      },
+      {
+        "key": "pressure_deflection_result",
+        "page": 1,
+        "label": "type-pressure deflection result",
+        "optional": true
+      },
+      {
+        "key": "vacuum_deflection_result",
+        "page": 1,
+        "label": "vacuum deflection result",
+        "optional": true
+      },
+      {
+        "key": "vacuum_duration",
+        "page": 1,
+        "label": "vacuum duration"
+      },
+      {
+        "key": "type_date",
+        "page": 1,
+        "label": "type date"
+      },
+      {
+        "key": "permissible_deflection_small",
+        "page": 1,
+        "label": "permissible deflection small"
+      },
+      {
+        "key": "permissible_deflection_mid",
+        "page": 1,
+        "label": "permissible deflection mid"
+      },
+      {
+        "key": "permissible_deflection_large",
+        "page": 1,
+        "label": "permissible deflection large"
+      },
+      {
+        "key": "permissible_deflection_largest",
+        "page": 1,
+        "label": "permissible deflection largest",
+        "guidance": "Leave blank if this printed limit cell is empty; a dash is not a numerical limit."
+      },
+      {
+        "key": "applied_through",
+        "page": 1,
+        "label": "pressure or vacuum applied through",
+        "guidance": "Read the location/method phrase under the type pressure/vacuum section, not the type-test observation."
+      },
+      {
+        "key": "type_observation",
+        "page": 1,
+        "label": "type observation",
+        "guidance": "Observation/remark for type pressure test only. Do not copy text describing where pressure/vacuum was applied."
+      },
+      {
+        "key": "condition_oil",
+        "page": 1,
+        "label": "condition oil"
+      },
+      {
+        "key": "ambient_oil",
+        "page": 1,
+        "label": "ambient oil"
+      },
+      {
+        "key": "sample_oil",
+        "page": 1,
+        "label": "sample oil"
+      },
+      {
+        "key": "oil_pressure",
+        "page": 1,
+        "label": "oil pressure"
+      },
+      {
+        "key": "oil_date",
+        "page": 1,
+        "label": "oil date"
+      },
+      {
+        "key": "oil_routine_pressure",
+        "page": 1,
+        "label": "oil routine pressure"
+      },
+      {
+        "key": "oil_test_pressure",
+        "page": 1,
+        "label": "oil test pressure"
+      },
+      {
+        "key": "oil_duration",
+        "page": 1,
+        "label": "oil duration"
+      },
+      {
+        "key": "oil_observation",
+        "page": 1,
+        "label": "oil observation"
+      },
+      {
+        "key": "instrument_serials",
+        "page": 1,
+        "label": "instrument serials"
+      },
+      {
+        "key": "engineer_signature_present",
+        "page": 1,
+        "label": "engineer signature present"
+      },
+      {
+        "key": "correction_note",
+        "page": 1,
+        "label": "correction note"
+      },
+      {
+        "key": "deflection.0.point",
+        "page": 1,
+        "label": "pressure point 1 point",
+        "guidance": "Pressure deflection table, printed point 1, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.0.initial",
+        "page": 1,
+        "label": "pressure point 1 initial",
+        "guidance": "Pressure deflection table, printed point 1, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.0.final",
+        "page": 1,
+        "label": "pressure point 1 final",
+        "guidance": "Pressure deflection table, printed point 1, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.0.difference",
+        "page": 1,
+        "label": "pressure point 1 difference",
+        "guidance": "Pressure deflection table, printed point 1, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.1.point",
+        "page": 1,
+        "label": "pressure point 2 point",
+        "guidance": "Pressure deflection table, printed point 2, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.1.initial",
+        "page": 1,
+        "label": "pressure point 2 initial",
+        "guidance": "Pressure deflection table, printed point 2, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.1.final",
+        "page": 1,
+        "label": "pressure point 2 final",
+        "guidance": "Pressure deflection table, printed point 2, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.1.difference",
+        "page": 1,
+        "label": "pressure point 2 difference",
+        "guidance": "Pressure deflection table, printed point 2, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.2.point",
+        "page": 1,
+        "label": "pressure point 3 point",
+        "guidance": "Pressure deflection table, printed point 3, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.2.initial",
+        "page": 1,
+        "label": "pressure point 3 initial",
+        "guidance": "Pressure deflection table, printed point 3, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.2.final",
+        "page": 1,
+        "label": "pressure point 3 final",
+        "guidance": "Pressure deflection table, printed point 3, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.2.difference",
+        "page": 1,
+        "label": "pressure point 3 difference",
+        "guidance": "Pressure deflection table, printed point 3, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.3.point",
+        "page": 1,
+        "label": "pressure point 4 point",
+        "guidance": "Pressure deflection table, printed point 4, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.3.initial",
+        "page": 1,
+        "label": "pressure point 4 initial",
+        "guidance": "Pressure deflection table, printed point 4, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.3.final",
+        "page": 1,
+        "label": "pressure point 4 final",
+        "guidance": "Pressure deflection table, printed point 4, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.3.difference",
+        "page": 1,
+        "label": "pressure point 4 difference",
+        "guidance": "Pressure deflection table, printed point 4, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.4.point",
+        "page": 1,
+        "label": "pressure point 5 point",
+        "guidance": "Pressure deflection table, printed point 5, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.4.initial",
+        "page": 1,
+        "label": "pressure point 5 initial",
+        "guidance": "Pressure deflection table, printed point 5, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.4.final",
+        "page": 1,
+        "label": "pressure point 5 final",
+        "guidance": "Pressure deflection table, printed point 5, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.4.difference",
+        "page": 1,
+        "label": "pressure point 5 difference",
+        "guidance": "Pressure deflection table, printed point 5, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.5.point",
+        "page": 1,
+        "label": "pressure point 6 point",
+        "guidance": "Pressure deflection table, printed point 6, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.5.initial",
+        "page": 1,
+        "label": "pressure point 6 initial",
+        "guidance": "Pressure deflection table, printed point 6, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.5.final",
+        "page": 1,
+        "label": "pressure point 6 final",
+        "guidance": "Pressure deflection table, printed point 6, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.5.difference",
+        "page": 1,
+        "label": "pressure point 6 difference",
+        "guidance": "Pressure deflection table, printed point 6, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.6.point",
+        "page": 1,
+        "label": "oil point 1 point",
+        "guidance": "Oil deflection table, printed point 1, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.6.initial",
+        "page": 1,
+        "label": "oil point 1 initial",
+        "guidance": "Oil deflection table, printed point 1, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.6.final",
+        "page": 1,
+        "label": "oil point 1 final",
+        "guidance": "Oil deflection table, printed point 1, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.6.difference",
+        "page": 1,
+        "label": "oil point 1 difference",
+        "guidance": "Oil deflection table, printed point 1, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.7.point",
+        "page": 1,
+        "label": "oil point 2 point",
+        "guidance": "Oil deflection table, printed point 2, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.7.initial",
+        "page": 1,
+        "label": "oil point 2 initial",
+        "guidance": "Oil deflection table, printed point 2, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.7.final",
+        "page": 1,
+        "label": "oil point 2 final",
+        "guidance": "Oil deflection table, printed point 2, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.7.difference",
+        "page": 1,
+        "label": "oil point 2 difference",
+        "guidance": "Oil deflection table, printed point 2, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.8.point",
+        "page": 1,
+        "label": "oil point 3 point",
+        "guidance": "Oil deflection table, printed point 3, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.8.initial",
+        "page": 1,
+        "label": "oil point 3 initial",
+        "guidance": "Oil deflection table, printed point 3, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.8.final",
+        "page": 1,
+        "label": "oil point 3 final",
+        "guidance": "Oil deflection table, printed point 3, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.8.difference",
+        "page": 1,
+        "label": "oil point 3 difference",
+        "guidance": "Oil deflection table, printed point 3, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.9.point",
+        "page": 1,
+        "label": "oil point 4 point",
+        "guidance": "Oil deflection table, printed point 4, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.9.initial",
+        "page": 1,
+        "label": "oil point 4 initial",
+        "guidance": "Oil deflection table, printed point 4, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.9.final",
+        "page": 1,
+        "label": "oil point 4 final",
+        "guidance": "Oil deflection table, printed point 4, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.9.difference",
+        "page": 1,
+        "label": "oil point 4 difference",
+        "guidance": "Oil deflection table, printed point 4, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.10.point",
+        "page": 1,
+        "label": "oil point 5 point",
+        "guidance": "Oil deflection table, printed point 5, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.10.initial",
+        "page": 1,
+        "label": "oil point 5 initial",
+        "guidance": "Oil deflection table, printed point 5, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.10.final",
+        "page": 1,
+        "label": "oil point 5 final",
+        "guidance": "Oil deflection table, printed point 5, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.10.difference",
+        "page": 1,
+        "label": "oil point 5 difference",
+        "guidance": "Oil deflection table, printed point 5, difference column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.11.point",
+        "page": 1,
+        "label": "oil point 6 point",
+        "guidance": "Oil deflection table, printed point 6, point column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.11.initial",
+        "page": 1,
+        "label": "oil point 6 initial",
+        "guidance": "Oil deflection table, printed point 6, initial column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.11.final",
+        "page": 1,
+        "label": "oil point 6 final",
+        "guidance": "Oil deflection table, printed point 6, final column. Do not borrow from the other six-point table."
+      },
+      {
+        "key": "deflection.11.difference",
+        "page": 1,
+        "label": "oil point 6 difference",
+        "guidance": "Oil deflection table, printed point 6, difference column. Do not borrow from the other six-point table."
+      }
+    ],
+    "instructions": [
+      "Type-test observation and applied-through pressure/vacuum are separate printed fields. Do not copy one into the other.",
+      "An empty permissible-deflection cell is blank. Do not copy a neighbouring limit or invent a value.",
+      "The deflection table has twelve labelled points: pressure points 1-6, then oil-leakage points 1-6. The handwritten point label and its row values must stay together.",
+      "Crossed-out text is struck_out, not a valid current reading."
+    ]
+  }
+]
