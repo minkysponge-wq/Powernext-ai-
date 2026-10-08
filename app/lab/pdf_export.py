@@ -762,11 +762,9 @@ def render_pdf(report):
         from .report_workflow import issue_code
 
         code = issue_code(report)
-        url = (
-            f"{settings.PUBLIC_VERIFY_BASE_URL}/verify/{report.pk}/{code}/"
-            if settings.PUBLIC_VERIFY_BASE_URL
-            else f"OV-VERIFY:{report.pk}:{code}"
-        )
+        from .verification_link import report_verification_url
+
+        url = report_verification_url(report, code)
         widget = QrCodeWidget(url)
         x0, y0, x1, y1 = widget.getBounds()
         drawing = Drawing(64, 64, transform=[64 / (x1 - x0), 0, 0, 64 / (y1 - y0), -x0, -y0])

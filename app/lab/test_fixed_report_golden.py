@@ -97,7 +97,7 @@ class FixedReportGoldenTests(SimpleTestCase):
                 "unit": "",
             }
         )
-        for stage, values in [("BT", (3.9012, 3.9134, 3.9256)), ("AT", (3.9412, 3.9534, 3.9656))]:
+        for stage, values in [("BT", (3.9736, 3.9558, 3.9690)), ("AT", (3.9890, 3.9734, 3.9844))]:
             for phase, value in enumerate(values, 1):
                 fields.append(
                     {
@@ -113,25 +113,25 @@ class FixedReportGoldenTests(SimpleTestCase):
             for row in _cross_test_rows(self.snapshot(fields), "cross_test_losses")
             if row[0] == "HV resistance, normal tap"
         )
-        self.assertEqual(row[1:4], ["3.9134", "3.9534", "Ω"])
+        self.assertEqual(row[1:4], ["3.9661", "3.9823", "Ω"])
 
     def test_a3_differences_come_from_displayed_values(self):
         self.assertEqual(
-            _comparison(917.9552, 915.7349, "W", 2, "change"), ("917.96", "915.73", "-2.23")
+            _comparison(908.0552, 906.8349, "W", 2, "change"), ("908.06", "906.83", "-1.23")
         )
         self.assertEqual(
-            _comparison(2423.0748, 2419.7963, "W", 2, "change"), ("2423.07", "2419.80", "-3.27")
+            _comparison(2439.0748, 2437.7963, "W", 2, "change"), ("2439.07", "2437.80", "-1.27")
         )
 
     def test_a4_impedance_and_reactance_share_bt_minus_at_convention(self):
         data = self.snapshot(
             rows=[
-                {"stage": "NTBT", "Z75": 4.335, "X50": 3.680},
-                {"stage": "NTAT", "Z75": 4.355, "X50": 3.686},
+                {"stage": "NTBT", "Z75": 4.380, "X50": 4.299},
+                {"stage": "NTAT", "Z75": 4.400, "X50": 4.306},
             ]
         )
         rows = _cross_test_rows(data, "cross_test_stability")
-        self.assertEqual(rows[0][4], "-0.461")
+        self.assertEqual(rows[0][4], "-0.457")
         self.assertEqual(rows[1][4], "-0.163")
         block = next(
             block
@@ -175,7 +175,7 @@ class FixedReportGoldenTests(SimpleTestCase):
         self.assertEqual(result["verdict"], "descriptive")
         self.assertEqual(result["v2_status"], "DESCRIPTIVE")
         self.assertIn(
-            "4.335",
+            "4.380",
             _rule_rows({"calculations": [result]}, {"codes": ["IMPEDANCE_HTBT"]}, False)[0][1],
         )
 
@@ -226,8 +226,8 @@ class FixedReportGoldenTests(SimpleTestCase):
         binding["row_specs"] = binding["row_specs"][:1]
         data = self.snapshot(
             rows=[
-                {"stage": "NTBT", "Z75": 4.335, "X50": 3.680},
-                {"stage": "NTAT", "Z75": 4.355, "X50": 3.686},
+                {"stage": "NTBT", "Z75": 4.38, "X50": 4.299},
+                {"stage": "NTAT", "Z75": 4.40, "X50": 4.306},
             ]
         )
         rows = _resolve(
@@ -321,7 +321,7 @@ class FixedReportGoldenTests(SimpleTestCase):
         }
         row = _rule_rows({"calculations": [rule]}, {"codes": ["TOP_OIL_RISE"]}, False)[0]
         self.assertEqual(row[3], "0.12 K")
-        self.assertEqual(_comparison(4.9008, 4.9068, "%", 3, "stability")[2], "-0.122")
+        self.assertEqual(_comparison(4.3808, 4.3868, "%", 3, "stability")[2], "-0.137")
 
     def test_b12_summary_deduplicates_observation(self):
         rule = {
@@ -442,10 +442,10 @@ class FixedReportGoldenTests(SimpleTestCase):
             {"requested_tests_text": "No-load current at 112.5%"},
         )
         ratio = evaluate_rule(self.rules["VOLTAGE_RATIO"], fields, calcs, {})
-        self.assertEqual((no_load["verdict"], no_load["value"]), ("pass", "1.31"))
+        self.assertEqual((no_load["verdict"], no_load["value"]), ("pass", "1.28"))
         self.assertEqual((ratio["verdict"], ratio["tap_label"]), ("pass", "3"))
         self.assertAlmostEqual(float(ratio["nominal_ratio"]), 11000 / (433 / (3**0.5)), places=2)
-        self.assertAlmostEqual(float(ratio["limit"]), min(0.5, 4.335 / 10), places=2)
+        self.assertAlmostEqual(float(ratio["limit"]), min(0.5, 4.38 / 10), places=2)
         cross = next(
             row
             for row in _cross_test_rows(self.snapshot(fields), "cross_test_losses")
@@ -455,7 +455,7 @@ class FixedReportGoldenTests(SimpleTestCase):
 
     def test_final_review_3_stability_precision_and_margin(self):
         self.assertEqual(
-            _comparison(3.6804, 3.6856, "%", 3, "stability"), ("3.680", "3.686", "-0.163")
+            _comparison(4.3804, 4.3866, "%", 3, "stability"), ("4.380", "4.387", "-0.160")
         )
         rule = {
             "code": "VOLTAGE_RATIO",
@@ -702,7 +702,7 @@ class FixedReportGoldenTests(SimpleTestCase):
         ]
         data = self.snapshot(fields, results=results)
         rows = _rule_rows(data, {"codes": [rule["code"] for rule in results]}, False)
-        self.assertEqual([row[1] for row in rows], ["-0.163 %", "-0.092 %", "-0.204 %"])
+        self.assertEqual([row[1] for row in rows], ["-0.163 %", "-0.092 %", "-0.205 %"])
         self.assertEqual(rows[-1][3], "1.80 %")
         summary = _test_summary(
             data,
@@ -711,30 +711,30 @@ class FixedReportGoldenTests(SimpleTestCase):
             [rule["code"] for rule in results],
             False,
         )
-        self.assertEqual(summary[3], "-0.204 %")
+        self.assertEqual(summary[3], "-0.205 %")
         self.assertEqual(summary[4], "1.80 %")
 
     def test_v8_2_ratio_governing_phase_not_mean(self):
         fields, calcs = evidence()
-        next(f for f in fields if f["schema_key"] == "ratio.3.AT_A")["value"] = "44.10"
+        next(f for f in fields if f["schema_key"] == "ratio.3.AT_A")["value"] = "44.11"
         result = evaluate_rule(self.rules["VOLTAGE_RATIO"], fields, calcs, {})
         self.assertEqual(result["verdict"], "pass")
         self.assertEqual(result["worst_phase"], "AT A")
-        self.assertEqual(result["worst_phase_ratio"], "44.10")
-        self.assertGreater(float(result["value"]), 0.22)
+        self.assertEqual(result["worst_phase_ratio"], "44.11")
+        self.assertGreater(float(result["value"]), 0.24)
         self.assertEqual(
             _rule_rows({"calculations": [result]}, {"codes": ["VOLTAGE_RATIO"]}, False)[0][1],
-            "AT A 44.10 (+0.22%)",
+            "AT A 44.11 (+0.25%)",
         )
         self.assertEqual(
             _rule_rows({"calculations": [result]}, {"codes": ["VOLTAGE_RATIO"]}, False)[0][3],
-            "0.21 %",
+            "0.19 %",
         )
         self.assertEqual(
             _test_summary(
                 {"calculations": [result]}, "ratio_vector", "Ratio", ["VOLTAGE_RATIO"], False
             )[3],
-            "AT A 44.10 (+0.22%)",
+            "AT A 44.11 (+0.25%)",
         )
 
     def test_v8_3_nonprincipal_impedance_and_losses_are_descriptive(self):

@@ -56,11 +56,11 @@ def evidence():
     add("loss_measurement", "hv_resistance.1.tap", "N")
     for key in ("ir_hv_earth_AT", "ir_lv_earth_AT", "ir_hv_lv_AT"):
         add("routine_test", key, 1, "GΩ")
-    add("temperature_rise", "top_oil_rise", 25.8, "K")
-    add("temperature_rise", "hv_winding_rise", 39.2, "K")
-    add("temperature_rise", "lv_winding_rise", 33.1, "K")
+    add("temperature_rise", "top_oil_rise", 26.1, "K")
+    add("temperature_rise", "hv_winding_rise", 39.7, "K")
+    add("temperature_rise", "lv_winding_rise", 34.3, "K")
     add("loss_measurement", "no_load_100_percent", 0.51, "%")
-    add("loss_measurement", "no_load_112_percent", 1.31, "%")
+    add("loss_measurement", "no_load_112_percent", 1.28, "%")
     for key in (
         "induced_observation_BT",
         "induced_observation_AT",
@@ -71,7 +71,7 @@ def evidence():
     ):
         add("routine_test", key, "No disruptive discharge, withstood")
     add("pressure_oil_leakage", "routine_pressure_observation", "No leakage observed")
-    add("pressure_oil_leakage", "routine_pressure", "87kpa")
+    add("pressure_oil_leakage", "routine_pressure", "91kpa")
     add("pressure_oil_leakage", "oil_observation", "No leakage observed")
     add("short_circuit", "no_visible_defects_confirmed", "confirmed")
     add("short_circuit", "overall_engineer_verdict", "confirmed")
@@ -81,12 +81,12 @@ def evidence():
     add("short_circuit", "during_test", "No abnormalities")
     add("short_circuit", "after_test", "No abnormalities")
     x = {
-        "NTBT": 3.680,
-        "NTAT": 3.686,
-        "HTBT": 4.348,
-        "HTAT": 4.352,
-        "LTBT": 4.410,
-        "LTAT": 4.419,
+        "NTBT": 4.299311815780109,
+        "NTAT": 4.305536983937887,
+        "HTBT": 4.365014858647969,
+        "HTAT": 4.36932491950878,
+        "LTBT": 4.396990084735396,
+        "LTAT": 4.406415419512878,
     }
     rows = []
     for stage in x:
@@ -94,9 +94,9 @@ def evidence():
             {
                 "stage": stage,
                 "X50": x[stage],
-                "Z75": 4.335,
-                "total_loss_50": 918 if stage.endswith("BT") else 916,
-                "total_loss_100": 2474 if stage.endswith("BT") else 2470,
+                "Z75": 4.38,
+                "total_loss_50": 908 if stage.endswith("BT") else 907,
+                "total_loss_100": 2486 if stage.endswith("BT") else 2484,
                 "limit_50": 980,
                 "limit_100": 2930,
             }
@@ -157,7 +157,7 @@ class RuleV2Tests(SimpleTestCase):
         for code, value in [
             ("REACTANCE_NTBT_NTAT", "-0.163"),
             ("REACTANCE_HTBT_HTAT", "-0.092"),
-            ("REACTANCE_LTBT_LTAT", "-0.204"),
+            ("REACTANCE_LTBT_LTAT", "-0.205"),
         ]:
             self.assertEqual(self.run_rule(code)["value"], value)
 
@@ -197,7 +197,7 @@ class RuleV2Tests(SimpleTestCase):
         self.assertEqual(result["quality_flag"], "near_limit")
 
     def test_pressure_unit_normalisation(self):
-        self.assertEqual(self.run_rule("PRESSURE_TEST")["normalised_pressure"], "87 kPa")
+        self.assertEqual(self.run_rule("PRESSURE_TEST")["normalised_pressure"], "91 kPa")
 
     def test_sc_overall_requires_checked_during_and_after_observations(self):
         fields, calcs = evidence()

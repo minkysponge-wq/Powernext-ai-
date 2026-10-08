@@ -448,6 +448,8 @@ def make_report(request, pk):
 @login_required
 def report(request, pk):
     obj = get_object_or_404(Report.objects.filter(job__in=allowed_jobs(request.user)), pk=pk)
+    from .report_workflow import issue_code
+
     response = render(
         request,
         "lab/report.html",
@@ -456,6 +458,7 @@ def report(request, pk):
             "data": obj.snapshot,
             "display_sections": obj.snapshot.get("report_sections")
             or obj.snapshot.get("sections", []),
+            "verification_code": issue_code(obj) if obj.approved_at else "",
         },
     )
     response["Cache-Control"] = "private, no-store"

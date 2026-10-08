@@ -148,8 +148,10 @@ LOGIN_REDIRECT_URL = "/"
 MFA_ENFORCED = not DEBUG or os.getenv("VECTORLAB_FORCE_MFA", "0") == "1"
 PRIVILEGED_IDLE_SECONDS = int(os.getenv("PRIVILEGED_IDLE_SECONDS", "900"))
 OTP_TOTP_ISSUER = "CPRI VectorLab"
-PUBLIC_VERIFY_BASE_URL = os.getenv(
-    "PUBLIC_VERIFY_BASE_URL", "http://127.0.0.1:8000" if DEBUG else ""
+PUBLIC_VERIFY_BASE_URL = (
+    os.getenv("VECTORLAB_PUBLIC_BASE_URL")
+    or os.getenv("PUBLIC_VERIFY_BASE_URL")
+    or "http://127.0.0.1:8000"
 ).rstrip("/")
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 FILE_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024

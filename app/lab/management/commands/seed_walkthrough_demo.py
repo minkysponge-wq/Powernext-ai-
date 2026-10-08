@@ -1,216 +1,156 @@
-"""Create a local-only, synthetic multi-role product walkthrough."""
+"""Seed one fictional fixed-template job; never perform an approval stage."""
 
 import json
-import secrets
 from pathlib import Path
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
+from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 from django.test import Client
 from django.urls import reverse
+from django_otp.oath import totp
+from django_otp.plugins.otp_totp.models import TOTPDevice
 
-from lab.models import AuditEvent, Job, Report, TestRun
-from lab.roles import ADMIN, CUSTOMER, ENGINEER, HOD, QUALITY
+from lab.fixed_template import TESTS
+from lab.management.commands.create_demo_users import DEMO_ROLES
+from lab.models import AuditEvent, Job, Report, ReportTemplate, TestRun
+from lab.synthetic_demo import attach_demo_rules, create_fields
 
-PREFIX = "walkthrough_"
+STATIONS = (
+    "routine_test",
+    "short_circuit",
+    "loss_measurement",
+    "loss_calculation",
+    "transformer_proforma",
+    "temperature_rise",
+    "pressure_oil_leakage",
+)
 
 
 class Command(BaseCommand):
-    help = "Seed synthetic, local-only jobs at station, Quality, HoD and issued stages."
+    help = "Seed one synthetic 18-section job with station evidence; never approve it."
 
     def handle(self, *args, **options):
         if not settings.DEBUG:
-            raise CommandError("The walkthrough seed is disabled outside local DEBUG mode.")
-        output = Path(settings.BASE_DIR).parent / "output" / "walkthrough-demo-access.json"
-        if output.exists():
-            data = json.loads(output.read_text(encoding="utf-8"))
-            self.stdout.write(json.dumps(data, indent=2))
+            raise CommandError("The synthetic walkthrough is local-only.")
+        root = Path(settings.BASE_DIR).parent
+        access_file = root / "output" / "walkthrough-demo-access.json"
+        if access_file.exists():
+            self.stdout.write(access_file.read_text(encoding="utf-8"))
             return
         if Job.objects.filter(customer__startswith="SYNTHETIC WALKTHROUGH").exists():
-            raise CommandError(
-                "Walkthrough jobs exist but the access file is missing; inspect them before reseeding."
-            )
-        password = secrets.token_urlsafe(15)
-        roles = {
-            "customer": (PREFIX + "customer", CUSTOMER),
-            "admin": (PREFIX + "admin", ADMIN),
-            "engineer_a": (PREFIX + "engineer_a", ENGINEER),
-            "engineer_b": (PREFIX + "engineer_b", ENGINEER),
-            "quality": (PREFIX + "quality", QUALITY),
-            "hod": (PREFIX + "hod", HOD),
-        }
-        users = {}
+            raise CommandError("Synthetic job exists but access file is missing; inspect it first.")
+        template = ReportTemplate.objects.get(name="CPRI-SCL-TR-v1", version=8)
+        users_file = root / "output" / "demo-users.json"
+        if not users_file.exists():
+            call_command("create_demo_users", stdout=self.stdout)
+        access = json.loads(users_file.read_text(encoding="utf-8"))
+        password = access["password"]
+        self.clients = {}
         with transaction.atomic():
-            for key, (username, group_name) in roles.items():
-                user, created = get_user_model().objects.get_or_create(username=username)
-                if not created and user.groups.exclude(name=group_name).exists():
-                    raise CommandError(
-                        f"Existing account {username} has another role; refusing to change it."
-                    )
-                user.set_password(password)
-                user.is_active = True
-                user.save(update_fields=["password", "is_active"])
-                user.groups.set([Group.objects.get(name=group_name)])
-                users[key] = user
-            jobs = {}
-            for stage in ("station", "quality", "hod", "issued"):
-                jobs[stage] = self.make_case(stage, users)
-            data = {
-                "notice": "LOCAL SYNTHETIC DATA ONLY. Never use these accounts for real records.",
-                "url": "http://127.0.0.1:8000/accounts/login/",
-                "password": password,
-                "users": {key: user.username for key, user in users.items()},
-                "jobs": {
-                    stage: {
-                        "file_number": job.file_number,
-                        "id": str(job.pk),
-                        "customer_url": f"http://127.0.0.1:8000/customer/requests/{job.file_number}/",
-                        "lab_url": f"http://127.0.0.1:8000/jobs/{job.pk}/",
-                    }
-                    for stage, job in jobs.items()
-                },
+            users = {
+                name: get_user_model().objects.get(username=details[0])
+                for name, details in DEMO_ROLES.items()
             }
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(data, indent=2), encoding="utf-8")
-        self.stdout.write(json.dumps(data, indent=2))
-
-    def post(self, user, name, args=None, data=None, query=""):
-        client = Client(SERVER_NAME="127.0.0.1")
-        client.force_login(user)
-        url = reverse(name, args=args or []) + query
-        response = client.post(url, data or {})
-        if response.status_code != 302:
-            detail = response.content.decode("utf-8", errors="replace")[:350]
-            raise CommandError(f"{user.username}: {name} returned {response.status_code}: {detail}")
-        return response
-
-    def make_case(self, stage, users):
-        customer = users["customer"]
-        admin = users["admin"]
-        engineer = users["engineer_a"]
-        types = ["pressure_oil_leakage"]
-        if stage == "issued":
-            types.append("short_circuit")
-        self.post(
-            customer,
-            "customer_new_request",
-            data={
-                "customer": "SYNTHETIC WALKTHROUGH — Example Power Systems",
-                "customer_address": "Demo-only address, Bengaluru",
-                "manufacturer": "SYNTHETIC DEMO Manufacturer",
-                "sample_particulars": f"SYNTHETIC {stage.upper()} sample; no real laboratory result",
-                "requested_tests": types,
-            },
-        )
-        job = Job.objects.filter(customer_user=customer).order_by("-created_at").first()
-        self.post(
-            admin,
-            "job_scope",
-            [job.pk],
-            {
-                "customer": job.customer,
-                "sample_code": f"SYN-{stage.upper()}-001",
-                "test_series": f"DEMO-{stage.upper()}",
-                "report_scope": types,
-                "scope_note": "Synthetic product walkthrough. Only selected demo tests apply; no CPRI conformity claim.",
-                "version": job.version,
-            },
-        )
-        job.refresh_from_db()
-        for index, kind in enumerate(types):
-            assigned = users["engineer_b"] if index else engineer
+            customer = users["customer"]
+            admin = users["admin"]
+            requested = list(STATIONS)
+            self.post(
+                customer,
+                "customer_new_request",
+                data={
+                    "customer": "SYNTHETIC WALKTHROUGH — Example Power Systems",
+                    "customer_address": "Demo-only address, Bengaluru",
+                    "manufacturer": "SYNTHETIC DEMO Manufacturer",
+                    "sample_particulars": "Fictional 250 kVA 11 kV/433 V Dyn11 transformer",
+                    "requested_tests": requested,
+                },
+            )
+            job = Job.objects.filter(customer_user=customer).order_by("-created_at").first()
+            job.report_template = template
+            job.save(update_fields=["report_template"])
             self.post(
                 admin,
-                "assign_test",
+                "job_scope",
                 [job.pk],
-                {"test_type": kind, "station": f"Demo bay {index+1}", "assigned_to": assigned.pk},
-            )
-            run = TestRun.objects.get(job=job, test_type=kind)
-            self.post(assigned, "start_test", [run.pk])
-            if stage != "station":
-                values = {
-                    "series": job.test_series,
-                    "sample_code": job.sample_code,
+                {
                     "customer": job.customer,
-                    "oil_observation": "No leakage observed (synthetic)",
-                    "shots.0.peak": "12.3",
-                }
-                self.enter_minimum(job, run, assigned, values)
+                    "sample_code": "SYN-FULL-001",
+                    "test_series": "SYN-SERIES-001",
+                    "report_scope": requested,
+                    "report_test_ids": [item[0] for item in TESTS],
+                    "scope_note": "Fictional full-template demo; no CPRI conformity claim.",
+                    "version": job.version,
+                },
+            )
+            job.refresh_from_db()
+            count = create_fields(job, users["engineer_a"], template.definition)
+            rule_count = attach_demo_rules(job)
+            for index, kind in enumerate(STATIONS):
+                assigned = users["engineer_b"] if index % 2 else users["engineer_a"]
                 self.post(
-                    assigned,
-                    "mark_unused_not_applicable",
-                    [run.pk],
+                    admin,
+                    "assign_test",
+                    [job.pk],
                     {
-                        "confirmed": "yes",
-                        "reason": "Synthetic walkthrough: other optional measurements do not apply to this demo case.",
+                        "test_type": kind,
+                        "station": f"Synthetic bay {index + 1}",
+                        "assigned_to": assigned.pk,
                     },
                 )
-                self.post(assigned, "lock_test", [run.pk], {"confirmed": "yes"})
-        if stage != "station":
-            report = Report.objects.filter(job=job).order_by("-revision").first()
-            if not report:
-                raise CommandError(f"{stage}: last station lock did not generate a draft")
-            if report.snapshot.get("blockers"):
-                ids = [
-                    f["id"]
-                    for f in report.snapshot.get("findings", [])
-                    if f.get("severity") == "blocker"
-                ]
-                raise CommandError(
-                    f'{stage}: report has {report.snapshot["blockers"]} blockers: {ids[:20]}'
-                )
-            self.post(engineer, "engineer_lock", [report.pk], {"confirmed": "yes"})
-            if stage in ("hod", "issued"):
-                self.post(users["quality"], "quality_verify", [report.pk], {"confirmed": "yes"})
-            if stage == "issued":
-                self.post(users["hod"], "approve_report", [report.pk], {"confirmed": "yes"})
-        AuditEvent.objects.create(
-            job=job,
-            actor=admin,
-            action="synthetic_walkthrough_case",
-            details={"stage": stage, "not_real_lab_evidence": True},
-        )
-        return job
-
-    def enter_minimum(self, job, run, user, values):
-        from django.core.paginator import Paginator
-
-        from lab.quality import identity
-
-        fields = job.fields.filter(
-            document__isnull=True, context__form_type=run.test_type
-        ).order_by("key")
-        for page in Paginator(fields, 30):
-            rows = list(page.object_list)
-            payload = {
-                "form-TOTAL_FORMS": len(rows),
-                "form-INITIAL_FORMS": len(rows),
-                "form-MIN_NUM_FORMS": 0,
-                "form-MAX_NUM_FORMS": 1000,
-                "action": "save",
-            }
-            for index, field in enumerate(rows):
-                key = identity(field)[2]
-                chosen = key in values and (
-                    key != "customer" or run.test_type == "pressure_oil_leakage"
-                )
-                value = values[key] if chosen else field.value
-                payload.update(
-                    {
-                        f"form-{index}-id": field.pk,
-                        f"form-{index}-value": value,
-                        f"form-{index}-unit": "kA" if key == "shots.0.peak" else field.unit,
-                        f"form-{index}-status": "verified" if chosen else field.status,
-                        f"form-{index}-version": field.version,
-                    }
-                )
-            self.post(
-                user,
-                "digital_review",
-                [job.pk],
-                payload,
-                query=f"?test={run.test_type}&page={page.number}",
+                run = TestRun.objects.get(job=job, test_type=kind)
+                self.post(assigned, "start_test", [run.pk])
+            AuditEvent.objects.create(
+                job=job,
+                actor=admin,
+                action="synthetic_walkthrough_seeded",
+                details={
+                    "fields": count,
+                    "demo_rules": rule_count,
+                    "no_real_source": True,
+                    "no_approval": True,
+                },
             )
+            if Report.objects.filter(job=job).exists():
+                raise CommandError("The seed unexpectedly created a report.")
+            data = {
+                "notice": "LOCAL SYNTHETIC DATA ONLY. No report is approved by this seed.",
+                "url": "http://127.0.0.1:8000/accounts/login/",
+                "password": password,
+                "users": {name: user.username for name, user in users.items()},
+                "job": {
+                    "id": str(job.pk),
+                    "file_number": job.file_number,
+                    "customer_url": f"http://127.0.0.1:8000/customer/requests/{job.file_number}/",
+                    "lab_url": f"http://127.0.0.1:8000/jobs/{job.pk}/",
+                },
+            }
+        access_file.parent.mkdir(parents=True, exist_ok=True)
+        access_file.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        self.stdout.write(f"Synthetic job ready: {job.pk}; access details in {access_file}")
+
+    def post(self, user, name, args=None, data=None):
+        client = self.clients.get(user.pk)
+        if client is None:
+            client = Client(SERVER_NAME="127.0.0.1")
+            client.force_login(user)
+            if settings.MFA_ENFORCED and TOTPDevice.objects.filter(user=user, confirmed=True).exists():
+                device = TOTPDevice.objects.get(user=user, confirmed=True)
+                response = client.post(
+                    reverse("otp_verify"), {"token": str(totp(device.bin_key)).zfill(6)}
+                )
+                if response.status_code != 302 or response["Location"].startswith(
+                    reverse("otp_verify")
+                ):
+                    raise CommandError(f"Demo MFA enrollment failed for {user.username}.")
+            self.clients[user.pk] = client
+        response = client.post(reverse(name, args=args or []), data or {})
+        if response.status_code != 302 or response["Location"].startswith(reverse("otp_verify")):
+            detail = response.content.decode("utf-8", errors="replace")[:350]
+            raise CommandError(
+                f"{user.username}: {name} returned {response.status_code}"
+                f" ({response.get('Location', '')}): {detail}"
+            )
+        return response

@@ -1,4 +1,4 @@
-"""Optional PDF byte-range signature; laboratory PKI remains an external dependency."""
+"""PDF byte-range signing; issuing requires a configured identity."""
 
 from io import BytesIO
 from pathlib import Path
@@ -13,10 +13,12 @@ class SigningConfigurationError(ValueError):
 
 
 def sign_issued_pdf(unsigned_pdf, signer_name):
-    """Sign with a configured PKCS#12 identity, or retain legacy unsigned mode."""
+    """Sign with a configured PKCS#12 identity; fail closed when unavailable."""
     path = settings.PDF_SIGNING_P12_PATH
     if not path:
-        return unsigned_pdf, False
+        raise SigningConfigurationError(
+            "PDF signer is not configured. Set PDF_SIGNING_P12_PATH and PDF_SIGNING_P12_PASSWORD before issue."
+        )
     certificate = Path(path)
     if not certificate.is_file():
         raise SigningConfigurationError("Configured PDF signing identity is unavailable.")

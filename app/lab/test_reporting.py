@@ -231,6 +231,21 @@ class ReportingTests(TestCase):
         self.assertTrue(verify_issue_seal(report))
         verification = reverse("verify_issued", args=[report.pk, issue_code(report)])
         self.assertContains(self.client.get(verification), "Application seal valid")
+        with report.approved_pdf.open("rb") as issued_file:
+            issued_bytes = issued_file.read()
+        self.assertContains(
+            self.client.post(
+                verification, {"pdf": SimpleUploadedFile("issued.pdf", issued_bytes, content_type="application/pdf")}
+            ),
+            "VALID — uploaded PDF matches",
+        )
+        self.assertContains(
+            self.client.post(
+                verification,
+                {"pdf": SimpleUploadedFile("tampered.pdf", issued_bytes + b"x", content_type="application/pdf")},
+            ),
+            "NOT VALID — uploaded PDF does not match",
+        )
         self.assertNotIn("Fixture customer", self.client.get(verification).content.decode())
         self.assertEqual(
             self.client.get(reverse("verify_issued", args=[report.pk, "0" * 24])).status_code, 404

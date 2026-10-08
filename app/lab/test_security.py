@@ -21,7 +21,7 @@ from .roles import ADMIN, CUSTOMER, ENGINEER, HOD, QUALITY
 @override_settings(MFA_ENFORCED=True)
 class PrivilegedMFATests(TestCase):
     def test_privileged_roles_need_otp_before_any_job_or_admin_route(self):
-        for name in (HOD, QUALITY, ADMIN):
+        for name in (ENGINEER, HOD, QUALITY, ADMIN):
             user = get_user_model().objects.create_user(
                 "mfa-" + name.lower(), password="Strong-test-password-1234"
             )

@@ -35,6 +35,10 @@ def verify_request_pdf_text(pdf_bytes, request_snapshot):
     for key, label in CUSTOMER_FIELDS:
         if key in request_snapshot:
             expected = _space(request_snapshot[key])
-            if not expected or _space(f"{label}: {expected}") not in text:
+            # Fixed report tables place labels and values in separate columns;
+            # text extraction yields a space instead of the prose colon.
+            if not expected or not any(
+                _space(f"{label}{separator} {expected}") in text for separator in (":", "")
+            ):
                 mismatched.append(key)
     return mismatched

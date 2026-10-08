@@ -8,9 +8,9 @@ from django.core import signing
 from django.db import transaction
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_http_methods, require_POST
 
 from .assembly import assemble
 from .models import AuditEvent, Job, Report
@@ -196,18 +196,40 @@ def issue_code(report):
     return hashlib.sha256(report.issue_seal.encode()).hexdigest()[:24] if report.issue_seal else ""
 
 
+def uploaded_pdf_matches_issue(report, uploaded):
+    """Compare a submitted PDF to the frozen issued-byte hash without storing it."""
+    if not report.approved_pdf_sha256:
+        return False
+    digest = hashlib.sha256()
+    for chunk in uploaded.chunks():
+        digest.update(chunk)
+    return hmac.compare_digest(digest.hexdigest(), report.approved_pdf_sha256)
+
+
+@require_http_methods(["GET", "POST"])
 def verify_issued(request, pk, code):
-    """Public verification reveals only the report ID, stage and signer; no customer data."""
-    report = get_object_or_404(Report.objects.select_related("approved_by"), pk=pk)
+    """Show QR-linked issue facts and optionally compare a submitted PDF's bytes."""
+    report = get_object_or_404(
+        Report.objects.select_related("approved_by", "engineer_locked_by", "quality_verified_by"),
+        pk=pk,
+    )
     if (
         not report.approved_at
         or not verify_issue_seal(report)
         or not hmac.compare_digest(issue_code(report), code)
     ):
         return HttpResponse("Application seal could not be verified.", status=404)
-    return HttpResponse(
-        f"Application seal valid. Report {report.pk}, revision {report.revision}; "
-        f"approved by {report.approved_by.get_username()} at {report.approved_at.isoformat()}. "
-        "This is not a certificate-backed institutional digital signature.",
-        content_type="text/plain; charset=utf-8",
+    uploaded = request.FILES.get("pdf") if request.method == "POST" else None
+    matched = uploaded_pdf_matches_issue(report, uploaded) if uploaded else None
+    return render(
+        request,
+        "lab/verify_report.html",
+        {
+            "report": report,
+            "verification_code": code,
+            "sample_code": report.snapshot.get("sample_code", ""),
+            "report_number": report.snapshot.get("file_number", ""),
+            "matched": matched,
+            "upload_attempted": request.method == "POST",
+        },
     )

@@ -20,7 +20,7 @@ class FixedTemplateTests(SimpleTestCase):
         self.assertEqual(_number("40.00"), "40")
         self.assertEqual(_number("120", "W"), "120.00")
         self.assertEqual(_number("40", "K"), "40.0")
-        self.assertEqual(_number("3.680422571931405", "%"), "3.680")
+        self.assertEqual(_number("4.299311815780109", "%"), "4.299")
         self.assertEqual(_number("0.01234567", "Ω"), "0.0123")
 
     def report(self, requested):

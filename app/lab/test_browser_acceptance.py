@@ -13,6 +13,7 @@ from django.core import mail
 from django.test import Client, override_settings
 from django.urls import reverse
 from django_otp.plugins.otp_totp.models import TOTPDevice
+from django_otp.oath import totp
 from pyhanko.keys import load_certs_from_pemder
 from pyhanko.pdf_utils.reader import PdfFileReader
 from pyhanko.sign.validation import validate_pdf_signature
@@ -42,7 +43,7 @@ class BrowserAcceptanceTests(StaticLiveServerTestCase):
             user.groups.add(Group.objects.get(name=role))
             users[key] = user.username
             users[key + "_id"] = user.pk
-            if key in ("admin", "quality", "hod"):
+            if key in ("admin", "engineer", "other_engineer", "quality", "hod"):
                 users[key + "_otp_secret"] = TOTPDevice.objects.create(
                     user=user, name="acceptance authenticator", confirmed=True
                 ).bin_key.hex()
@@ -141,15 +142,23 @@ class BrowserAcceptanceTests(StaticLiveServerTestCase):
                         verify_request_pdf_text(stream.read(), job.request_snapshot), []
                     )
                 client = Client()
-                client.force_login(get_user_model().objects.get(username=users["engineer"]))
-                field = job.fields.first()
-                self.assertEqual(
-                    client.post(
-                        reverse("edit_field", args=[job.pk, field.pk]),
-                        {"value": "unauthorised later change"},
-                    ).status_code,
-                    409,
+                engineer_user = get_user_model().objects.get(username=users["engineer"])
+                client.force_login(engineer_user)
+                # The browser already used its device in this time step. A fresh
+                # test device avoids replaying a valid-but-consumed TOTP code.
+                device = TOTPDevice.objects.create(
+                    user=engineer_user, name="post-issue test authenticator", confirmed=True
                 )
+                otp_response = client.post(
+                    reverse("otp_verify"), {"token": str(totp(device.bin_key)).zfill(6)}
+                )
+                self.assertEqual(otp_response.status_code, 302, otp_response.content)
+                field = job.fields.first()
+                edit_response = client.post(
+                    reverse("edit_field", args=[job.pk, field.pk]),
+                    {"value": "unauthorised later change"},
+                )
+                self.assertEqual(edit_response.status_code, 409, edit_response.get("Location"))
                 self.assertTrue(
                     AuditEvent.objects.filter(job=job, action="report_returned").exists()
                 )

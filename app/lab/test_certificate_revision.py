@@ -34,7 +34,7 @@ class CertificateRevisionTests(SimpleTestCase):
                 "form_type": "transformer_proforma",
                 "schema_key": "serial_number",
                 "status": "unreviewed",
-                "value": "7316",
+                "value": "1098",
                 "unit": "",
                 "source": "Proforma p. 1",
                 "document_id": None,
@@ -51,7 +51,7 @@ class CertificateRevisionTests(SimpleTestCase):
         }
         text = self.text(render_pdf(self.report(snapshot)))
         self.assertIn("250 kVA [unreviewed]", text)
-        self.assertIn("7316 [unreviewed]", text)
+        self.assertIn("1098 [unreviewed]", text)
         headings = (
             "SUMMARY OF RESULTS",
             "SAMPLE DESCRIPTION",
@@ -92,7 +92,7 @@ class CertificateRevisionTests(SimpleTestCase):
             "test_type": "temperature_rise",
             "operation": "identity",
             "verdict": "pass",
-            "value": "25.8",
+            "value": "26.1",
             "unit": "K",
             "limit": "35",
             "margin": "8.9",

@@ -21,15 +21,15 @@ class VerdictRuleTests(SimpleTestCase):
             "test_type": "temperature_rise",
             "operation": "identity",
             "verdict": "marginal",
-            "value": "39.8",
+            "value": "39.7",
             "unit": "K",
             "limit_side": "upper",
             "limit": "40",
-            "margin": "0.2",
+            "margin": "0.3",
             "margin_unit": "K",
             "rule_status": "confirmed",
             "source_clause": "Fixture clause",
-            "inputs": [{"value": "39.8", "unit": "K", "source": "Station A"}],
+            "inputs": [{"value": "39.7", "unit": "K", "source": "Station A"}],
         }
         snapshot = {
             "calculations": [marginal],
@@ -39,7 +39,7 @@ class VerdictRuleTests(SimpleTestCase):
                     "form_type": "temperature_rise",
                     "schema_key": "hv_winding_rise",
                     "status": "verified",
-                    "value": "39.8",
+                    "value": "39.7",
                     "unit": "K",
                     "source": "Station A",
                 },
@@ -55,8 +55,8 @@ class VerdictRuleTests(SimpleTestCase):
         }
         result = analysis(snapshot)
         lines = " ".join(row["text"] for rows in result["sections"].values() for row in rows)
-        self.assertIn("marginal; measured 39.8 K", lines)
-        self.assertIn("signed margin 0.2 K", lines)
+        self.assertIn("marginal; measured 39.7 K", lines)
+        self.assertIn("signed margin 0.3 K", lines)
         self.assertNotIn("9999", lines)
         self.assertIn("Fixture clause", str(result["sections"]["temperature_rise"]))
 
@@ -90,9 +90,9 @@ class VerdictRuleTests(SimpleTestCase):
                 ["actual"],
                 "W",
                 {"upper": 980, "marginal_percent": 2},
-                [self.field("actual", 918, "W")],
+                [self.field("actual", 908, "W")],
                 "pass",
-                "62",
+                "72",
             ),
             (
                 "loss 100",
@@ -100,9 +100,9 @@ class VerdictRuleTests(SimpleTestCase):
                 ["actual"],
                 "W",
                 {"upper": 2930, "marginal_percent": 2},
-                [self.field("actual", 2474, "W")],
+                [self.field("actual", 2486, "W")],
                 "pass",
-                "456",
+                "444",
             ),
             (
                 "winding rise",
@@ -110,9 +110,9 @@ class VerdictRuleTests(SimpleTestCase):
                 ["actual"],
                 "K",
                 {"upper": 40, "marginal_percent": 2},
-                [self.field("actual", 39.8, "K")],
+                [self.field("actual", 39.7, "K")],
                 "marginal",
-                "0.2",
+                "0.3",
             ),
             (
                 "reactance change",
@@ -120,9 +120,9 @@ class VerdictRuleTests(SimpleTestCase):
                 ["before", "after"],
                 "%",
                 {"upper": 2, "marginal_percent": 2},
-                [self.field("before", 100, "%"), self.field("after", 100.204, "%")],
+                [self.field("before", 100, "%"), self.field("after", 100.205, "%")],
                 "pass",
-                "1.79600",
+                "1.79500",
             ),
             (
                 "ratio error",
@@ -164,7 +164,7 @@ class VerdictRuleTests(SimpleTestCase):
                 "marginal_percent": 2,
             },
         )
-        good = self.field("top_oil_rise", 25.8, "K", form_type="temperature_rise")
+        good = self.field("top_oil_rise", 26.1, "K", form_type="temperature_rise")
         self.assertEqual(evaluate_rule(rule, [good])["verdict"], "pass")
         for fields in (
             [],
@@ -180,7 +180,7 @@ class VerdictRuleTests(SimpleTestCase):
                 "form_type": "loss_calculation",
                 "source": "Reviewed worksheet",
                 "document_id": "doc-1",
-                "rows": [{"stage": "NTBT", "total_loss_100": 2474, "limit_100": 2930}],
+                "rows": [{"stage": "NTBT", "total_loss_100": 2486, "limit_100": 2930}],
                 "error": "",
             }
         ]
@@ -192,7 +192,7 @@ class VerdictRuleTests(SimpleTestCase):
             "identity", {"inputs": inputs, "unit": "W", "upper_input": 1, "marginal_percent": 2}
         )
         result = evaluate_rule(rule, [], calculations)
-        self.assertEqual((result["verdict"], result["margin"]), ("pass", "456"))
+        self.assertEqual((result["verdict"], result["margin"]), ("pass", "444"))
         self.assertEqual(evaluate_rule(rule, [], [])["verdict"], "blocked")
         self.assertEqual(evaluate_rule(rule, [], calculations * 2)["verdict"], "blocked")
 
@@ -225,7 +225,7 @@ class VerdictRuleTests(SimpleTestCase):
                     "test_type": "temperature_rise",
                 },
             ),
-            [self.field("rise", 39.8, "K")],
+            [self.field("rise", 39.7, "K")],
         )
         snapshot = {
             "title": "Synthetic test",
@@ -255,7 +255,7 @@ class VerdictRuleTests(SimpleTestCase):
 
     def test_pdf_starts_test_on_new_page_without_database_field_ids(self):
         measured = dict(
-            self.field("top_oil_rise", 25.8, "K", form_type="temperature_rise"),
+            self.field("top_oil_rise", 26.1, "K", form_type="temperature_rise"),
             id=987654,
             label="Top-oil rise",
             source="Temperature station",

@@ -1,6 +1,7 @@
 """Local certificate signing checks; self-signed fixtures are not CPRI identity proof."""
 
 import tempfile
+from io import StringIO
 from datetime import datetime, timedelta, timezone
 from io import BytesIO
 from pathlib import Path
@@ -11,6 +12,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives.serialization import pkcs12
 from cryptography.x509.oid import NameOID
 from django.test import SimpleTestCase, override_settings
+from django.core.management import call_command
 from pyhanko.keys import load_certs_from_pemder
 from pyhanko.pdf_utils.reader import PdfFileReader
 from pyhanko.sign.validation import validate_pdf_signature
@@ -73,10 +75,31 @@ def sample_pdf():
 
 
 class PdfSigningTests(SimpleTestCase):
+    def test_create_demo_signer_is_private_and_never_overwrites(self):
+        with tempfile.TemporaryDirectory() as directory, override_settings(
+            DEBUG=True, BASE_DIR=Path(directory) / "app"
+        ):
+            output = StringIO()
+            call_command("create_demo_signer", stdout=output)
+            p12 = Path(directory) / "private" / "demo-signing" / "vectorlab-demo.p12"
+            self.assertTrue(p12.is_file())
+            password = next(
+                line.split("=", 1)[1]
+                for line in output.getvalue().splitlines()
+                if line.startswith("PDF_SIGNING_P12_PASSWORD=")
+            )
+            key, certificate, _ = pkcs12.load_key_and_certificates(
+                p12.read_bytes(), password.encode()
+            )
+            self.assertIsNotNone(key)
+            self.assertIn("VectorLab DEMO", certificate.subject.rfc4514_string())
+            with self.assertRaisesMessage(Exception, "already exists"):
+                call_command("create_demo_signer", stdout=StringIO())
+
     @override_settings(PDF_SIGNING_P12_PATH="", PDF_SIGNING_P12_PASSWORD="")
-    def test_unconfigured_signer_does_not_modify_existing_export(self):
-        unsigned = sample_pdf()
-        self.assertEqual(sign_issued_pdf(unsigned, "HoD"), (unsigned, False))
+    def test_unconfigured_signer_blocks_issue(self):
+        with self.assertRaisesRegex(SigningConfigurationError, "PDF signer is not configured"):
+            sign_issued_pdf(sample_pdf(), "HoD")
 
     def test_configured_signer_writes_verifiable_pdf_signature(self):
         with tempfile.TemporaryDirectory() as directory:

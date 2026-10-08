@@ -143,7 +143,7 @@ class DayTwoTests(TestCase):
         fields = self.table()
         fields[1].value = "5.00"
         fields[1].save()
-        near = self.field("hv_winding_rise", "39.8", "K", kind="temperature_rise")
+        near = self.field("hv_winding_rise", "39.7", "K", kind="temperature_rise")
         checks = assess(list(self.job.fields.select_related("document")))
         self.assertTrue(all(checks[f.pk]["state"] == "needs_review" for f in fields + [near]))
         self.assertTrue(

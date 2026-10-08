@@ -22,6 +22,7 @@ Copy-Item .env.example app/.env
 .\.venv\Scripts\python.exe app/manage.py migrate
 .\.venv\Scripts\python.exe app/manage.py seed_cpri_fixed_template
 .\.venv\Scripts\python.exe app/manage.py seed_verdict_candidates
+.\.venv\Scripts\python.exe app/manage.py create_demo_signer
 .\.venv\Scripts\python.exe app/manage.py seed_walkthrough_demo
 .\.venv\Scripts\python.exe app/manage.py runserver
 ```
@@ -32,9 +33,9 @@ Run the task worker in another terminal:
 .\.venv\Scripts\python.exe app/manage.py qcluster
 ```
 
-The walkthrough seed creates local demonstration users for the roles. Inspect the command output and set fresh passwords through Django's `changepassword`; no real passwords are supplied in this repository. Real customer records are not part of this repository.
+For the local walkthrough, set `DJANGO_DEBUG=1`, `VECTORLAB_FORCE_MFA=1`, and `VECTORLAB_PUBLIC_BASE_URL=http://127.0.0.1:8000` in `app/.env`. The signer command creates an untrusted, self-signed DEMO key in ignored `private/` and prints the two `PDF_SIGNING_*` settings to add to `app/.env`; issuance refuses to proceed without them. The walkthrough seed invokes `create_demo_users` once, prints the temporary password and authenticator enrollment URIs, then creates one synthetic job with station data. It does not approve or issue anything. Give each role owner only their enrollment URI. The ignored `output/demo-users.json` is local access material; delete it after the walkthrough. The separate source-backed HVD review needs a private, explicitly authorised data bundle and is not part of a fresh clone.
 
-`python demo/seed_station_entry.py` performs a read-only preflight; add `--apply` to replay the synthetic customer and station workflow through the app's HTTP screens.
+`python demo/seed_station_entry.py` performs a read-only preflight; add `--apply` to replay the synthetic customer and station workflow through the app's HTTP screens. The former source-backed replay is retained only in ignored private storage.
 
 ## Docker Compose
 
@@ -42,7 +43,9 @@ Fill `app/.env` from the example with independent production secrets and deploym
 
 ## Test and workflow
 
-Run `.\.venv\Scripts\python.exe app/manage.py test lab --noinput` (baseline: 241 passing) and `.\.venv\Scripts\python.exe app/manage.py check --deploy` with production environment values. Verify local audit chains with `.\.venv\Scripts\python.exe app/manage.py verify_audit_chain`.
+Run `.\.venv\Scripts\python.exe app/manage.py test lab --noinput` and `.\.venv\Scripts\python.exe app/manage.py check --deploy` with production environment values. For benchmarks, install `requirements-dev.txt` and run `.\.venv\Scripts\python.exe -m pytest benchmark -q`. Verify local audit chains with `.\.venv\Scripts\python.exe app/manage.py verify_audit_chain`.
+
+With the local server running after the walkthrough seed, run `node demo/full_ui_run.cjs` once to replay the synthetic job through the customer, station, Engineer, Quality, HoD and verification screens. It saves ordered screenshots, the signed 18-page PDF, the customer-downloaded copy, the tamper result and stage timings in ignored `demo/run/`. The two PDF copies must have identical bytes. Without SMTP credentials, delivery is explicitly an **unsent outbox draft**, not a sent email. The run uses fictional readings and a separate fictional demo rule set; it does not certify a real CPRI sample.
 
 1. **Customer:** submit a request and watch timestamped status changes.
 2. **Admin:** register the sample, confirm scope and assign stations.
@@ -65,4 +68,4 @@ See [demo script](docs/DEMO_SCRIPT.md) for a judge walkthrough and [architecture
 
 ## Known limits
 
-The demo signer is self-signed and does not establish institutional trust. Several IS clause numbers remain `[CLAUSE TBC]`, and rule set v2 awaits CPRI adoption. Real source scans, customer databases, reports and screenshots are excluded from this repository. The local application is not a production validation claim. See [rules](docs/RULES.md), [report template](docs/REPORT_TEMPLATE.md), and [security](docs/SECURITY.md).
+The demo signer is self-signed and does not establish institutional trust. Several IS clause numbers remain `[CLAUSE TBC]`, and rule set v2 awaits CPRI adoption. Real source scans, the HVD job database and its draft are private and excluded from submission. The local application is not a production validation claim. See [rules](docs/RULES.md), [report template](docs/REPORT_TEMPLATE.md), [security](docs/SECURITY.md) and [cleanup report](CLEANUP_REPORT.md).

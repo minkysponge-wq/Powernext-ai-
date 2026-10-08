@@ -438,9 +438,9 @@ def approve_report(request, pk):
             pdf_bytes, certificate_signed = sign_issued_pdf(
                 unsigned_pdf, request.user.get_full_name() or request.user.get_username()
             )
-        except SigningConfigurationError:
+        except SigningConfigurationError as error:
             return HttpResponse(
-                "PDF signing is configured but failed. The report was not issued; check the signer configuration.",
+                str(error),
                 status=503,
             )
         obj.approved_pdf.save(f"{obj.pk}-r{obj.revision}.pdf", ContentFile(pdf_bytes), save=False)

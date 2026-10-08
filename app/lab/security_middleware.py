@@ -8,9 +8,9 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 
-from .roles import ADMIN, HOD, QUALITY, role_for
+from .roles import ADMIN, ENGINEER, HOD, QUALITY, role_for
 
-PRIVILEGED_ROLES = frozenset((HOD, QUALITY, ADMIN))
+PRIVILEGED_ROLES = frozenset((ENGINEER, HOD, QUALITY, ADMIN))
 
 
 class PrivilegedIdleTimeoutMiddleware:

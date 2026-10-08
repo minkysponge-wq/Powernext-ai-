@@ -9,13 +9,13 @@ from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_http_methods
 
-from .roles import ADMIN, HOD, QUALITY, role_for
+from .roles import ADMIN, ENGINEER, HOD, QUALITY, role_for
 
 
 @login_required
 @require_http_methods(["GET", "POST"])
 def otp_verify(request):
-    if role_for(request.user) not in (ADMIN, HOD, QUALITY):
+    if role_for(request.user) not in (ADMIN, ENGINEER, HOD, QUALITY):
         return redirect("dashboard")
     destination = request.POST.get("next") or request.GET.get("next") or reverse("dashboard")
     if not url_has_allowed_host_and_scheme(

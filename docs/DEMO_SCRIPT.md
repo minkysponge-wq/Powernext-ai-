@@ -10,4 +10,4 @@ Run `python demo/seed_station_entry.py --apply` from the repository root to crea
 6. HoD completes MFA, approves and signs the synthetic certificate.
 7. Customer sees delivery; the QR endpoint shows report number and document hash. Altered bytes fail verification.
 
-Capture screenshots in ignored `demo/screens/` during the local walkthrough if a backup visual sequence is needed. The demo signer is self-signed and must be labelled as such.
+Use `demo/screens/` only as a backup visual sequence. The source-backed HVD replay requires the private job data and is intentionally excluded from a public clone. The demo signer is self-signed and must be labelled as such.

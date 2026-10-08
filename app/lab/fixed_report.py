@@ -9,6 +9,7 @@ from io import BytesIO
 from pathlib import Path
 
 from django.conf import settings
+from django.utils import timezone
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
@@ -255,6 +256,14 @@ def _field_value(data, name, binding, issued):
     field = matches[0]
     if field.get("status") != "verified":
         return "[pending review]"
+    if name == "tests_requested":
+        requested = (data.get("request_snapshot") or {}).get("requested_tests")
+        if isinstance(requested, list) and field["value"] == str(requested):
+            from .test_catalog import station_types
+
+            labels = {item["form_type"]: item["label"] for item in station_types()}
+            if requested and all(code in labels for code in requested):
+                return "; ".join(labels[code] for code in requested)
     return (
         str(field["value"])
         if binding.get("exact_copy")
@@ -779,10 +788,22 @@ def _system(data, key, report, issued, binding=None):
             return "Passed; marginal: " + ", ".join(marginal) + "."
         return "Passed all tests listed."
     if key == "signatures":
+        def authorisation(user, at):
+            if not issued or not user or not at:
+                return "Pending"
+            name = user.get_full_name().strip() or str(user)
+            return f"{name} — {timezone.localtime(at).strftime('%d %B %Y, %H:%M %Z')}"
+
         return [
-            ["Tested by (Engineer)", str(report.engineer_locked_by) if issued else "Pending"],
-            ["Verified by (Quality)", str(report.quality_verified_by) if issued else "Pending"],
-            ["Approved by (HoD)", str(report.approved_by) if issued else "Pending"],
+            [
+                "Tested by (Engineer)",
+                authorisation(getattr(report, "engineer_locked_by", None), getattr(report, "engineer_locked_at", None)),
+            ],
+            [
+                "Verified by (Quality)",
+                authorisation(getattr(report, "quality_verified_by", None), getattr(report, "quality_verified_at", None)),
+            ],
+            ["Approved by (HoD)", authorisation(getattr(report, "approved_by", None), report.approved_at)],
         ]
     if key == "summary_rows":
         return [
@@ -1133,7 +1154,11 @@ def _resolve(data, name, binding, report, issued):
                         else "The configured check meets its limit. The near-limit margin was reviewed by Quality."
                     )
                 return "The configured check is marginal; Quality review is required."
-            return "The configured checks show a pass; final approval is required before issue."
+            return (
+                "The configured checks show a pass."
+                if issued
+                else "The configured checks show a pass; final approval is required before issue."
+            )
         if source == "remark":
             return "No additional engineer remark recorded."
     if source == "chart":
@@ -1416,11 +1441,9 @@ def render_fixed_pdf(report):
                 story.append(table(rows, block.get("columns")))
                 if kind == "signature_block" and model["issued"]:
                     code = issue_code(report)
-                    url = (
-                        f"{settings.PUBLIC_VERIFY_BASE_URL}/verify/{report.pk}/{code}/"
-                        if settings.PUBLIC_VERIFY_BASE_URL
-                        else f"OV-VERIFY:{report.pk}:{code}"
-                    )
+                    from .verification_link import report_verification_url
+
+                    url = report_verification_url(report, code)
                     widget = QrCodeWidget(url)
                     x0, y0, x1, y1 = widget.getBounds()
                     drawing = Drawing(
