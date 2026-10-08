@@ -58,7 +58,15 @@
     pending = fetch(location.href, {method:'POST',body:data,credentials:'same-origin',headers:{'X-Requested-With':'XMLHttpRequest'}});
     try {
       const response = await pending;
-      if (!response.ok) throw new Error(response.status === 409 ? 'Another edit was saved. Reload before continuing.' : 'Could not save. Check the highlighted entries.');
+      if (!response.ok) {
+        let message = response.status === 409 ? 'Another edit was saved. Reload before continuing.' : 'Could not save. Check the highlighted entries.';
+        if (response.status === 400) {
+          const details = await response.json();
+          const first = (details.errors || []).find(errors => Object.keys(errors).length);
+          if (first) message = Object.values(first).flat()[0] || message;
+        }
+        throw new Error(message);
+      }
       const result = await response.json();
       form.querySelectorAll('input[name$="-id"]').forEach(input => {
         const version = form.querySelector(`[name="${input.name.slice(0,-3)}-version"]`);

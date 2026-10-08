@@ -99,12 +99,24 @@ def dashboard(request):
     filters = form.cleaned_data if valid else {}
     query = filters.get("q", "")
     if query:
+        report_jobs = []
+        if query.upper().startswith("VL-SCL-"):
+            from .verification_link import issued_report_number
+
+            report_jobs = [
+                report.job_id
+                for report in Report.objects.filter(
+                    job__in=jobs, approved_at__isnull=False
+                ).only("id", "job_id", "approved_at", "snapshot")
+                if query.casefold() in issued_report_number(report).casefold()
+            ]
         jobs = jobs.filter(
             Q(file_number__icontains=query)
             | Q(title__icontains=query)
             | Q(customer__icontains=query)
             | Q(sample_code__icontains=query)
             | Q(test_series__icontains=query)
+            | Q(pk__in=report_jobs)
         )
     jobs = jobs.annotate(
         has_readings=Exists(Field.objects.filter(job_id=OuterRef("pk"))),

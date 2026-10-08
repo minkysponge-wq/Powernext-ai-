@@ -43,7 +43,7 @@ Fill `app/.env` from the example with independent production secrets and deploym
 
 ## Test and workflow
 
-Run `.\.venv\Scripts\python.exe app/manage.py test lab --noinput` and `.\.venv\Scripts\python.exe app/manage.py check --deploy` with production environment values. For benchmarks, install `requirements-dev.txt` and run `.\.venv\Scripts\python.exe -m pytest benchmark -q`. Verify local audit chains with `.\.venv\Scripts\python.exe app/manage.py verify_audit_chain`.
+Run `.\.venv\Scripts\python.exe app/manage.py test lab --noinput` with `VECTORLAB_FORCE_MFA=0` for the test process, then restore MFA for the demo. Run `.\.venv\Scripts\python.exe app/manage.py check --deploy` with production environment values. For the signed acceptance benchmark, run `.\.venv\Scripts\python.exe benchmark/run_signed_acceptance.py`. Verify local audit chains with `.\.venv\Scripts\python.exe app/manage.py verify_audit_chain`.
 
 With the local server running after the walkthrough seed, run `node demo/full_ui_run.cjs` once to replay the synthetic job through the customer, station, Engineer, Quality, HoD and verification screens. It saves ordered screenshots, the signed 18-page PDF, the customer-downloaded copy, the tamper result and stage timings in ignored `demo/run/`. The two PDF copies must have identical bytes. Without SMTP credentials, delivery is explicitly an **unsent outbox draft**, not a sent email. The run uses fictional, perturbed readings and candidate rule set v2. Only this exact local synthetic fixture can pass the demo issue gate while v2 remains pending CPRI adoption; every report page says **SYNTHETIC DEMO — not a CPRI certificate**. The normal rule-confirmation gate remains in force for real jobs.
 

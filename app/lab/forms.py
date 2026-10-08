@@ -92,6 +92,57 @@ class ReviewRowForm(forms.ModelForm):
         return data
 
 
+class StationReadingForm(ReviewRowForm):
+    """Reject invalid numeric station entries before any reading is saved."""
+
+    def clean(self):
+        from fnmatch import fnmatchcase
+
+        from .fixed_template import TESTS, report_field_specs
+        from .quality import canonical_unit, number, validation_policy
+
+        data = super().clean()
+        value = (data.get("value") or "").strip()
+        if not value:
+            return data
+        form_type = self.instance.context.get("form_type", "")
+        key = self.instance.context.get("schema_key", "")
+        numeric = False
+        allowed_units = []
+        for test_id, _, default_form, _, _ in TESTS:
+            for spec in report_field_specs(test_id):
+                if spec.get("form_type", default_form) != form_type:
+                    continue
+                if spec["key"].replace("{principal}", "3") != key:
+                    continue
+                if spec.get("decimals") is not None:
+                    numeric = True
+                    if spec.get("unit"):
+                        allowed_units = [spec["unit"]]
+        for rule in validation_policy()["checks"]:
+            if rule["type"] not in ("unit", "range"):
+                continue
+            if rule.get("form_type", form_type) != form_type or not fnmatchcase(
+                key, rule["field"]
+            ):
+                continue
+            numeric = True
+            if rule["type"] == "unit":
+                allowed_units = rule["allowed"]
+            elif rule.get("unit"):
+                allowed_units = [rule["unit"]]
+        if not numeric and self.instance.unit and number(self.instance.value) is not None:
+            numeric = True
+            allowed_units = [self.instance.unit]
+        if numeric and number(value) is None:
+            self.add_error("value", "Enter a finite numeric reading.")
+        if allowed_units and canonical_unit(data.get("unit", "")) not in {
+            canonical_unit(unit) for unit in allowed_units
+        }:
+            self.add_error("unit", "Use the configured unit: " + " or ".join(allowed_units) + ".")
+        return data
+
+
 class ScopeForm(forms.ModelForm):
     report_scope = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple, label="Applicable report sections"

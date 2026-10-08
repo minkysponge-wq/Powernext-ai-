@@ -16,7 +16,7 @@ from django.views.decorators.http import require_POST
 from django_q.tasks import async_task
 
 from .assembly import assemble
-from .forms import ReadingImportForm, ReviewRowForm, ScopeForm
+from .forms import ReadingImportForm, ScopeForm, StationReadingForm
 from .models import AuditEvent, Field, InsightDraft, Job, Report
 from .quality import identity
 from .report_workflow import job_locked
@@ -163,7 +163,7 @@ def digital_review(request, pk):
         )
     page = Paginator(digital.order_by("key"), 30).get_page(request.GET.get("page", 1))
     ids = [f.pk for f in page.object_list]
-    FormSet = modelformset_factory(Field, form=ReviewRowForm, extra=0)
+    FormSet = modelformset_factory(Field, form=StationReadingForm, extra=0)
     forms = FormSet(request.POST or None, queryset=job.fields.filter(pk__in=ids).order_by("key"))
     ajax_save = request.headers.get("X-Requested-With") == "XMLHttpRequest"
     valid = forms.is_valid() if request.method == "POST" else False
