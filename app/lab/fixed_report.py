@@ -133,6 +133,8 @@ def _mapped_source(data, form_type, key):
     field = matches[0]
     documents = {item.get("id"): item.get("name") for item in data.get("documents", [])}
     name = documents.get(field.get("document_id")) or field.get("source") or "Digital entry"
+    if field.get("origin") == "digital" and not field.get("document_id"):
+        return name
     return f'{name}, p. {field.get("page") or "?"}'
 
 
@@ -296,6 +298,8 @@ def _scope_label(data, test_id):
 
 
 def _brief_basis(rule):
+    if rule.get("version") == 2:
+        return "Rule set v2 — pending CPRI adoption"
     source = rule.get("source_clause") or "Source clause not confirmed"
     if rule.get("version") == 2:
         for before, after in (
@@ -360,7 +364,9 @@ def _rule_rows(data, binding, issued):
                 "—",
             )
         else:
-            marginal_label = "PASS ✓" if rule.get("version") == 2 else "PASS (MARGINAL) ⚠"
+            marginal_label = (
+                "PASS (NEAR LIMIT) ⚠" if rule.get("version") == 2 else "PASS (MARGINAL) ⚠"
+            )
             result = {
                 "pass": "PASS ✓",
                 "fail": "FAIL ✗",
@@ -460,7 +466,9 @@ def _test_summary(data, test_id, title, codes, issued):
         result = "Review required"
     elif any(rule.get("verdict") == "marginal" for rule in rules):
         result = (
-            "PASS ✓" if all(rule.get("version") == 2 for rule in rules) else "PASS (MARGINAL) ⚠"
+            "PASS (NEAR LIMIT) ⚠"
+            if all(rule.get("version") == 2 for rule in rules)
+            else "PASS (MARGINAL) ⚠"
         )
     elif all(rule.get("v2_status") == "OBSERVATION" for rule in rules):
         result = (
@@ -741,7 +749,13 @@ def _cross_test_rows(data, kind, row_specs=None):
 
 def _system(data, key, report, issued, binding=None):
     if key == "report_no":
-        return data.get("file_number") or "Not allocated"
+        from .verification_link import issued_report_number
+
+        return (
+            "Not allocated"
+            if data.get("synthetic_demo") and not issued
+            else issued_report_number(report)
+        )
     if key == "file_no":
         return data.get("file_number") or "Not allocated"
     if key == "revision":
@@ -895,6 +909,19 @@ def _system(data, key, report, issued, binding=None):
                     ),
                 ]
             )
+        if data.get("synthetic_demo") and not rows:
+            entries = sorted(
+                {
+                    field.get("source", "")
+                    for field in data.get("fields", [])
+                    if field.get("status") == "verified"
+                    and field.get("source", "").startswith("Station entry —")
+                }
+            )
+            rows = [
+                [entry.rsplit(", ", 1)[0], "—", entry.rsplit(", ", 1)[-1]]
+                for entry in entries
+            ]
         return rows or [["Not recorded", "—", "—"]]
     if key == "instruments":
         return [
@@ -1234,6 +1261,7 @@ def compile_fixed(report):
         "report_no": values["report_no"],
         "revision": report.revision,
         "issued": issued,
+        "synthetic_demo": bool(data.get("synthetic_demo")),
         "pages": pages,
     }
 
@@ -1272,6 +1300,8 @@ def render_fixed_html(report):
         out.append('<p class="draft">AUTOMATED DRAFT — NOT ISSUED</p>')
     for page in model["pages"]:
         out += ["<section><h1>", html_escape(page["title"]), "</h1>"]
+        if model["synthetic_demo"]:
+            out.append('<p class="draft">SYNTHETIC DEMO — not a CPRI certificate</p>')
         for block in page["blocks"]:
             if block.get("title"):
                 out += ["<h2>", html_escape(block["title"]), "</h2>"]
@@ -1340,6 +1370,7 @@ def render_fixed_html(report):
             str(model["version"]),
             " · Revision ",
             str(model["revision"]),
+            " · SYNTHETIC DEMO — not a CPRI certificate" if model["synthetic_demo"] else "",
             "</p></section>",
         ]
     out.append("</body></html>")
@@ -1383,7 +1414,14 @@ def render_fixed_pdf(report):
             "FixedBody", parent=styles["BodyText"], fontName=FONT, fontSize=7.2, leading=9
         )
     )
-    styles.add(ParagraphStyle("FixedCell", parent=styles["FixedBody"], fontSize=6.4, leading=7.8))
+    styles.add(
+        ParagraphStyle(
+            "FixedCell",
+            parent=styles["FixedBody"],
+            fontSize=6.0 if model["synthetic_demo"] else 6.4,
+            leading=7.0 if model["synthetic_demo"] else 7.8,
+        )
+    )
 
     def paragraph(value, style="FixedBody"):
         return Paragraph(
@@ -1517,6 +1555,7 @@ def render_fixed_pdf(report):
             sample=model["sample_code"],
             revision=model["revision"],
             provisional=not model["issued"],
+            synthetic_demo=model["synthetic_demo"],
             mapping_version=model["version"],
             **kwargs,
         ),

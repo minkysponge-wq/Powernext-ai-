@@ -364,6 +364,9 @@ def assemble(job):
                 "Resolve the input or profile issue before approving the report.",
             )
     assigned_rules = list(job.rules.order_by("code", "version"))
+    from .synthetic_demo import is_synthetic_walkthrough
+
+    synthetic_walkthrough = is_synthetic_walkthrough(job)
     rule_context = {
         "requested_tests_text": job.requested_tests or request.get("requested_tests", ""),
         "requested_test_ids": job.report_test_ids,
@@ -379,7 +382,16 @@ def assemble(job):
         if r.code == "SC_OVERALL"
     ]
     for rule in rules:
-        if rule["verdict"] in ("blocked", "not_configured") or rule["rule_status"] != "confirmed":
+        candidate_demo_rule = (
+            synthetic_walkthrough
+            and rule["version"] == 2
+            and rule["rule_status"] == "assumed"
+            and rule.get("parameters", {}).get("decision_status")
+            == "reviewed by team, pending CPRI adoption"
+        )
+        if rule["verdict"] in ("blocked", "not_configured") or (
+            rule["rule_status"] != "confirmed" and not candidate_demo_rule
+        ):
             finding(
                 "rule-" + rule["code"] + "-" + str(rule["version"]),
                 "blocker",
@@ -480,6 +492,7 @@ def assemble(job):
         )
     result = {
         "title": job.title,
+        "synthetic_demo": synthetic_walkthrough,
         "customer": request.get("customer", job.customer),
         "sample_code": job.sample_code,
         "test_series": job.test_series,

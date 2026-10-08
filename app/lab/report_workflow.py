@@ -209,6 +209,8 @@ def uploaded_pdf_matches_issue(report, uploaded):
 @require_http_methods(["GET", "POST"])
 def verify_issued(request, pk, code):
     """Show QR-linked issue facts and optionally compare a submitted PDF's bytes."""
+    from .verification_link import issued_report_number
+
     report = get_object_or_404(
         Report.objects.select_related("approved_by", "engineer_locked_by", "quality_verified_by"),
         pk=pk,
@@ -228,7 +230,7 @@ def verify_issued(request, pk, code):
             "report": report,
             "verification_code": code,
             "sample_code": report.snapshot.get("sample_code", ""),
-            "report_number": report.snapshot.get("file_number", ""),
+            "report_number": issued_report_number(report),
             "matched": matched,
             "upload_attempted": request.method == "POST",
         },

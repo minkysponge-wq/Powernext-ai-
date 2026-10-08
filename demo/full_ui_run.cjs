@@ -119,8 +119,8 @@ function totp(uri) {
       const match = admin.url().match(/\/reports\/([a-f0-9-]+)\/$/);
       assert(match, `Draft report did not open: ${admin.url()}`);
       reportId = match[1];
-      assert((await admin.locator('body').innerText()).includes('23 pass'));
-      await screenshot(admin, 'draft-23-rule-verdicts');
+      assert((await admin.locator('body').innerText()).includes('pending CPRI adoption'));
+      await screenshot(admin, 'draft-v2-rule-verdicts');
     });
     await stage('engineer_lock', async () => {
       await engineerA.goto(`${base}/reports/${reportId}/`);
@@ -184,6 +184,7 @@ function totp(uri) {
       assert.equal(await verify.count(), 1);
       await hod.goto(new URL(await verify.getAttribute('href'), base).href);
       assert((await hod.locator('body').innerText()).includes('VALID'));
+      assert((await hod.locator('body').innerText()).includes('VL-SCL-'));
       await screenshot(hod, 'qr-valid');
       const tampered = path.join(evidenceDir, 'tampered-for-check.pdf');
       fs.writeFileSync(tampered, Buffer.concat([issued, Buffer.from('x')]));

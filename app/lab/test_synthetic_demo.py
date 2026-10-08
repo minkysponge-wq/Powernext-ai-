@@ -23,6 +23,7 @@ from .pdf_export import render_pdf
 from .pdf_text_check import verify_request_pdf_text
 from .report_workflow import issue_code, verify_issue_seal
 from .test_pdf_signing import demo_identity
+from .verification_link import issued_report_number
 
 
 class SyntheticSeedTests(TestCase):
@@ -94,11 +95,15 @@ class SyntheticSeedTests(TestCase):
                 self.assertEqual(len(issued_pages), 18)
                 issued_text = "\n".join(page.extract_text() or "" for page in issued_pages)
                 self.assertNotIn("final approval is required before issue", issued_text)
-                self.assertIn("walkthrough_engineer_a", issued_text)
-                self.assertIn("walkthrough_quality", issued_text)
-                self.assertIn("walkthrough_hod", issued_text)
+                self.assertIn("Maneesh", issued_text)
+                self.assertIn("Suhas", issued_text)
+                self.assertIn("Sampreeth", issued_text)
                 self.assertIn("Tested by (Engineer)", issued_text)
-                self.assertRegex(issued_text, r"walkthrough_hod\s+—\s+\d{2} \w+ \d{4}, \d{2}:\d{2}")
+                self.assertRegex(issued_text, r"Sampreeth\s+—\s+\d{2} \w+ \d{4}, \d{2}:\d{2}")
+                self.assertRegex(issued_text, r"VL-SCL-\d{4}-[0-9A-F]{10}")
+                self.assertNotEqual(issued_report_number(report), job.file_number)
+                self.assertIn(job.file_number, issued_text)
+                self.assertEqual(issued_text.count("SYNTHETIC DEMO — not a CPRI certificate"), 36)
                 self.assertContains(
                     clients["hod"].get(reverse("report", args=[report.pk])),
                     reverse("verify_issued", args=[report.pk, issue_code(report)]),
@@ -130,12 +135,45 @@ class SyntheticSeedTests(TestCase):
                 self.assertTrue(TOTPDevice.objects.filter(user=user, confirmed=True).exists())
             data = assemble(job)
             self.assertEqual(data["blockers"], 0, data["findings"])
-            self.assertEqual(job.rules.count(), 23)
+            self.assertTrue(data["synthetic_demo"])
+            self.assertEqual(job.rules.count(), 28)
+            self.assertEqual(set(job.rules.values_list("version", flat=True)), {2})
+            self.assertEqual(
+                next(rule for rule in data["calculations"] if rule["code"] == "HV_WINDING_RISE")["verdict"],
+                "marginal",
+            )
+            station = {
+                field["schema_key"]: field["value"]
+                for field in data["fields"] if field["form_type"] == "routine_test"
+            }
+            losses = {
+                field["schema_key"]: field["value"]
+                for field in data["fields"] if field["form_type"] == "loss_measurement"
+            }
+            for side in ("BT", "AT"):
+                for phase in (1, 2, 3):
+                    self.assertGreater(
+                        float(losses[f"hv_resistance.1.{side}_{phase}"]),
+                        float(losses[f"hv_resistance.0.{side}_{phase}"]),
+                    )
+                    self.assertGreater(
+                        float(losses[f"hv_resistance.0.{side}_{phase}"]),
+                        float(losses[f"hv_resistance.2.{side}_{phase}"]),
+                    )
+                    self.assertTrue(3.7 < float(losses[f"lv_resistance.0.{side}_{phase}"]) < 4.1)
+                self.assertGreater(float(station[f"ratio.0.{side}_A"]), float(station[f"ratio.3.{side}_A"]))
+                self.assertGreater(float(station[f"ratio.3.{side}_A"]), float(station[f"ratio.6.{side}_A"]))
+            self.assertGreater(len({station[key] for key in station if key.startswith("ir_")}), 3)
+            self.assertTrue(
+                all(field["source"].startswith("Station entry —") for field in data["fields"]
+                    if field["status"] == "verified" and field["form_type"] == "routine_test")
+            )
             self.assertEqual(
                 [
                     (rule["code"], rule["verdict"])
                     for rule in data["calculations"]
-                    if rule["verdict"] != "pass"
+                    if rule["v2_status"] in ("ACTIVE", "OBSERVATION")
+                    and rule["verdict"] not in ("pass", "marginal", "not_applicable")
                 ],
                 [],
             )
@@ -155,6 +193,11 @@ class SyntheticSeedTests(TestCase):
             self.assertNotIn("['", cover)
             text = "\n".join(page.extract_text() or "" for page in pages)
             self.assertNotIn("[pending review]", text)
+            self.assertIn("NEAR LIMIT", text)
+            self.assertIn("Rule set v2", text)
+            self.assertNotIn("SYN-DEMO-1", text)
+            self.assertNotIn("IS 2026", pages[1].extract_text() or "")
+            self.assertIn("Station entry", pages[-1].extract_text() or "")
             prior = []
             for definition in v2_definitions(
                 [
@@ -178,4 +221,10 @@ class SyntheticSeedTests(TestCase):
                 if rule.code == "NO_LOAD_CURRENT_112" and result["verdict"] == "not_applicable":
                     continue  # The synthetic CRF does not request this special test.
                 if result["v2_status"] in ("ACTIVE", "OBSERVATION"):
-                    self.assertEqual(result["verdict"], "pass", (rule.code, result["message"]))
+                    self.assertEqual(
+                        result["verdict"],
+                        "marginal" if rule.code == "HV_WINDING_RISE" else "pass",
+                        (rule.code, result["message"]),
+                    )
+            with override_settings(DEBUG=False):
+                self.assertGreater(assemble(job)["blockers"], 0)

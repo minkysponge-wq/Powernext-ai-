@@ -22,6 +22,15 @@ DEMO_ROLES = {
     "hod": ("walkthrough_hod", HOD, "approve_report"),
 }
 
+DEMO_DISPLAY_NAMES = {
+    "customer": "Demo Customer",
+    "admin": "Demo Administrator",
+    "engineer_a": "Maneesh",
+    "engineer_b": "Station B",
+    "quality": "Suhas",
+    "hod": "Sampreeth",
+}
+
 
 class Command(BaseCommand):
     help = "Create local synthetic users and print each authenticator enrollment URI once."
@@ -43,6 +52,10 @@ class Command(BaseCommand):
         with transaction.atomic():
             for label, (username, role, permission) in DEMO_ROLES.items():
                 user = get_user_model().objects.create_user(username=username, password=password)
+                names = DEMO_DISPLAY_NAMES[label].split(" ", 1)
+                user.first_name = names[0]
+                user.last_name = names[1] if len(names) > 1 else ""
+                user.save(update_fields=["first_name", "last_name"])
                 user.groups.add(Group.objects.get(name=role))
                 if permission:
                     user.user_permissions.add(Permission.objects.get(codename=permission))

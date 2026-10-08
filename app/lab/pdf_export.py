@@ -50,6 +50,7 @@ class NumberedCanvas(canvas.Canvas):
         revision=1,
         provisional=False,
         mapping_version=None,
+        synthetic_demo=False,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -59,8 +60,9 @@ class NumberedCanvas(canvas.Canvas):
             self.revision,
             self.provisional,
             self.mapping_version,
+            self.synthetic_demo,
             self.saved,
-        ) = (certificate, sample, revision, provisional, mapping_version, [])
+        ) = (certificate, sample, revision, provisional, mapping_version, synthetic_demo, [])
 
     def showPage(self):
         self.saved.append(dict(self.__dict__))
@@ -77,6 +79,14 @@ class NumberedCanvas(canvas.Canvas):
                 self.setFillColor(colors.HexColor("#dedede"))
                 self.setFont(FONT, 27)
                 self.drawCentredString(0, 0, "AUTOMATED DRAFT - NOT ISSUED")
+                self.restoreState()
+            if self.synthetic_demo:
+                self.saveState()
+                self.translate(295, 420)
+                self.rotate(38)
+                self.setFillColor(colors.HexColor("#e4e4e4"))
+                self.setFont(FONT, 20)
+                self.drawCentredString(0, 0, "SYNTHETIC DEMO — not a CPRI certificate")
                 self.restoreState()
             self.setStrokeColor(RULE)
             self.line(45, 808, 550, 808)
@@ -97,7 +107,9 @@ class NumberedCanvas(canvas.Canvas):
             self.drawString(
                 45,
                 24,
-                "This report shall not be reproduced except in full without written approval of CPRI.",
+                "SYNTHETIC DEMO — not a CPRI certificate"
+                if self.synthetic_demo
+                else "This report shall not be reproduced except in full without written approval of CPRI.",
             )
             canvas.Canvas.showPage(self)
         canvas.Canvas.save(self)

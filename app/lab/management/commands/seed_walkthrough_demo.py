@@ -15,7 +15,7 @@ from django_otp.plugins.otp_totp.models import TOTPDevice
 
 from lab.fixed_template import TESTS
 from lab.management.commands.create_demo_users import DEMO_ROLES
-from lab.models import AuditEvent, Job, Report, ReportTemplate, TestRun
+from lab.models import AuditEvent, Job, Report, ReportTemplate, Rule, TestRun
 from lab.synthetic_demo import attach_demo_rules, create_fields
 
 STATIONS = (
@@ -43,6 +43,10 @@ class Command(BaseCommand):
         if Job.objects.filter(customer__startswith="SYNTHETIC WALKTHROUGH").exists():
             raise CommandError("Synthetic job exists but access file is missing; inspect it first.")
         template = ReportTemplate.objects.get(name="CPRI-SCL-TR-v1", version=8)
+        if not Rule.objects.filter(version=1).exists():
+            call_command("seed_verdict_candidates", stdout=self.stdout)
+        if not Rule.objects.filter(version=2).exists():
+            call_command("seed_verdict_v2", stdout=self.stdout)
         users_file = root / "output" / "demo-users.json"
         if not users_file.exists():
             call_command("create_demo_users", stdout=self.stdout)
@@ -86,7 +90,11 @@ class Command(BaseCommand):
                 },
             )
             job.refresh_from_db()
-            count = create_fields(job, users["engineer_a"], template.definition)
+            station_actors = {
+                kind: users["engineer_b"] if index % 2 else users["engineer_a"]
+                for index, kind in enumerate(STATIONS)
+            }
+            count = create_fields(job, station_actors, template.definition)
             rule_count = attach_demo_rules(job)
             for index, kind in enumerate(STATIONS):
                 assigned = users["engineer_b"] if index % 2 else users["engineer_a"]
@@ -108,7 +116,7 @@ class Command(BaseCommand):
                 action="synthetic_walkthrough_seeded",
                 details={
                     "fields": count,
-                    "demo_rules": rule_count,
+                    "candidate_v2_rules": rule_count,
                     "no_real_source": True,
                     "no_approval": True,
                 },

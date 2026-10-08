@@ -6,21 +6,35 @@ for a new synthetic job; it does not alter review states on existing jobs.
 
 import json
 import re
-from copy import deepcopy
 from pathlib import Path
+
+from django.conf import settings
+from django.utils import timezone
 
 from .extraction import schemas
 from .fixed_template import TESTS, report_field_specs
 from .models import Field, Rule
 
 WORKSHEET = json.loads(
-    (Path(__file__).with_name("fixtures") / "synthetic_datasheet_v217.json").read_text(
+    (Path(__file__).with_name("fixtures") / "synthetic_demo_v2.json").read_text(
         encoding="utf-8"
     )
 )["values"]
 STATION_POLICIES = json.loads(
     Path(__file__).with_name("station_types.json").read_text(encoding="utf-8")
 )
+
+
+def is_synthetic_walkthrough(job):
+    """A local-only, exact fixture identity for the candidate-rule demo gate."""
+    return (
+        settings.DEBUG
+        and job.sample_code == "SYN-FULL-001"
+        and job.customer == "SYNTHETIC WALKTHROUGH — Example Power Systems"
+        and job.test_series == "SYN-SERIES-001"
+        and job.customer_user_id is not None
+        and job.customer_user.username == "walkthrough_customer"
+    )
 
 
 def worksheet_unit(key):
@@ -84,6 +98,7 @@ def reading(job, form_type, key):
         "phases": "3",
         "frequency": "50",
         "vector_group": "Dyn11",
+        "declared_ratio_principal": "44.00",
         "cooling": "ONAN",
         "serial_number": "SYN-1098",
         "serial": "SYN-1098",
@@ -101,7 +116,7 @@ def reading(job, form_type, key):
         "guaranteed_temp_rise_1": "35",
         "guaranteed_temp_rise_2": "40",
         "top_oil_rise": "26.1",
-        "hv_winding_rise": "35.0",
+        "hv_winding_rise": "39.6",
         "lv_winding_rise": "34.3",
         "no_load_100_percent": "0.51",
         "no_load_112_percent": "1.28",
@@ -166,16 +181,36 @@ def reading(job, form_type, key):
             "routine_pressure": "kPa",
         }.get(key, "")
         return exact[key], unit
-    if key.startswith("ratio.3."):
-        return ("3" if key.endswith(".tap") else "44.00"), ""
+    if key.startswith("ratio."):
+        _, position, reading_key = key.split(".")
+        index = int(position)
+        if reading_key == "tap":
+            return ("N" if index == 3 else "H" if index == 0 else "L" if index == 6 else str(index + 1)), ""
+        nominal = (46.20, 45.10, 44.55, 44.00, 42.90, 41.80, 39.60)[index]
+        phase = {"A": 0.00, "B": -0.02, "C": 0.03}[reading_key[-1]]
+        after = 0.08 if reading_key.startswith("AT") else 0.0
+        return f"{nominal + phase + after:.2f}", ""
     if key.startswith("hv_resistance."):
+        _, position, reading_key = key.split(".")
+        index = int(position)
         if key.endswith(".tap"):
-            return {"0": "N", "1": "H", "2": "L"}.get(key.split(".")[1], "?"), ""
-        return "4.0000", "Ω"
+            return {0: "N", 1: "H", 2: "L"}.get(index, "?"), ""
+        if reading_key.startswith(("BT_", "AT_")):
+            stage = {0: 0, 1: 2, 2: 4}[index] + int(reading_key.startswith("AT_"))
+            phase = reading_key[-1]
+            return WORKSHEET[f"hv_resistance.{stage}.R{phase}"], "Ω"
+        return "", ""
     if key.startswith("lv_resistance."):
-        return "4.0000", "mΩ"
+        stage = int(".AT_" in key)
+        phase = key[-1]
+        return WORKSHEET[f"lv_resistance.{stage}.R{phase}"], "mΩ"
     if key.startswith("ir_"):
-        return "1.20", "GΩ"
+        ir = {
+            "ir_hv_earth_BT": "1.20", "ir_hv_earth_AT": "1.19",
+            "ir_lv_earth_BT": "1.26", "ir_lv_earth_AT": "1.24",
+            "ir_hv_lv_BT": "1.31", "ir_hv_lv_AT": "1.29",
+        }
+        return ir[key], "GΩ"
     if key.endswith("_observation_BT") or key.endswith("_observation_AT"):
         return "No disruptive discharge, withstood", ""
     if key.startswith("hv_voltage_"):
@@ -198,10 +233,15 @@ def reading(job, form_type, key):
     return "Synthetic recorded value", ""
 
 
-def create_fields(job, actor, definition):
+def create_fields(job, actors, definition):
     """Create one explicitly synthetic record per schema cell on a new job."""
     needed = mapped_keys(definition)
     needed.update({("transformer_proforma", "tap_range"), ("transformer_proforma", "tap_step")})
+    needed.update(
+        ("routine_test", f"ratio.{index}.{suffix}")
+        for index in range(7)
+        for suffix in ("tap", "BT_A", "BT_B", "BT_C", "AT_A", "AT_B", "AT_C")
+    )
     needed.update(
         {
             ("transformer_proforma", "impedance_high_tap_at_75"),
@@ -219,8 +259,20 @@ def create_fields(job, actor, definition):
         needed.update((policy["form_type"], key) for key in policy["lock_required"])
         needed.add((policy["form_type"], policy["result_any_of"][0]))
     objects = []
+    entered_at = timezone.localtime().strftime("%d %b %y %H:%M %Z")
+    station_names = {
+        "routine_test": "Routine",
+        "short_circuit": "SC",
+        "loss_measurement": "Loss",
+        "loss_calculation": "Loss calculation",
+        "transformer_proforma": "Proforma",
+        "temperature_rise": "Temperature rise",
+        "pressure_oil_leakage": "Pressure/oil",
+    }
     for schema in schemas():
         form_type = schema["form_type"]
+        actor = actors.get(form_type, actors["routine_test"])
+        station = station_names.get(form_type, form_type.replace("_", " ").title())
         for spec in schema["fields"]:
             key = spec["key"]
             active = (form_type, key) in needed or (
@@ -242,7 +294,10 @@ def create_fields(job, actor, definition):
                         "form_type": form_type,
                         "schema_key": key,
                         "schema_page": spec["page"],
-                        "source_reference": f"SYNTHETIC {form_type} fixture",
+                        "source_reference": (
+                            f"Station entry — {station}, {actor.get_full_name() or actor.username}, "
+                            f"{entered_at}"
+                        ),
                     },
                     updated_by=actor,
                 )
@@ -252,30 +307,9 @@ def create_fields(job, actor, definition):
 
 
 def attach_demo_rules(job):
-    """Assign separate fictional acceptance rules; leave CPRI v1/v2 untouched."""
-    from .management.commands.seed_verdict_candidates import candidates
-
-    rules = []
-    for code, title, operation, original in candidates():
-        params = deepcopy(original)
-        for condition in params.get("conditions", []):
-            if condition["selector"]["schema_key"] == "circular":
-                condition["accepted_values"].append("Ticked")
-        if code == "INDUCED_DIELECTRIC":
-            params["accepted_values"].append("No disruptive discharge, withstood")
-        rule, created = Rule.objects.get_or_create(
-            code=code,
-            version=100,
-            defaults={
-                "title": "DEMO ONLY: " + title,
-                "operation": operation,
-                "parameters": params,
-                "source_clause": "SYN-DEMO-1 section 1: fictional acceptance criteria for the public walkthrough; not CPRI or IS limits.",
-                "status": "confirmed",
-            },
-        )
-        if created:
-            rule.full_clean()
-        rules.append(rule)
+    """Assign the unmodified candidate v2 rules to the local synthetic job."""
+    rules = list(Rule.objects.filter(version=2).order_by("code"))
+    if len(rules) != 28 or any(rule.status != "assumed" for rule in rules):
+        raise ValueError("Seed all 28 unchanged candidate v2 rules before the walkthrough.")
     job.rules.add(*rules)
     return len(rules)
