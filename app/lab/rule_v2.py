@@ -26,6 +26,8 @@ def _field(fields, form_type, key, unit=None, optional=False):
             f"Expected one matching reading; found {len(matches)} for {form_type}.{key}."
         )
     field = matches[0]
+    if optional and field.get("status") == "not_applicable":
+        return None
     if field.get("status") != "verified":
         raise ValueError(f"Input needs review: {form_type}.{key}.")
     if unit is not None and field.get("unit", "") != unit:

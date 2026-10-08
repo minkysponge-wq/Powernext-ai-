@@ -85,7 +85,7 @@ class Command(BaseCommand):
                     "test_series": "SYN-SERIES-001",
                     "report_scope": requested,
                     "report_test_ids": [item[0] for item in TESTS],
-                    "scope_note": "Fictional full-template demo; no CPRI conformity claim.",
+                    "scope_note": "Fictional full-template demo; includes the 112.5% no-load current special test; no CPRI conformity claim.",
                     "version": job.version,
                 },
             )

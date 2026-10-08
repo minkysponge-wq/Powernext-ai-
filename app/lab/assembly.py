@@ -368,7 +368,11 @@ def assemble(job):
 
     synthetic_walkthrough = is_synthetic_walkthrough(job)
     rule_context = {
-        "requested_tests_text": job.requested_tests or request.get("requested_tests", ""),
+        "requested_tests_text": (
+            f"{job.requested_tests or request.get('requested_tests', '')}; {job.scope_note}"
+            if synthetic_walkthrough
+            else job.requested_tests or request.get("requested_tests", "")
+        ),
         "requested_test_ids": job.report_test_ids,
     }
     rules = [

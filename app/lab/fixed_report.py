@@ -932,6 +932,25 @@ def _system(data, key, report, issued, binding=None):
             and field.get("value")
         ] or ["[pending review]"]
     if key == "review_summary":
+        if data.get("synthetic_demo") and not data.get("documents"):
+            entrants = sorted({
+                field["source"].rsplit(", ", 2)[-2]
+                for field in data.get("fields", [])
+                if field.get("status") == "verified"
+                and field.get("source", "").startswith("Station entry —")
+                and len(field["source"].rsplit(", ", 2)) == 3
+            })
+            engineer = getattr(report, "engineer_locked_by", None)
+            locked_at = getattr(report, "engineer_locked_at", None)
+            name = (engineer.get_full_name().strip() or str(engineer)) if engineer else "[pending]"
+            timestamp = (
+                timezone.localtime(locked_at).strftime("%Y-%m-%d %H:%M:%S %Z")
+                if locked_at else "[pending]"
+            )
+            return [
+                f"Readings entered at stations by {', '.join(entrants)}; no extracted values; "
+                f"reviewed at engineer lock by {name}, {timestamp}."
+            ]
         mapped = mapped_review_rows(data, include_verified=True)
         pending = len(mapped_review_rows(data))
         verified = len(mapped) - pending

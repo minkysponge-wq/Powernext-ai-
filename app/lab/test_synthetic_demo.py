@@ -104,6 +104,8 @@ class SyntheticSeedTests(TestCase):
                 self.assertNotEqual(issued_report_number(report), job.file_number)
                 self.assertIn(job.file_number, issued_text)
                 self.assertEqual(issued_text.count("SYNTHETIC DEMO — not a CPRI certificate"), 36)
+                self.assertIn("Readings entered at stations by Maneesh, Station B; no extracted values;", issued_text)
+                self.assertRegex(issued_text, r"reviewed at engineer lock by Maneesh, \d{4}-\d{2}-\d{2}")
                 self.assertContains(
                     clients["hod"].get(reverse("report", args=[report.pk])),
                     reverse("verify_issued", args=[report.pk, issue_code(report)]),
@@ -138,6 +140,19 @@ class SyntheticSeedTests(TestCase):
             self.assertTrue(data["synthetic_demo"])
             self.assertEqual(job.rules.count(), 28)
             self.assertEqual(set(job.rules.values_list("version", flat=True)), {2})
+            by_code = {rule["code"]: rule for rule in data["calculations"]}
+            current = by_code["NO_LOAD_CURRENT_112"]
+            self.assertEqual(current["verdict"], "pass")
+            self.assertEqual(current["value"], "1.28")
+            self.assertEqual((current["limit"], current["unit"]), ("5", "%"))
+            self.assertEqual(current["inputs"][0]["source"].split(", ")[0], "Station entry — Loss")
+            for code in ("IMPEDANCE_HTBT", "IMPEDANCE_HTAT", "IMPEDANCE_LTBT", "IMPEDANCE_LTAT"):
+                self.assertEqual(by_code[code]["verdict"], "descriptive")
+                self.assertEqual(by_code[code]["v2_status"], "DESCRIPTIVE")
+            self.assertTrue(all(field["status"] == "not_applicable" for field in data["fields"]
+                if field["schema_key"] in ("impedance_high_tap_at_75", "impedance_low_tap_at_75")))
+            pressure = next(field for field in data["fields"] if field["schema_key"] == "routine_pressure")
+            self.assertEqual((pressure["value"], pressure["unit"]), ("80", "kPa"))
             self.assertEqual(
                 next(rule for rule in data["calculations"] if rule["code"] == "HV_WINDING_RISE")["verdict"],
                 "marginal",
@@ -211,15 +226,13 @@ class SyntheticSeedTests(TestCase):
                     data["fields"],
                     data["transformer_calculations"],
                     {
-                        "requested_tests_text": job.requested_tests,
+                        "requested_tests_text": f"{job.requested_tests}; {job.scope_note}",
                         "requested_test_ids": job.report_test_ids,
                         "prior_results": prior,
                     },
                 )
                 if rule.code != "SC_OVERALL":
                     prior.append(result)
-                if rule.code == "NO_LOAD_CURRENT_112" and result["verdict"] == "not_applicable":
-                    continue  # The synthetic CRF does not request this special test.
                 if result["v2_status"] in ("ACTIVE", "OBSERVATION"):
                     self.assertEqual(
                         result["verdict"],

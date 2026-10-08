@@ -111,8 +111,6 @@ def reading(job, form_type, key):
         "guaranteed_total_loss_50": "980",
         "guaranteed_total_loss_100": "2930",
         "impedance_at_75": "4.5",
-        "impedance_high_tap_at_75": "4.5",
-        "impedance_low_tap_at_75": "4.5",
         "guaranteed_temp_rise_1": "35",
         "guaranteed_temp_rise_2": "40",
         "top_oil_rise": "26.1",
@@ -122,7 +120,7 @@ def reading(job, form_type, key):
         "no_load_112_percent": "1.28",
         "no_load_100_limit_percent": "2.00",
         "no_load_112_limit_percent": "2.00",
-        "routine_pressure": "91",
+        "routine_pressure": "80",
         "routine_pressure_observation": "No leakage at any point",
         "type_pressure": "80",
         "type_pressure_duration": "30",
@@ -241,12 +239,6 @@ def create_fields(job, actors, definition):
         ("routine_test", f"ratio.{index}.{suffix}")
         for index in range(7)
         for suffix in ("tap", "BT_A", "BT_B", "BT_C", "AT_A", "AT_B", "AT_C")
-    )
-    needed.update(
-        {
-            ("transformer_proforma", "impedance_high_tap_at_75"),
-            ("transformer_proforma", "impedance_low_tap_at_75"),
-        }
     )
     needed.add(("transformer_proforma", "circular"))
     needed.update(
