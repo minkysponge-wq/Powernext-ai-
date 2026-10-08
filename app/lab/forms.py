@@ -103,8 +103,6 @@ class StationReadingForm(ReviewRowForm):
 
         data = super().clean()
         value = (data.get("value") or "").strip()
-        if not value:
-            return data
         form_type = self.instance.context.get("form_type", "")
         key = self.instance.context.get("schema_key", "")
         numeric = False
@@ -134,9 +132,9 @@ class StationReadingForm(ReviewRowForm):
         if not numeric and self.instance.unit and number(self.instance.value) is not None:
             numeric = True
             allowed_units = [self.instance.unit]
-        if numeric and number(value) is None:
+        if numeric and value and number(value) is None:
             self.add_error("value", "Enter a finite numeric reading.")
-        if allowed_units and canonical_unit(data.get("unit", "")) not in {
+        if value and allowed_units and canonical_unit(data.get("unit", "")) not in {
             canonical_unit(unit) for unit in allowed_units
         }:
             self.add_error("unit", "Use the configured unit: " + " or ".join(allowed_units) + ".")
