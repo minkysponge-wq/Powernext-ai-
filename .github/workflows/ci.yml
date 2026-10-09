@@ -29,6 +29,11 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium
           echo "VECTORLAB_BROWSER=$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')" >> "$GITHUB_ENV"
+      - name: Create ephemeral synthetic signer
+        run: |
+          PYTHONPATH=app python -c 'import os; from pathlib import Path; from lab.test_pdf_signing import demo_identity; directory = Path(os.environ["RUNNER_TEMP"]) / "vectorlab-ci-signing"; directory.mkdir(); demo_identity(directory)'
+          echo "PDF_SIGNING_P12_PATH=$RUNNER_TEMP/vectorlab-ci-signing/demo-hod.p12" >> "$GITHUB_ENV"
+          echo "PDF_SIGNING_P12_PASSWORD=fixture-password" >> "$GITHUB_ENV"
       - name: Django suite
         run: python app/manage.py test lab --noinput
       - name: Signed acceptance benchmark
