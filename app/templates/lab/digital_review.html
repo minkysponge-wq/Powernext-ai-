@@ -11,13 +11,19 @@
 <section class="panel entry-panel">
   <div class="panel-heading"><h2>Readings · page {{ page.number }} of {{ page.paginator.num_pages }}</h2></div>
   <form method="post" id="station-form">{% csrf_token %}{{ forms.management_form }}{{ forms.non_form_errors }}
-    <div class="table-scroll"><table class="entry-table"><thead><tr><th>Measurement and source</th><th>Value</th><th>Unit</th><th>Review</th></tr></thead><tbody>
+    <div class="table-scroll"><table class="entry-table"><thead><tr><th>Measurement and source</th><th>Before test (BT)</th><th>After test (AT)</th><th>Other value</th><th>Unit</th><th>Review</th></tr></thead><tbody>
     {% for form in forms %}<tr data-reading-key="{{ form.instance.context.schema_key }}" data-reading-page="{{ form.instance.context.schema_page }}">
       <td class="entry-name">{{ form.instance.label|readable }}{% if form.instance.context.schema_key in lock_required %} <span class="badge amber">Required</span>{% elif form.instance.context.schema_key in result_any_of %} <span class="badge blue">Result option</span>{% endif %}<small>{{ form.instance.context.form_type|readable }} · {{ form.instance.context.source_reference|default:'Digital entry' }}</small>{% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}{{ form.non_field_errors }}</td>
-      <td class="entry-value"><label for="{{ form.value.id_for_label }}"><span class="mobile-field-label">Value</span><span class="sr-only">{{ form.instance.label }} value</span></label>{{ form.value }}{{ form.value.errors }}<div class="live-check" aria-live="polite"></div></td>
+      {% if '_BT' in form.instance.context.schema_key %}
+        <td class="entry-value"><label for="{{ form.value.id_for_label }}"><span class="mobile-field-label">Before test value</span><span class="sr-only">{{ form.instance.label }} value</span></label>{{ form.value }}{{ form.value.errors }}<div class="live-check" aria-live="polite"></div></td><td class="entry-placeholder" aria-hidden="true">—</td><td class="entry-placeholder" aria-hidden="true">—</td>
+      {% elif '_AT' in form.instance.context.schema_key %}
+        <td class="entry-placeholder" aria-hidden="true">—</td><td class="entry-value"><label for="{{ form.value.id_for_label }}"><span class="mobile-field-label">After test value</span><span class="sr-only">{{ form.instance.label }} value</span></label>{{ form.value }}{{ form.value.errors }}<div class="live-check" aria-live="polite"></div></td><td class="entry-placeholder" aria-hidden="true">—</td>
+      {% else %}
+        <td class="entry-placeholder" aria-hidden="true">—</td><td class="entry-placeholder" aria-hidden="true">—</td><td class="entry-value"><label for="{{ form.value.id_for_label }}"><span class="mobile-field-label">Value</span><span class="sr-only">{{ form.instance.label }} value</span></label>{{ form.value }}{{ form.value.errors }}<div class="live-check" aria-live="polite"></div></td>
+      {% endif %}
       <td class="entry-unit"><label for="{{ form.unit.id_for_label }}"><span class="mobile-field-label">Unit</span><span class="sr-only">{{ form.instance.label }} unit</span></label>{{ form.unit }}{{ form.unit.errors }}</td>
       <td class="entry-status"><label for="{{ form.status.id_for_label }}"><span class="mobile-field-label">Review</span><span class="sr-only">{{ form.instance.label }} review</span></label>{{ form.status }}{{ form.status.errors }}</td>
-    </tr>{% empty %}<tr><td colspan="4">No readings yet. Start the assigned test, or <a href="{% url 'import_readings' job.pk %}">import measurements</a>.</td></tr>{% endfor %}
+    </tr>{% empty %}<tr><td colspan="6">No readings yet. Start the assigned test, or <a href="{% url 'import_readings' job.pk %}">import measurements</a>.</td></tr>{% endfor %}
     </tbody></table></div>
     <div class="review-savebar"><span id="station-save-state" role="status">Saved readings restore after refresh</span><button name="action" value="save" class="secondary">Save this page</button>{% if page.has_next %}<button name="action" value="next">Save & next →</button>{% else %}<button name="action" value="check">Save & check findings</button>{% endif %}</div>
   </form>

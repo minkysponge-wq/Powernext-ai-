@@ -8,6 +8,11 @@ const root = path.resolve(__dirname, '..');
 const access = JSON.parse(fs.readFileSync(process.env.VECTORLAB_ACCESS_FILE || path.join(root, 'output/walkthrough-demo-access.json')));
 const users = JSON.parse(fs.readFileSync(process.env.VECTORLAB_USER_FILE || path.join(root, 'output/demo-users.json')));
 const base = process.env.VECTORLAB_TEST_URL || 'http://127.0.0.1:8010';
+const afterOnly = process.argv.includes('--after-only');
+const role = process.env.VECTORLAB_CAPTURE_ROLE || 'engineer_a';
+const label = process.env.VECTORLAB_CAPTURE_LABEL || 'station-entry';
+const route = process.env.VECTORLAB_CAPTURE_URL || `/jobs/${access.job.id}/digital-review/?test=routine_test`;
+const formSelector = process.env.VECTORLAB_CAPTURE_FORM || '#station-form';
 function code(uri) {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
   const secret = new URL(uri).searchParams.get('secret');
@@ -27,14 +32,14 @@ function code(uri) {
   const browser = await chromium.launch({headless: true, executablePath: process.env.VECTORLAB_BROWSER || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'});
   const page = await browser.newPage({viewport: {width: 1366, height: 768}});
   await page.goto(base + '/accounts/login/');
-  await page.locator('[name="username"]').fill(access.users.engineer_a);
+  await page.locator('[name="username"]').fill(access.users[role]);
   await page.locator('[name="password"]').fill(access.password);
   await page.getByRole('button', {name: 'Sign in'}).click();
   await page.waitForLoadState('networkidle');
   if (await page.locator('#role-tour[open]').count()) await page.locator('#tour-close').click();
   if (page.url().includes('/accounts/otp/')) {
     for (let attempt = 0; attempt < 2; attempt++) {
-      await page.locator('[name="token"]').fill(code(users.totp_enrollment.engineer_a));
+      await page.locator('[name="token"]').fill(code(users.totp_enrollment[role]));
       await page.getByRole('button', {name: 'Verify'}).click();
       await page.waitForLoadState('networkidle');
       if (!page.url().includes('/accounts/otp/')) break;
@@ -42,12 +47,14 @@ function code(uri) {
     }
   }
   if (await page.locator('#role-tour[open]').count()) await page.locator('#tour-close').click();
-  const response = await page.goto(`${base}/jobs/${access.job.id}/digital-review/?test=routine_test`);
-  if (response.status() !== 200 || !(await page.locator('#station-form').count())) throw new Error('Active station form unavailable');
-  const rows = [];
+  const response = await page.goto(new URL(route, base).href);
+  if (response.status() !== 200 || !(await page.locator(formSelector).count())) throw new Error(`${label} form unavailable`);
+  const auditPath = path.join(root, 'ui', label === 'station-entry' ? 'station-audit.json' : `${label}-audit.json`);
+  const rows = afterOnly && fs.existsSync(auditPath) ? JSON.parse(fs.readFileSync(auditPath)).filter(row => row.version === 'before') : [];
   for (const [width, height] of [[1366, 768], [1920, 1080]]) {
     await page.setViewportSize({width, height});
-    await page.evaluate(() => {
+    if (!afterOnly) {
+      await page.evaluate(() => {
       const combined = document.querySelector('link[href*="ui-polish.css"]');
       for (const name of ['app.css', 'lab-theme.css', 'interface-refresh.css', 'brand-refresh.css', 'workflow-ux.css']) {
         const link = document.createElement('link');
@@ -57,15 +64,16 @@ function code(uri) {
         document.head.append(link);
       }
       combined.disabled = true;
-    });
-    await page.waitForLoadState('networkidle');
-    await page.screenshot({path: path.join(root, 'ui/before', `station-entry-${width}x${height}.png`), fullPage: true});
-    rows.push({version: 'before', width, height, status: response.status(), pageOverflow: await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)});
-    await page.evaluate(() => {
+      });
+      await page.waitForLoadState('networkidle');
+      await page.screenshot({path: path.join(root, 'ui/before', `${label}-${width}x${height}.png`), fullPage: true});
+      rows.push({version: 'before', width, height, status: response.status(), pageOverflow: await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)});
+      await page.evaluate(() => {
       document.querySelectorAll('[data-baseline-style="1"]').forEach(link => link.remove());
       document.querySelector('link[href*="ui-polish.css"]').disabled = false;
-    });
-    await page.screenshot({path: path.join(root, 'ui/after', `station-entry-${width}x${height}.png`), fullPage: true});
+      });
+    }
+    await page.screenshot({path: path.join(root, 'ui/after', `${label}-${width}x${height}.png`), fullPage: true});
     const metrics = await page.evaluate(() => {
       const rgb = raw => (raw.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
       const lum = c => {
@@ -89,13 +97,13 @@ function code(uri) {
         if (foreground.length !== 3 || background.length !== 3) continue;
         const ratio = (Math.max(lum(foreground), lum(background)) + .05) / (Math.min(lum(foreground), lum(background)) + .05);
         const size = parseFloat(style.fontSize), weight = parseInt(style.fontWeight, 10) || 400;
-        if (ratio < (size >= 24 || size >= 18.66 && weight >= 700 ? 3 : 4.5)) low.push({text: text.slice(0, 60), ratio: +ratio.toFixed(2)});
+        if (ratio < (size >= 24 || size >= 18.66 && weight >= 700 ? 3 : 4.5)) low.push({tag: el.tagName.toLowerCase(), class: String(el.className).slice(0, 50), text: text.slice(0, 60), foreground: style.color, background: background.join(','), ratio: +ratio.toFixed(2)});
       }
       return {pageOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth, lowContrast: low.slice(0, 20), lowContrastCount: low.length};
     });
     rows.push({version: 'after', width, height, status: response.status(), ...metrics});
   }
-  fs.writeFileSync(path.join(root, 'ui/station-audit.json'), JSON.stringify(rows, null, 2));
+  fs.writeFileSync(auditPath, JSON.stringify(rows, null, 2));
   await browser.close();
-  console.log('Captured active station entry at both sizes.');
+  console.log(`Captured ${label} at both sizes.`);
 })().catch(error => { console.error(error.message); process.exit(1); });
