@@ -29,10 +29,10 @@ Both 1366×768 and 1920×1080 full-page captures are in `ui/before/`; `audit.jso
 
 ## Changes
 
-- Added one `ui-polish.css` design-system overlay with palette, type, spacing, card, table, form, button, badge, alert and verification tokens. Existing legacy stylesheets remain in place; no renderer styles were changed.
+- Bundled the existing CSS cascade and the new design-system rules into one served `ui-polish.css`. The old CSS source files remain in the repository for traceability; the app shell loads only the bundled stylesheet. It defines palette, type, spacing, card, table, form, button, badge, alert and verification tokens. No renderer styles were changed.
 - Reworked the public verification markup so VALID / NOT VALID leads the page and the existing document details and upload control follow in a clean card. The result wording, form field names and action remain unchanged.
 - Moved the existing customer report section before the planned-test table and placed the existing updates timeline in a disclosure.
-- Added a compact job identity strip using existing file, sample, customer and report-stage data. The issued **report number itself is not available in this template context**; adding it would require a view change, which the presentation-only rules forbid.
+- Added a compact job identity strip using existing file, sample, customer and report-stage data. The issued report number is rendered from the same existing report fields used by the allocation helper; a focused test compares the displayed number with the helper output.
 - Made utility Search and station Lock visually secondary while preserving their buttons, actions, names and selectors.
 
 ## Before / after evidence
@@ -64,13 +64,13 @@ Each pair exists at both `1366x768` and `1920x1080`; replace the size suffix to 
 
 | Check | Result |
 |---|---|
-| Full Django suite | PASS — 251 tests. |
-| Unchanged Playwright synthetic flow | PASS — `UI_FLOW_PASS`, 37 seconds, signed report, customer download, QR VALID, tampered NOT VALID, audit screen. SMTP absent: clearly marked unsent outbox draft. |
-| Horizontal page scroll | PASS — zero document-level overflow at 1366 and 1920 on captured pages; active station form also zero. Wide tables scroll inside their cards. |
+| Full Django suite | PASS — 252 tests. |
+| Unchanged Playwright synthetic flow | PASS — `UI_FLOW_PASS`, 39 seconds on the final CSS, signed report, customer download, QR VALID, tampered NOT VALID, audit screen. SMTP absent: clearly marked unsent outbox draft. |
+| Horizontal page scroll | PASS — zero document-level overflow at 1366 and 1920 on all 34 issued-job captures and the separate active station form. Wide tables scroll inside their cards. |
 | Text fit | PASS in inspected screenshots; long sidebar names use ellipsis with their existing full-value title tooltip, IDs wrap, buttons and badges remain readable. |
 | Primary action | PASS for the audited task screens: utility Search and station Lock use secondary styling; required actions remain visible. |
-| New palette contrast | PASS for token pairs: accent/ink 5.16:1, muted/white 6.04:1, pass 6.90:1, near 5.76:1, fail 5.87:1, blocked 6.16:1. A full computed contrast audit of all legacy styles has not been run. |
+| AA contrast | PASS on captured text at both widths: zero computed low-contrast groups on the 34 issued-job captures and the active station form. Token pairs: accent/ink 5.16:1, muted/white 6.04:1, pass 6.90:1, near 5.76:1, fail 5.87:1, blocked 6.16:1. The calculation inherits solid backgrounds and excludes disabled controls; it is not a substitute for a manual accessibility audit. |
 | Field names/IDs, URLs, permissions, logic | PASS — template/CSS diff only; Playwright flow unchanged. |
 | Issued PDF | PASS — exact same 74,529 bytes, SHA-256 `2e432fa5c9dd9eca1c55c9c9e2ec8d09d6d904e400a909867ef71c015769fa60`; 18 pages and extracted text hash identical. |
 
-**Merge decision:** leave on `ui-polish` until the report number can be shown in the job header without breaking the presentation-only constraint, and the remaining legacy text colors receive a complete AA audit. No view or report logic was changed to bypass these limits.
+**Merge decision:** leave on `ui-polish`. The active station table still renders BT and AT as separate labelled rows rather than paired before/after columns, and a source-crop review screen could not be captured from the synthetic issued fixture because it has no imported scan. These two presentation checks remain open; no view, review-status or report logic was changed to bypass them.

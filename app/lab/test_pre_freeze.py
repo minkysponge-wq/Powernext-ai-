@@ -88,3 +88,17 @@ class ReportNumberSearchTests(TestCase):
         response = self.client.get(reverse("dashboard"), {"q": issued_report_number(report)})
         self.assertContains(response, job.sample_code)
         self.assertContains(response, job.customer)
+
+    def test_issued_job_header_shows_allocated_number(self):
+        user = get_user_model().objects.create_user("header-admin")
+        user.groups.add(Group.objects.get(name=ADMIN))
+        job = Job.objects.create(
+            owner=user, title="Issued synthetic job", customer="Synthetic customer",
+            sample_code="SYN-HEADER-001", file_number="OV-2026-HEADER",
+        )
+        report = Report.objects.create(
+            job=job, revision=1, snapshot={"synthetic_demo": True},
+            snapshot_sha256="a" * 64, created_by=user, approved_at=timezone.now(),
+        )
+        self.client.force_login(user)
+        self.assertContains(self.client.get(reverse("job_detail", args=[job.pk])), issued_report_number(report))

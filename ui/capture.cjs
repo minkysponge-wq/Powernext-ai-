@@ -41,6 +41,40 @@ function code(uri) {
       const file = `${role}-${label}-${width}x${height}.png`;
       await page.screenshot({path: path.join(out, file), fullPage: true});
       const metrics = await page.evaluate(() => {
+        const rgb = value => {
+          const parts = value.match(/[\d.]+/g);
+          return parts && parts.length >= 3 ? parts.slice(0, 3).map(Number) : null;
+        };
+        const luminance = color => {
+          const c = color.map(v => v / 255).map(v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4);
+          return .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
+        };
+        const lowContrast = new Map();
+        for (const el of document.querySelectorAll('body *')) {
+          if (!Array.from(el.childNodes).some(node => node.nodeType === 3 && node.textContent.trim())) continue;
+          const style = getComputedStyle(el);
+          if (style.display === 'none' || style.visibility !== 'visible' || el.getBoundingClientRect().width < 1 || el.matches(':disabled')) continue;
+          const foreground = rgb(style.color);
+          let background = null, ancestor = el;
+          while (ancestor && !background) {
+            const raw = getComputedStyle(ancestor).backgroundColor;
+            if (raw && !raw.endsWith(', 0)') && raw !== 'transparent') background = rgb(raw);
+            ancestor = ancestor.parentElement;
+          }
+          background ||= [255, 255, 255];
+          if (!foreground) continue;
+          const light = Math.max(luminance(foreground), luminance(background));
+          const dark = Math.min(luminance(foreground), luminance(background));
+          const ratio = (light + .05) / (dark + .05);
+          const size = parseFloat(style.fontSize), weight = parseInt(style.fontWeight, 10) || 400;
+          const threshold = size >= 24 || (size >= 18.66 && weight >= 700) ? 3 : 4.5;
+          if (ratio >= threshold) continue;
+          const label = Array.from(el.childNodes).filter(node => node.nodeType === 3).map(node => node.textContent.trim()).join(' ').slice(0, 60);
+          const key = `${style.color}/${background.join(',')}/${el.className}`;
+          const item = lowContrast.get(key) || {tag: el.tagName.toLowerCase(), class: String(el.className).slice(0, 60), text: label, ratio: +ratio.toFixed(2), count: 0};
+          item.count++;
+          lowContrast.set(key, item);
+        }
         const overflowing = [...document.querySelectorAll('body *')].filter(el => {
           const s = getComputedStyle(el);
           const box = el.getBoundingClientRect();
@@ -50,7 +84,7 @@ function code(uri) {
         }).slice(0, 12).map(el => ({tag: el.tagName.toLowerCase(), class: String(el.className).slice(0, 70),
           text: (el.innerText || '').trim().slice(0, 75), extra: el.scrollWidth - el.clientWidth}));
         return {pageOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-          candidates: overflowing};
+          candidates: overflowing, lowContrast: [...lowContrast.values()].sort((a, b) => b.count - a.count).slice(0, 20)};
       });
       rows.push({role, label, url, width, height, status: response.status(), file, ...metrics});
       fs.writeFileSync(path.join(out, 'audit.json'), JSON.stringify(rows, null, 2));
@@ -97,7 +131,7 @@ function code(uri) {
 
   const station = await login('engineer_a');
   await capture(station.page, 'station', 'job-tests', `/jobs/${job}/?step=tests`);
-  await capture(station.page, 'station', 'entry', `/jobs/${job}/digital-review/?test=routine_test`);
+  // The issued fixture is locked; capture the active entry form via capture_station.cjs.
   await capture(station.page, 'station', 'report', `/reports/${report}/`);
   await station.context.close();
 

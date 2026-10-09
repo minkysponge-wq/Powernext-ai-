@@ -11,7 +11,9 @@
     "width": 1366,
     "height": 768,
     "status": 200,
-    "pageOverflow": 0
+    "pageOverflow": 0,
+    "lowContrast": [],
+    "lowContrastCount": 0
   },
   {
     "version": "before",
@@ -25,6 +27,8 @@
     "width": 1920,
     "height": 1080,
     "status": 200,
-    "pageOverflow": 0
+    "pageOverflow": 0,
+    "lowContrast": [],
+    "lowContrastCount": 0
   }
 ]

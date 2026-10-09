@@ -15,7 +15,8 @@
         "text": "Walkthrough_Customer",
         "extra": 23
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "customer",
@@ -33,7 +34,8 @@
         "text": "Walkthrough_Customer",
         "extra": 23
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "customer",
@@ -51,7 +53,8 @@
         "text": "Walkthrough_Customer",
         "extra": 23
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "customer",
@@ -69,7 +72,8 @@
         "text": "Walkthrough_Customer",
         "extra": 23
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "customer",
@@ -87,7 +91,8 @@
         "text": "Walkthrough_Customer",
         "extra": 23
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "customer",
@@ -105,7 +110,8 @@
         "text": "Walkthrough_Customer",
         "extra": 23
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -116,7 +122,8 @@
     "status": 200,
     "file": "admin-dashboard-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -127,7 +134,8 @@
     "status": 200,
     "file": "admin-dashboard-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -138,7 +146,8 @@
     "status": 200,
     "file": "admin-job-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -149,7 +158,8 @@
     "status": 200,
     "file": "admin-job-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -160,7 +170,8 @@
     "status": 200,
     "file": "admin-import-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -171,7 +182,8 @@
     "status": 200,
     "file": "admin-import-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -182,7 +194,8 @@
     "status": 200,
     "file": "admin-mapping-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -193,7 +206,8 @@
     "status": 200,
     "file": "admin-mapping-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -204,7 +218,8 @@
     "status": 200,
     "file": "admin-archive-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -215,7 +230,8 @@
     "status": 200,
     "file": "admin-archive-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -226,7 +242,8 @@
     "status": 200,
     "file": "admin-audit-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "admin",
@@ -237,7 +254,8 @@
     "status": 200,
     "file": "admin-audit-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "station",
@@ -255,7 +273,8 @@
         "text": "Walkthrough_Engineer_A",
         "extra": 34
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "station",
@@ -273,29 +292,8 @@
         "text": "Walkthrough_Engineer_A",
         "extra": 34
       }
-    ]
-  },
-  {
-    "role": "station",
-    "label": "entry",
-    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/digital-review/?test=routine_test",
-    "width": 1366,
-    "height": 768,
-    "status": 403,
-    "file": "station-entry-1366x768.png",
-    "pageOverflow": 0,
-    "candidates": []
-  },
-  {
-    "role": "station",
-    "label": "entry",
-    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/digital-review/?test=routine_test",
-    "width": 1920,
-    "height": 1080,
-    "status": 403,
-    "file": "station-entry-1920x1080.png",
-    "pageOverflow": 0,
-    "candidates": []
+    ],
+    "lowContrast": []
   },
   {
     "role": "station",
@@ -313,7 +311,8 @@
         "text": "Walkthrough_Engineer_A",
         "extra": 34
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "station",
@@ -331,7 +330,8 @@
         "text": "Walkthrough_Engineer_A",
         "extra": 34
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "quality",
@@ -349,7 +349,8 @@
         "text": "Walkthrough_Quality",
         "extra": 8
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "quality",
@@ -367,7 +368,8 @@
         "text": "Walkthrough_Quality",
         "extra": 8
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "quality",
@@ -385,7 +387,8 @@
         "text": "Walkthrough_Quality",
         "extra": 8
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "quality",
@@ -403,7 +406,8 @@
         "text": "Walkthrough_Quality",
         "extra": 8
       }
-    ]
+    ],
+    "lowContrast": []
   },
   {
     "role": "hod",
@@ -414,7 +418,8 @@
     "status": 200,
     "file": "hod-queue-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "hod",
@@ -425,7 +430,8 @@
     "status": 200,
     "file": "hod-queue-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "hod",
@@ -436,7 +442,8 @@
     "status": 200,
     "file": "hod-report-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "hod",
@@ -447,7 +454,8 @@
     "status": 200,
     "file": "hod-report-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "hod",
@@ -458,7 +466,8 @@
     "status": 200,
     "file": "hod-delivery-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "hod",
@@ -469,7 +478,8 @@
     "status": 200,
     "file": "hod-delivery-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "public",
@@ -480,7 +490,8 @@
     "status": 200,
     "file": "public-verification-1366x768.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   },
   {
     "role": "public",
@@ -491,6 +502,7 @@
     "status": 200,
     "file": "public-verification-1920x1080.png",
     "pageOverflow": 0,
-    "candidates": []
+    "candidates": [],
+    "lowContrast": []
   }
 ]
