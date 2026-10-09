@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Verify test report · VectorLab</title>
   <link rel="stylesheet" href="{% static 'ui-polish.css' %}?v=1">
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
 </head>
 <body class="verification-page">
 <main class="verification-card">
@@ -31,5 +32,6 @@
   </form>
   <p class="verification-note">This self-signed demonstration certificate is not a CPRI institutional identity.</p>
 </main>
+<footer class="app-footer verification-footer">VectorLab v1.0.0 · build {{ vectorlab_build_hash|default:'dev' }}</footer>
 </body>
 </html>

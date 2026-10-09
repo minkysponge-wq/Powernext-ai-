@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      DJANGO_DEBUG: "1"
+      VECTORLAB_FORCE_MFA: "0"
+      PAID_AI_ALLOWED: "0"
+      CLOUD_AI_ALLOWED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          npm ci
+          npx playwright install --with-deps chromium
+          echo "VECTORLAB_BROWSER=$(node -e 'process.stdout.write(require("playwright").chromium.executablePath())')" >> "$GITHUB_ENV"
+      - name: Django suite
+        run: python app/manage.py test lab --noinput
+      - name: Signed acceptance benchmark
+        run: python benchmark/run_signed_acceptance.py

@@ -51,6 +51,7 @@
       {% for message in messages %}<div class="notice {{ message.tags }}" role="status">{{ message }}</div>{% endfor %}
       {% block content %}{% endblock %}
     </main>
+    <footer class="app-footer">VectorLab v1.0.0 · build {{ vectorlab_build_hash|default:'dev' }}</footer>
   </div>
   {% if user.is_authenticated %}<dialog id="role-tour" data-role="{{ lab_role|default:'Customer' }}" data-user="{{ user.pk }}" aria-labelledby="tour-title"><h2 id="tour-title">A quick tour</h2><p id="tour-copy"></p><div class="tour-actions"><button type="button" class="secondary" id="tour-close">Close</button><button type="button" id="tour-next">Next</button></div></dialog>{% endif %}
 </body>

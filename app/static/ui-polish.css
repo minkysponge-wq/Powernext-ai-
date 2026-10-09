@@ -391,3 +391,27 @@ progress.progress-track { color: var(--ui-navy); }
 @media print {
   .paper { max-width: none; padding: 0; }
 }
+
+/* Release shell, sign-in and error pages. */
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.app-shell > main { width: 100%; flex: 1 0 auto; }
+.app-footer { padding: 12px 36px 20px; color: var(--ui-muted); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+.login { max-width: 940px; gap: 48px; }
+.login-intro h1 { max-width: 470px; }
+.login-intro .login-support { margin-top: 24px; color: var(--ui-blue); font-weight: 650; }
+.login-form .eyebrow { margin-bottom: 8px; }
+.login-form h2 { margin-bottom: 24px; }
+.error-page { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; background: var(--ui-canvas); }
+.error-card { width: min(100%, 520px); padding: 40px; border: 1px solid var(--ui-border); border-radius: 16px; background: var(--ui-surface); box-shadow: 0 12px 32px #032d5710; }
+.error-card h1 { margin-bottom: 16px; }
+.error-card p { margin-bottom: 24px; }
+.error-page .app-footer { width: min(100%, 520px); text-align: center; }
+.verification-footer { margin: 0 auto; max-width: 780px; }
+@media(max-width: 850px) {
+  .app-footer { padding-inline: 20px; }
+  .login { gap: 24px; }
+}
+@media(max-width: 650px) {
+  .login { grid-template-columns: 1fr; }
+  .error-card { padding: 28px; }
+}

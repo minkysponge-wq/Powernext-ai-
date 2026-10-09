@@ -101,6 +101,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "lab.roles.role_context",
+                "lab.build_info.build_info",
             ]
         },
     }

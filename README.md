@@ -1,5 +1,23 @@
 # VectorLab for CPRI Track 3
 
+**From customer request and station readings to a traceable, reviewed transformer test certificate.**
+
+[![CI](https://github.com/minkysponge-wq/Powernext-ai-/actions/workflows/ci.yml/badge.svg)](https://github.com/minkysponge-wq/Powernext-ai-/actions/workflows/ci.yml)
+
+| Verified Django tests | Synthetic UI run | Fixed report |
+|---|---|---|
+| 252 passing | 37 s end to end on the release run; 7 s HoD approval to issue | 18 pages |
+
+The previous UI run completed in 31 seconds; demo timing varies by machine and load.
+
+| Job dashboard | Station entry | Public PDF verification |
+|---|---|---|
+| ![Job dashboard](docs/img/dashboard.png) | ![Station entry](docs/img/station-entry.png) | ![Public PDF verification](docs/img/verification.png) |
+
+**Quick start:** Install Python 3.12 and Node.js, then follow [Local setup](#local-setup). The synthetic seed and demo signer keep private customer records and paid AI out of a fresh clone.
+
+**Read next:** [Architecture](docs/ARCHITECTURE.md) · [Security](docs/SECURITY.md) · [Report template](docs/REPORT_TEMPLATE.md) · [Rules](docs/RULES.md) · [Demo script](docs/DEMO_SCRIPT.md) · [Changelog](CHANGELOG.md)
+
 VectorLab carries a transformer test job from customer request through station readings, engineering review, Quality verification, HoD approval, and a controlled PDF certificate. Each reading retains its source and review state. The fixed `CPRI-SCL-TR-v1` report computes deterministic results from reviewed inputs and keeps drafts separate from issued certificates.
 
 ![VectorLab architecture](docs/architecture.png)
