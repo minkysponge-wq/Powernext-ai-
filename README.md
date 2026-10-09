@@ -6,7 +6,7 @@
 
 | Verified Django tests | Synthetic UI run | Fixed report |
 |---|---|---|
-| 252 passing | 37 s end to end on the release run; 7 s HoD approval to issue | 18 pages |
+| 253 passing | 37 s end to end on the release run; 7 s HoD approval to issue | 18 pages |
 
 The previous UI run completed in 31 seconds; demo timing varies by machine and load.
 
