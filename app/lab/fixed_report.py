@@ -1448,7 +1448,7 @@ def render_fixed_pdf(report):
             styles[style],
         )
 
-    def table(rows, columns=None):
+    def table(rows, columns=None, compact=False):
         values = []
         if columns:
             values.append([paragraph(cell, "FixedCell") for cell in columns])
@@ -1472,6 +1472,11 @@ def render_fixed_pdf(report):
                 ]
             )
         )
+        if compact:
+            item.setStyle(TableStyle([
+                ("TOPPADDING", (0, 0), (-1, -1), 2),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+            ]))
         return item
 
     story = []
@@ -1495,7 +1500,11 @@ def render_fixed_pdf(report):
             ):
                 if isinstance(rows, str):
                     rows = [[rows]]
-                story.append(table(rows, block.get("columns")))
+                story.append(table(
+                    rows,
+                    block.get("columns"),
+                    compact=page["title"] == "10. SHORT-CIRCUIT WITHSTAND",
+                ))
                 if kind == "signature_block" and model["issued"]:
                     code = issue_code(report)
                     from .verification_link import report_verification_url

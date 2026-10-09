@@ -16,7 +16,7 @@ The previous UI run completed in 31 seconds; demo timing varies by machine and l
 
 **Quick start:** Install Python 3.12 and Node.js, then follow [Local setup](#local-setup). The synthetic seed and demo signer keep private customer records and paid AI out of a fresh clone.
 
-**Read next:** [Architecture](docs/ARCHITECTURE.md) · [Security](docs/SECURITY.md) · [Report template](docs/REPORT_TEMPLATE.md) · [Rules](docs/RULES.md) · [Demo script](docs/DEMO_SCRIPT.md) · [Changelog](CHANGELOG.md)
+**Read next:** [Architecture](docs/ARCHITECTURE.md) · [Security](docs/SECURITY.md) · [Report template](docs/REPORT_TEMPLATE.md) · [Rules](docs/RULES.md) · [Second-form stress check](docs/UNSEEN_FORM_STRESS.md) · [Demo script](docs/DEMO_SCRIPT.md) · [Changelog](CHANGELOG.md)
 
 VectorLab carries a transformer test job from customer request through station readings, engineering review, Quality verification, HoD approval, and a controlled PDF certificate. Each reading retains its source and review state. The fixed `CPRI-SCL-TR-v1` report computes deterministic results from reviewed inputs and keeps drafts separate from issued certificates.
 
