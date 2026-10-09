@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{% static 'interface-refresh.css' %}?v=4">
   <link rel="stylesheet" href="{% static 'brand-refresh.css' %}?v=1">
   <link rel="stylesheet" href="{% static 'workflow-ux.css' %}?v=1">
+  <link rel="stylesheet" href="{% static 'ui-polish.css' %}?v=1">
   <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
   <script src="{% static 'workspace.js' %}?v=3" defer></script>
   <script src="{% static 'role-tour.js' %}?v=1" defer></script>
@@ -45,7 +46,7 @@
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{% url 'dashboard' %}">Home</a><span aria-hidden="true">/</span><span>{% block location %}Workspace{% endblock %}</span></nav>
       {% if user.is_authenticated %}
         <div class="topbar-actions">
-          {% if lab_access %}<form class="top-search" method="get" action="{% url 'dashboard' %}" role="search"><label class="sr-only" for="global-job-search">Search jobs</label><input id="global-job-search" name="q" placeholder="Search jobs" maxlength="100"><button type="submit" aria-label="Search jobs">Search</button></form>{% endif %}
+          {% if lab_access %}<form class="top-search" method="get" action="{% url 'dashboard' %}" role="search"><label class="sr-only" for="global-job-search">Search jobs</label><input id="global-job-search" name="q" placeholder="Search jobs" maxlength="100"><button type="submit" class="secondary" aria-label="Search jobs">Search</button></form>{% endif %}
           {% if action_count and lab_role == 'Quality' or action_count and lab_role == 'HoD' %}<a class="top-notice" href="{% url 'review_queue' %}">{{ action_count }} need your review</a>{% elif action_count and lab_role == 'Test Engineer' %}<a class="top-notice" href="{% url 'dashboard' %}#my-tests">{{ action_count }} assigned tests</a>{% elif not lab_access %}<a class="top-notice" href="{% url 'customer_home' %}">My requests</a>{% endif %}
           <button type="button" class="tour-trigger" id="tour-open" aria-label="Show quick tour">Quick tour</button><span class="role-badge">{{ lab_role|default:'Customer' }}</span>
         </div>

@@ -1,0 +1,140 @@
+/* Presentation-only design tokens and component refinements. */
+:root {
+  --ui-navy: #032d57;
+  --ui-blue: #194371;
+  --ui-accent: #0097da;
+  --ui-accent-ink: #001e3a;
+  --ui-surface: #ffffff;
+  --ui-canvas: #f5f7f9;
+  --ui-border: #dce4ea;
+  --ui-text: #243746;
+  --ui-muted: #526575;
+  --ui-pass: #175c3c;
+  --ui-near: #805619;
+  --ui-fail: #a52d2d;
+  --ui-blocked: #465969;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ui-text);
+  background: var(--ui-canvas);
+}
+
+html { overflow-x: clip; }
+body { min-width: 0; overflow-x: clip; line-height: 1.45; }
+main { max-width: 1500px; }
+h1, h2, h3 { line-height: 1.25; }
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
+p, li, label, td, th { line-height: 1.45; }
+small, .helptext, .muted { line-height: 1.45; }
+
+/* A repeatable page header, card, table and form rhythm. */
+.page-heading { gap: var(--space-6); margin-bottom: var(--space-6); align-items: center; }
+.page-heading > div { min-width: 0; }
+.page-heading h1 { margin-bottom: var(--space-2); }
+.page-heading .subtitle { font-size: 14px; }
+.job-meta-strip { display: flex; align-items: center; gap: var(--space-3) var(--space-6); flex-wrap: wrap; margin: calc(-1 * var(--space-3)) 0 var(--space-6); padding: var(--space-3) var(--space-4); background: #fff; border: 1px solid var(--ui-border); border-radius: 10px; font-size: 13px; }
+.job-meta-strip span { min-width: 0; overflow-wrap: anywhere; }
+.job-meta-strip strong { color: var(--ui-muted); margin-right: var(--space-2); font-weight: 600; }
+.job-meta-strip .badge { margin-left: auto; }
+.panel, .stat-card { border: 1px solid var(--ui-border); border-radius: 12px; background: var(--ui-surface); box-shadow: 0 2px 10px #032d5708; }
+.panel { margin-bottom: var(--space-6); }
+.panel-heading { padding: var(--space-4) var(--space-6); gap: var(--space-4); }
+.panel > h2, .panel > p, .panel > form, .panel > .secondary-disclosure { margin-left: var(--space-6); margin-right: var(--space-6); }
+.panel > h2:first-child { margin-top: var(--space-6); }
+.panel > p:last-child { margin-bottom: var(--space-6); }
+.panel > .button { margin: 0 var(--space-6) var(--space-6); }
+.stat-grid { gap: var(--space-4); margin-bottom: var(--space-6); }
+.stat-card { padding: var(--space-6); }
+.stat-card strong { font-variant-numeric: tabular-nums; }
+.table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+table { font-size: 13px; }
+th { font-size: 13px; white-space: nowrap; }
+td, th { padding: var(--space-3) var(--space-4); overflow-wrap: anywhere; }
+td:has(.progress-track), td:has(.badge) { min-width: 110px; }
+td .badge { max-width: none; white-space: nowrap; }
+td, th, .stat-card strong, .review-summary strong { font-variant-numeric: tabular-nums; }
+td:has(input[type="number"]), td.entry-unit { font-variant-numeric: tabular-nums; }
+
+label { font-size: 14px; line-height: 1.45; margin-bottom: var(--space-2); }
+input, select, textarea { min-height: 40px; max-width: 100%; }
+textarea { height: auto; }
+.helptext { font-size: 13px; color: var(--ui-muted); }
+.errorlist, .notice.error { color: #8a2727; background: #fff0ee; border: 1px solid #edb4af; }
+.notice { font-size: 14px; padding: var(--space-3) var(--space-4); }
+
+button, .button, .badge { height: auto; min-height: 36px; padding: 8px 14px; line-height: 1.25; white-space: nowrap; }
+button:not(.secondary):not(.text-button):not(.verify-button):not(.tour-trigger):not(.signout):not(:disabled),
+.button:not(.secondary) { background: var(--ui-accent); color: var(--ui-accent-ink); border-color: var(--ui-accent); }
+button:not(.secondary):not(.text-button):not(.verify-button):not(.tour-trigger):not(.signout):not(:disabled):hover,
+.button:not(.secondary):hover { background: #79d2f4; border-color: #007eb8; color: var(--ui-accent-ink); }
+.badge { min-height: 26px; padding: 5px 10px; font-size: 13px; font-weight: 650; }
+.badge.green, .badge.verified { background: #e4f2e9; color: var(--ui-pass); }
+.badge.amber, .badge.unreviewed, .badge.ambiguous { background: #fff1d6; color: var(--ui-near); }
+.badge.red, .badge.failed, .badge.blocked { background: #fbe7e7; color: var(--ui-fail); }
+.badge.grey, .badge.draft, .badge.blue { background: #e8edf1; color: var(--ui-blocked); }
+.empty { padding: var(--space-8) var(--space-6); }
+.empty h3 { font-size: 16px; }
+.back-link { font-size: 13px; margin-bottom: var(--space-4); }
+
+/* Keep long references readable without widening the page. */
+.job-title, .filename, .revision-link, .report-meta dd, .paper footer, .review-row, .reading-heading { overflow-wrap: anywhere; }
+.sidebar-bottom strong { max-width: 132px; }
+.review-row { padding: var(--space-6) 0; }
+.reading-heading { align-items: flex-start; }
+.reading-heading h3 { font-size: 16px; }
+.reading-inputs { gap: var(--space-3); }
+.crop-box { padding: var(--space-3); }
+.review-controls { gap: var(--space-3); flex-wrap: wrap; }
+.entry-table { min-width: 850px; }
+.entry-table th, .entry-table td { padding: var(--space-4); }
+.entry-name small { display: block; color: var(--ui-muted); }
+.entry-value .live-check, .entry-table .errorlist { margin-top: var(--space-2); }
+.review-savebar { gap: var(--space-2); padding: var(--space-3) var(--space-4); }
+.report-controls { align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-4); }
+.report-controls p { display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end; }
+.report-controls .button { font-size: 13px; }
+.paper { max-width: 1100px; padding: var(--space-8); }
+.paper .table-scroll { margin-block: var(--space-4); }
+.paper th, .paper td { padding: var(--space-3); }
+.secondary-disclosure { padding-block: var(--space-4); }
+.secondary-disclosure summary { font-size: 16px; font-weight: 700; color: var(--ui-navy); }
+.secondary-disclosure .customer-timeline { margin-top: var(--space-6); }
+.customer-timeline li { padding-bottom: var(--space-4); }
+
+/* The public QR destination uses this same token set without the app shell. */
+.verification-page { margin: 0; padding: var(--space-8) var(--space-4); background: var(--ui-canvas); }
+.verification-card { box-sizing: border-box; width: min(100%, 780px); margin: 0 auto; padding: var(--space-8); background: #fff; border: 1px solid var(--ui-border); border-radius: 16px; box-shadow: 0 12px 32px #032d5710; }
+.verification-eyebrow { margin: 0 0 var(--space-4); color: var(--ui-blue); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.verification-result { margin: 0 0 var(--space-8); padding: var(--space-6); border-radius: 12px; border: 1px solid; font-size: 24px; line-height: 1.25; }
+.verification-result.valid { color: var(--ui-pass); background: #e4f2e9; border-color: #b5d9c4; }
+.verification-result.invalid { color: var(--ui-fail); background: #fbe7e7; border-color: #e8bbbb; }
+.verification-card h2 { margin: 0 0 var(--space-4); }
+.verification-details { display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr); gap: var(--space-3) var(--space-6); margin: 0; padding-block: var(--space-6); border-top: 1px solid var(--ui-border); border-bottom: 1px solid var(--ui-border); }
+.verification-details dt { font-weight: 700; color: var(--ui-blue); }
+.verification-details dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.verification-upload { margin-top: var(--space-6); }
+.verification-upload label { display: block; font-weight: 700; }
+.verification-upload-row { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.verification-upload-row input { flex: 1 1 260px; border: 1px solid var(--ui-border); border-radius: 8px; padding: var(--space-2); }
+.verification-upload-row button { font: inherit; font-weight: 700; border: 1px solid var(--ui-accent); border-radius: 8px; background: var(--ui-accent); color: var(--ui-accent-ink); cursor: pointer; }
+.verification-upload-row button:hover { background: #79d2f4; }
+.verification-note { margin: var(--space-6) 0 0; font-size: 13px; color: var(--ui-muted); }
+
+@media (max-width: 850px) {
+  .entry-table { min-width: 0; }
+  .verification-card { padding: var(--space-6); }
+  .verification-details { grid-template-columns: 1fr; gap: var(--space-1); }
+  .verification-details dd { margin-bottom: var(--space-3); }
+}
+@media print {
+  .paper { max-width: none; padding: 0; }
+}

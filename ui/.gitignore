@@ -1,0 +1,3 @@
+# Full-page visual evidence stays in the local workspace (about 100 MB).
+before/*.png
+after/*.png

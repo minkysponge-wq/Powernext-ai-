@@ -1,0 +1,468 @@
+[
+  {
+    "role": "customer",
+    "label": "home",
+    "url": "/customer/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "customer-home-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Customer",
+        "extra": 16
+      }
+    ]
+  },
+  {
+    "role": "customer",
+    "label": "home",
+    "url": "/customer/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "customer-home-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Customer",
+        "extra": 16
+      }
+    ]
+  },
+  {
+    "role": "customer",
+    "label": "new-request",
+    "url": "/customer/requests/new/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "customer-new-request-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Customer",
+        "extra": 16
+      }
+    ]
+  },
+  {
+    "role": "customer",
+    "label": "new-request",
+    "url": "/customer/requests/new/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "customer-new-request-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Customer",
+        "extra": 16
+      }
+    ]
+  },
+  {
+    "role": "customer",
+    "label": "status",
+    "url": "/customer/requests/OV-2026-F42D5FD0BBB8/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "customer-status-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Customer",
+        "extra": 16
+      }
+    ]
+  },
+  {
+    "role": "customer",
+    "label": "status",
+    "url": "/customer/requests/OV-2026-F42D5FD0BBB8/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "customer-status-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Customer",
+        "extra": 16
+      }
+    ]
+  },
+  {
+    "role": "admin",
+    "label": "dashboard",
+    "url": "/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "admin-dashboard-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "dashboard",
+    "url": "/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "admin-dashboard-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "job",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/?step=report",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "admin-job-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "job",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/?step=report",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "admin-job-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "import",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/import/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "admin-import-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "import",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/import/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "admin-import-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "mapping",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/mapping/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "admin-mapping-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "mapping",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/mapping/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "admin-mapping-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "archive",
+    "url": "/reports/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "admin-archive-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "archive",
+    "url": "/reports/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "admin-archive-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "audit",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/audit/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "admin-audit-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "admin",
+    "label": "audit",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/audit/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "admin-audit-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "station",
+    "label": "job-tests",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/?step=tests",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "station-job-tests-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Engineer_A",
+        "extra": 27
+      }
+    ]
+  },
+  {
+    "role": "station",
+    "label": "job-tests",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/?step=tests",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "station-job-tests-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Engineer_A",
+        "extra": 27
+      }
+    ]
+  },
+  {
+    "role": "station",
+    "label": "entry",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/digital-review/?test=routine_test",
+    "width": 1366,
+    "height": 768,
+    "status": 403,
+    "file": "station-entry-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "station",
+    "label": "entry",
+    "url": "/jobs/66ebe57b-2b5f-4924-b3d9-889db7e60da1/digital-review/?test=routine_test",
+    "width": 1920,
+    "height": 1080,
+    "status": 403,
+    "file": "station-entry-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "station",
+    "label": "report",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "station-report-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Engineer_A",
+        "extra": 27
+      }
+    ]
+  },
+  {
+    "role": "station",
+    "label": "report",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "station-report-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": [
+      {
+        "tag": "strong",
+        "class": "",
+        "text": "Walkthrough_Engineer_A",
+        "extra": 27
+      }
+    ]
+  },
+  {
+    "role": "quality",
+    "label": "queue",
+    "url": "/review/queue/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "quality-queue-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "quality",
+    "label": "queue",
+    "url": "/review/queue/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "quality-queue-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "quality",
+    "label": "report",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "quality-report-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "quality",
+    "label": "report",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "quality-report-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "hod",
+    "label": "queue",
+    "url": "/review/queue/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "hod-queue-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "hod",
+    "label": "queue",
+    "url": "/review/queue/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "hod-queue-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "hod",
+    "label": "report",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "hod-report-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "hod",
+    "label": "report",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "hod-report-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "hod",
+    "label": "delivery",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/delivery/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "hod-delivery-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "hod",
+    "label": "delivery",
+    "url": "/reports/ecd30af7-14c2-4715-b614-06d8a90c0ff1/delivery/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "hod-delivery-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "public",
+    "label": "verification",
+    "url": "/verify/ecd30af7-14c2-4715-b614-06d8a90c0ff1/71b898d53ccc542c6c623549/",
+    "width": 1366,
+    "height": 768,
+    "status": 200,
+    "file": "public-verification-1366x768.png",
+    "pageOverflow": 0,
+    "candidates": []
+  },
+  {
+    "role": "public",
+    "label": "verification",
+    "url": "/verify/ecd30af7-14c2-4715-b614-06d8a90c0ff1/71b898d53ccc542c6c623549/",
+    "width": 1920,
+    "height": 1080,
+    "status": 200,
+    "file": "public-verification-1920x1080.png",
+    "pageOverflow": 0,
+    "candidates": []
+  }
+]
